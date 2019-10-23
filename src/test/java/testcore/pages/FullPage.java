@@ -9,9 +9,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import page.Page;
 import pagedef.Identifier;
-import testcore.controls.dialog.ConfirmActionDialog;
-import testcore.controls.dialog.NotificationDialog;
-import testcore.controls.dialog.UserSettingsDialog;
+/*import testcore.controls.dialog.ConfirmActionDialog;
+import testcore.controls.dialog.NotificationDialog;*/
 
 import java.util.Map;
 import org.openqa.selenium.By;
@@ -164,11 +163,11 @@ public abstract class FullPage extends Page {
 		return dialogElement;
 	}
 
-	public ConfirmActionDialog confirmActionDialog() throws Exception {
+/*	public ConfirmActionDialog confirmActionDialog() throws Exception {
 		WebElement dialog = elementConfirmActionDialog();
 		ConfirmActionDialog confirmActiondialog = new ConfirmActionDialog(null, this, dialog);
 		return confirmActiondialog;
-	}
+	}*/
 
 	public WebElement elementNotificationDialog() throws Exception {
 		this.getAgent().getWaiter().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ant-notification-notice-message, .ant-notification-notice-with-icon")));
@@ -178,11 +177,11 @@ public abstract class FullPage extends Page {
 		return this.getAgent().getWebDriver().findElement(By.cssSelector(".ant-notification"));
 	}
 
-	public NotificationDialog notificationDialog() throws Exception {
+/*	public NotificationDialog notificationDialog() throws Exception {
 		WebElement dialog = elementNotificationDialog();
 		NotificationDialog NotificationDialog = new NotificationDialog(null, this, dialog);
 		return NotificationDialog;
-	}
+	}*/
 
 	public IControl getMenuControl(String locatorVariable) throws Exception {
 		String controlType = new Object(){}.getClass().getEnclosingMethod().getName().substring(3);
@@ -247,11 +246,6 @@ public abstract class FullPage extends Page {
 		String DIALOG_IDENTIFIER = "//div[contains(@class, 'modal-content')]";
 		this.getAgent().getWaiter().until(ExpectedConditions.visibilityOfElementLocated(By.xpath(DIALOG_IDENTIFIER)));
 		return this.getAgent().getWebDriver().findElement(By.xpath(DIALOG_IDENTIFIER));
-	}
-
-	public UserSettingsDialog userSettingsDialog() throws Exception {
-		WebElement dialog = elementUserSettingsDialog();
-		return new UserSettingsDialog(pageName(), this, dialog);
 	}
 
 	public void logScreenShot(String logScreenShotName) throws Exception {

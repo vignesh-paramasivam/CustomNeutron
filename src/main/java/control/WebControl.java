@@ -14,8 +14,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import page.IPage;
-import testcore.controls.dialog.ConfirmActionDialog;
-import testcore.controls.dialog.NotificationDialog;
+/*import testcore.controls.dialog.ConfirmActionDialog;
+import testcore.controls.dialog.NotificationDialog;*/
 
 public class WebControl extends Control {
 
