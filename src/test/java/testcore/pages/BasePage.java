@@ -9,13 +9,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import page.Page;
 import pagedef.Identifier;
-/*import testcore.controls.dialog.ConfirmActionDialog;
-import testcore.controls.dialog.NotificationDialog;*/
 
 import java.util.Map;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public abstract class BasePage extends Page {
@@ -43,14 +40,6 @@ public abstract class BasePage extends Page {
 
 	public WebDriverWait waiter() throws Exception {
 		return this.getAgent().getWaiter();
-	}
-
-	public WebElement commonModalDialogElement() throws Exception {
-		String DIALOG_IDENTIFIER = "div.ant-modal-content";
-		WebElement dialogElement = this.getAgent().getWebDriver()
-				.findElement(By.cssSelector(DIALOG_IDENTIFIER));
-		this.getAgent().getWaiter().until(ExpectedConditions.visibilityOf(dialogElement));
-		return dialogElement;
 	}
 
 
@@ -146,16 +135,6 @@ public abstract class BasePage extends Page {
 		return generateDynamicControlFromParent(locatorVariable, controlType, parentElement);
 	}
 
-	public IControl getCascadingDropdownControl(String locatorVariable) throws Exception {
-		String controlType = new Object(){}.getClass().getEnclosingMethod().getName().substring(3);
-		return generateDynamicControl(locatorVariable, controlType);
-	}
-
-	public IControl getCascadingDropdownControl(String locatorVariable, WebElement parentElement) throws Exception {
-		String controlType = new Object(){}.getClass().getEnclosingMethod().getName().substring(3);
-		return generateDynamicControlFromParent(locatorVariable, controlType, parentElement);
-	}
-
 	protected WebElement elementConfirmActionDialog() throws Exception {
 		this.getAgent().getWaiter().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(CONFIRMATION_DIALOG_IDENTIFIER)));
 		WebElement dialogElement = this.getAgent().getWebDriver().findElement(By.cssSelector(CONFIRMATION_DIALOG_IDENTIFIER));
@@ -199,16 +178,6 @@ public abstract class BasePage extends Page {
 		return generateDynamicControlFromParent(locatorVariable, controlType, parentElement);
 	}
 
-	public IControl getDualCalendarControl(String locatorVariable) throws Exception {
-		String controlType = new Object(){}.getClass().getEnclosingMethod().getName().substring(3);
-		return generateDynamicControl(locatorVariable, controlType);
-	}
-
-	public IControl getDualCalendarControl(String locatorVariable, WebElement parentElement) throws Exception {
-		String controlType = new Object(){}.getClass().getEnclosingMethod().getName().substring(3);
-		return generateDynamicControlFromParent(locatorVariable, controlType, parentElement);
-	}
-
 	public IControl getTextareaControl(String locatorVariable) throws Exception {
 		String controlType = new Object(){}.getClass().getEnclosingMethod().getName().substring(3);
 		return generateDynamicControl(locatorVariable, controlType);
@@ -222,30 +191,6 @@ public abstract class BasePage extends Page {
 	public IControl getRadioControl(String locatorVariable, WebElement parentElement) throws Exception {
 		String controlType = new Object(){}.getClass().getEnclosingMethod().getName().substring(3);
 		return generateDynamicControlFromParent(locatorVariable, controlType, parentElement);
-	}
-
-	public IControl getAttachmentControl(String locatorVariable) throws Exception {
-		String controlType = new Object(){}.getClass().getEnclosingMethod().getName().substring(3);
-		return generateDynamicControl(locatorVariable, controlType);
-	}
-
-	public IControl getAttachmentControl(String locatorVariable, WebElement parentElement) throws Exception {
-		String controlType = new Object(){}.getClass().getEnclosingMethod().getName().substring(3);
-		return generateDynamicControlFromParent(locatorVariable, controlType, parentElement);
-	}
-
-	public  void click_popup_yes_button() throws Exception{
-		getButtonControl("Yes", driver().findElement(By.cssSelector("div.ant-popover-content div.ant-popover-buttons"))).click();
-	}
-
-	public  void click_popup_no_button() throws Exception{
-		getButtonControl("No", driver().findElement(By.cssSelector("div.ant-popover-content div.ant-popover-buttons"))).click();
-	}
-
-	private WebElement elementUserSettingsDialog() throws Exception {
-		String DIALOG_IDENTIFIER = "//div[contains(@class, 'modal-content')]";
-		this.getAgent().getWaiter().until(ExpectedConditions.visibilityOfElementLocated(By.xpath(DIALOG_IDENTIFIER)));
-		return this.getAgent().getWebDriver().findElement(By.xpath(DIALOG_IDENTIFIER));
 	}
 
 	public void logScreenShot(String logScreenShotName) throws Exception {

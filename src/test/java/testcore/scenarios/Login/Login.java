@@ -8,7 +8,7 @@ public class Login extends SupportTest {
 
     @Test(enabled = true)
     public void Login_ValidateLoginAndLogout() throws Exception {
-        login.login();
+        ctms.login();
     }
 
 

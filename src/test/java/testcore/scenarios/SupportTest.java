@@ -29,7 +29,7 @@ public class SupportTest {
 	protected static Logger logger = AutomationCentral.getLogger();
 	private Configuration conf = null;
 	protected HomePage home;
-	protected LoginPage login;
+	protected LoginPage ctms;
 	private IAgent agent;
 	private ITestContext context = null;
 	private String testName = null;
@@ -40,20 +40,6 @@ public class SupportTest {
 	private List<HashMap<String, String>> listOfHashMap = new ArrayList<HashMap<String,String>>();
 
 
-	/*This method is intended to skip the test suite if its name not given as part of the test execution
-	* parameters*/
-	private synchronized void skipExecution(ITestContext context){
-		if(System.getProperty("suites_to_execute") == null ) { return; 	}
-
-		String[] suites_to_run = System.getProperty("suites_to_execute").split(",");
-		String current_suite_name = context.getSuite().getName();
-
-		if((Arrays.asList(suites_to_run).stream().noneMatch(suite -> suite.equalsIgnoreCase(current_suite_name)))){
-			logger.info("Skipping suite: " + current_suite_name);
-			throw new SkipException("This " + current_suite_name + " suite will not be executed");
-		}
-	}
-
 	@BeforeSuite(alwaysRun = true)
 	public void runOncePerSuite(ITestContext context) throws Exception {
 		AutomationCentral.INSTANCE.init();
@@ -63,7 +49,6 @@ public class SupportTest {
 
 	@BeforeTest(alwaysRun = true)
 	public void runOncePerContext(ITestContext context) throws Exception {
-		skipExecution(context);
 		logger.info(String.format("Test context setup started for %s test.", context.getName()));
 		AutomationCentral.INSTANCE.registerContext(context);
 		logger.info(String.format("Test context setup completed for %s test.", context.getName()));
@@ -72,7 +57,6 @@ public class SupportTest {
 	@Parameters("browser")
 	@BeforeClass(alwaysRun = true)
 	public void runOncePerClass(@Optional("browser") String browser, ITestContext context) throws Exception {
-		skipExecution(context);
 		if(!browser.equals("browser")) { System.setProperty("browser", browser); }
 		this.context = context;
 		this.conf = AutomationCentral.INSTANCE.getContextConfig(context);
@@ -85,11 +69,10 @@ public class SupportTest {
 
 	@BeforeMethod(alwaysRun = true)
 	public void runOncePerMethod(ITestContext context, Method method) throws Exception {
-		skipExecution(context);
 		testName = method.getName();
 		if (!testName.equals(testCase)) {
 			Testcount = 0;
-			if(listOfHashMap.isEmpty()==false){
+			if(!listOfHashMap.isEmpty()){
 				listOfHashMap.clear();
 			}
 			listOfHashMap = dataTable.preProcessAllTestData(testName);
@@ -108,13 +91,12 @@ public class SupportTest {
 		testData.putAll(listOfHashMap.get(Testcount++));
 		this.testData.put("testName", testName);
 		home = new HomePage(this.conf, agent, testData);
-		login = new LoginPage(this.conf, agent, testData);
+		ctms = new LoginPage(this.conf, agent, testData);
 		logger.info(String.format("Set up for test method [%s] ended.", testName));
 	}
 
 	@AfterMethod(alwaysRun = true)
 	public void tearDown(ITestResult result, ITestContext context) throws Exception {
-		skipExecution(context);
 		logger.info(String.format("Tear down for test method [%s] started.", testName));
 		testCase = testName;
 		if (ITestResult.FAILURE == result.getStatus()) {

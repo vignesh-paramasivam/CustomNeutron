@@ -51,25 +51,14 @@ public interface IPage extends IWindowActions {
 
 	IControl getDropdownControl(String string, WebElement parentElement) throws Exception;
 
-	IControl getCascadingDropdownControl(String string, WebElement parentElement) throws Exception;
-
 	IControl getMenuControl(String string) throws Exception;
 	
 	IControl getSectionControl(String string) throws Exception;
 	
 	IControl getSectionControl(String string, WebElement parentElement) throws Exception;
-	
-    IControl getDualCalendarControl(String string) throws Exception;
-	
-	IControl getDualCalendarControl(String string, WebElement parentElement) throws Exception;
 
 	IControl getRadioControl(String string) throws Exception;
 
 	IControl getRadioControl(String string, WebElement parentElement) throws Exception;
-
-	IControl getAttachmentControl(String string) throws Exception;
-
-	IControl getAttachmentControl(String string, WebElement parentElement) throws Exception;
-
 
 }
