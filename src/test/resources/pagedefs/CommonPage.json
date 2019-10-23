@@ -3,10 +3,10 @@
 		"DESKTOP_WEB": "xpath=//input[@name='%1$s'] | //input[@id='%1$s']"
 	},
 	"ButtonControl": {
-		"DESKTOP_WEB": "xpath=//button[@type='submit'][@id='%1$s'] | //*[@id='%1$s'] | //button[@name='%1$s'] | //button[text()='%1$s'] | //button/span[text()='%1$s']/.."
+		"DESKTOP_WEB": "xpath=//button[@type='submit'][@id='%1$s'] | //*[@id='%1$s'] | //input[@name='%1$s'] | //button[text()='%1$s'] | //button/span[text()='%1$s']/.."
 	},
 	"LinkControl": {
-		"DESKTOP_WEB": "xpath=//a/span[text()='%1$s'] | //a[contains(@class, '%1$s')]/i | //a//i[@id='%1$s']"
+		"DESKTOP_WEB": "xpath=//a[@title='%1$s'] | //a[contains(@class, '%1$s')]/i | //a//i[@id='%1$s']"
 	},
 	"DialogControl": {
 		"DESKTOP_WEB": "css=div.modal-content, div.ant-modal-content"
@@ -24,24 +24,15 @@
 		"DESKTOP_WEB": "xpath=//label[@for='%1$s']//parent::div//following-sibling::div//input"
 	},
 	"DropdownControl": {
-		"DESKTOP_WEB": "xpath=//label[@for='%1$s']//parent::div//following-sibling::div | //label[@title='%1$s']//parent::div//following-sibling::div | //*[@class='dropdown']//div[contains(@class, '%1$s')]"
-	},
-	"CascadingDropdownControl": {
 		"DESKTOP_WEB": "xpath=//input[@id='%1$s']"
 	},
 	"MenuControl": {
-		"DESKTOP_WEB": "xpath=//a[contains(@class, 'sideNavItem')]//span[contains(@class, 'menuitem-notvisible')][contains(text(), '%1$s')]/ancestor::a[contains(@class, 'sideNavItem')]//i | //button[contains(text(), '%1$s') ]/i"
+		"DESKTOP_WEB": "xpath=//div[@id='jsm']"
 	},
 	"SectionControl": {
 		"DESKTOP_WEB": "xpath=//div[contains(@id,'%1$s')] | //div[@role='dialog']//div[@class='%1$s'] | //span[text()='%1$s']//ancestor::div[@class='ant-modal-header']/following-sibling::div"
 	},
-	"DualCalendarControl": {
-		 "DESKTOP_WEB":   "xpath=//input[contains(@class, 'ant-calendar-input ')]//ancestor::div[@class='%1$s']"
-	},
 	"RadioControl": {
 		"DESKTOP_WEB": "xpath=//input[@type='radio']/ancestor::label//span[text()='%1$s']/preceding-sibling::span//input[@type='radio']"
-	},
-	"AttachmentControl": {
-		"DESKTOP_WEB": "xpath=//label[@title='%1$s']//parent::div//following-sibling::div//input"
 	}
 }

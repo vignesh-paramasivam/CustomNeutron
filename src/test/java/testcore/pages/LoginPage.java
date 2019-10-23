@@ -3,6 +3,8 @@ package testcore.pages;
 import agent.IAgent;
 import central.Configuration;
 import org.apache.commons.lang3.NotImplementedException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import testcore.pages.desktop.DesktopLoginPage;
 
 import java.util.Map;
@@ -36,9 +38,12 @@ public class LoginPage extends BasePage {
 	}
 
 
-	public void login() throws Exception {
+	public HomePage login() throws Exception {
 		getTextboxControl("user").enterText(getTestData().get("User"));
 		getTextboxControl("pwd").enterText(getTestData().get("Password"));
+		getButtonControl("btnLogin").click();
+		this.getAgent().getWaiter().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#leftPaneDiv")));
+		return new HomePage(getConfig(), getAgent(), getTestData());
 	}
 
 	
