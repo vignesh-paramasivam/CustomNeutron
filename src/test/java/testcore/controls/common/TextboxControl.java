@@ -13,11 +13,6 @@ public class TextboxControl extends WebControl {
 	}
 
 	@Override
-	public String placeHolderName() {
-		return this.getRawWebElement().getAttribute("placeholder");
-	}
-
-	@Override
 	public void enterText(String text) throws Exception {
 		try {
 			this.waitUntilClickable();
@@ -56,12 +51,6 @@ public class TextboxControl extends WebControl {
 		this.getRawWebElement().sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
 	}
 
-
-	@Override
-	public void sendKeysAfterRemovingExistingValue(String text) throws Exception {
-		this.getRawWebElement().sendKeys(Keys.chord(Keys.CONTROL,"a", Keys.DELETE));
-		this.getRawWebElement().sendKeys(text);
-	}
 	
 }
 

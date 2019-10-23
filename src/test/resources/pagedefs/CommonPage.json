@@ -1,6 +1,6 @@
 {
 	"TextboxControl": {
-		"DESKTOP_WEB": "xpath=//input[@name='%1$s'] | //input[@id='%1$s'] | //input[@type='text'][@placeholder='%1$s']"
+		"DESKTOP_WEB": "xpath=//input[@name='%1$s'] | //input[@id='%1$s']"
 	},
 	"ButtonControl": {
 		"DESKTOP_WEB": "xpath=//button[@type='submit'][@id='%1$s'] | //*[@id='%1$s'] | //button[@name='%1$s'] | //button[text()='%1$s'] | //button/span[text()='%1$s']/.."

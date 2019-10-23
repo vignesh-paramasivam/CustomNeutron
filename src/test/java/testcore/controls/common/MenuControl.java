@@ -15,6 +15,6 @@ public class MenuControl  extends WebControl {
 	@Override
 	public void click() throws Exception {
 		this.getRawWebElement().click();
-		assertPageLoad();
+		getPage().assertPageLoad();
 	}
 }

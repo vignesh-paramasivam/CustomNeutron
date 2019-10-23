@@ -15,7 +15,6 @@ import enums.Platform;
 import page.IPage;
 import pagedef.Identifier;
 import testcore.controls.common.*;
-import testcore.controls.dialog.DialogControl;
 import utils.JavaUtils;
 
 public abstract class Control implements IControl {
@@ -173,34 +172,34 @@ public abstract class Control implements IControl {
 		while (current - start < 30) {
 			try {
 				switch (by.getIdType()) {
-				case ID:
-					elements = finder.findElements(By.id(by.getValue()));
-					break;
-				case XPATH:
-					elements = finder.findElements(By.xpath(by.getValue()));
-					break;
-				case NAME:
-					elements = finder.findElements(By.name(by.getValue()));
-					break;
-				case LINKTEXT:
-					elements = finder.findElements(By.linkText(by.getValue()));
-					break;
-				case CLASSNAME:
-					elements = finder.findElements(By.className(by.getValue()));
-					break;
-				case CSS:
-					elements = finder.findElements(By.cssSelector(by.getValue()));
-					break;
-				case PARTIALLINKTEXT:
-					elements = finder.findElements(By.partialLinkText(by.getValue()));
-					break;
-				case TAGNAME:
-					elements = finder.findElements(By.tagName(by.getValue()));
-					break;
-				default:
-					String msg = "Wrong identifier passed. Identifier Type : " + by.getIdType();
-					logger.error(msg);
-					break;
+					case ID:
+						elements = finder.findElements(By.id(by.getValue()));
+						break;
+					case XPATH:
+						elements = finder.findElements(By.xpath(by.getValue()));
+						break;
+					case NAME:
+						elements = finder.findElements(By.name(by.getValue()));
+						break;
+					case LINKTEXT:
+						elements = finder.findElements(By.linkText(by.getValue()));
+						break;
+					case CLASSNAME:
+						elements = finder.findElements(By.className(by.getValue()));
+						break;
+					case CSS:
+						elements = finder.findElements(By.cssSelector(by.getValue()));
+						break;
+					case PARTIALLINKTEXT:
+						elements = finder.findElements(By.partialLinkText(by.getValue()));
+						break;
+					case TAGNAME:
+						elements = finder.findElements(By.tagName(by.getValue()));
+						break;
+					default:
+						String msg = "Wrong identifier passed. Identifier Type : " + by.getIdType();
+						logger.error(msg);
+						break;
 				}
 			} catch (Exception e) {
 				// ignore. would continue polling.
@@ -258,42 +257,34 @@ public abstract class Control implements IControl {
 
 		if(finder == null){
 			finder = page.getAgent().getWebDriver();
-		}		
+		}
 
 		switch(controlType){
-		case "TextboxControl": 
-			return new TextboxControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
-		case "DialogControl":
-			return new DialogControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
-		case "ButtonControl":
-			return new ButtonControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
-		case "LinkControl":
-			return new LinkControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
-		case "CheckboxControl":
-			return new CheckboxControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
-		case "CalendarControl":
-			return new CalendarControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
-		case "GridControl":
-			return new GridControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
-		case "TextareaControl":
-			return new TextareaControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
-		case "DropdownControl":
-			return new DropdownControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
-		case "CascadingDropdownControl":
-			return new CascadingDropdownControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
-		case "MenuControl":
-			return new MenuControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
-		case "SectionControl":
-			return new SectionControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
-		case "DualCalendarControl":
-			return new DualCalendarControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
-		case "RadioControl":
-			return new RadioControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
-		case "AttachmentControl":
-			return new AttachmentControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
-		default:
-			throw new Error("Invalid control type");
-		}		
+			case "TextboxControl":
+				return new TextboxControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
+			case "ButtonControl":
+				return new ButtonControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
+			case "LinkControl":
+				return new LinkControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
+			case "CheckboxControl":
+				return new CheckboxControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
+			case "CalendarControl":
+				return new CalendarControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
+			case "GridControl":
+				return new GridControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
+			case "TextareaControl":
+				return new TextareaControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
+			case "DropdownControl":
+				return new DropdownControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
+			case "MenuControl":
+				return new MenuControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
+			case "SectionControl":
+				return new SectionControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
+			case "RadioControl":
+				return new RadioControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
+			default:
+				throw new Error("Invalid control type");
+		}
 	}
 
 	private static List<?> identify(SearchContext finder, Identifier by, String locatorParameter) throws Exception {
@@ -303,36 +294,36 @@ public abstract class Control implements IControl {
 		while (current - start < 30) {
 			try {
 				switch (by.getIdType()) {
-				case ID:
-					elements = finder.findElements(By.id(by.getValue(locatorParameter)));
-					break;
-				case XPATH:
-					// Locate xpath from given parent element. if the parent element is null, it takes 'document' root as parent.
-					String locator_toLocateFromParent = addDotToXpathLocatorPath(by, locatorParameter);
-					elements = finder.findElements(By.xpath(locator_toLocateFromParent));
-					break;
-				case NAME:
-					elements = finder.findElements(By.name(by.getValue(locatorParameter)));
-					break;
-				case LINKTEXT:
-					elements = finder.findElements(By.linkText(by.getValue(locatorParameter)));
-					break;
-				case CLASSNAME:
-					elements = finder.findElements(By.className(by.getValue(locatorParameter)));
-					break;
-				case CSS:
-					elements = finder.findElements(By.cssSelector(by.getValue(locatorParameter)));
-					break;
-				case PARTIALLINKTEXT:
-					elements = finder.findElements(By.partialLinkText(by.getValue(locatorParameter)));
-					break;
-				case TAGNAME:
-					elements = finder.findElements(By.tagName(by.getValue(locatorParameter)));
-					break;
-				default:
-					String msg = "Wrong identifier passed. Identifier Type : " + by.getIdType();
-					logger.error(msg);
-					break;
+					case ID:
+						elements = finder.findElements(By.id(by.getValue(locatorParameter)));
+						break;
+					case XPATH:
+						// Locate xpath from given parent element. if the parent element is null, it takes 'document' root as parent.
+						String locator_toLocateFromParent = addDotToXpathLocatorPath(by, locatorParameter);
+						elements = finder.findElements(By.xpath(locator_toLocateFromParent));
+						break;
+					case NAME:
+						elements = finder.findElements(By.name(by.getValue(locatorParameter)));
+						break;
+					case LINKTEXT:
+						elements = finder.findElements(By.linkText(by.getValue(locatorParameter)));
+						break;
+					case CLASSNAME:
+						elements = finder.findElements(By.className(by.getValue(locatorParameter)));
+						break;
+					case CSS:
+						elements = finder.findElements(By.cssSelector(by.getValue(locatorParameter)));
+						break;
+					case PARTIALLINKTEXT:
+						elements = finder.findElements(By.partialLinkText(by.getValue(locatorParameter)));
+						break;
+					case TAGNAME:
+						elements = finder.findElements(By.tagName(by.getValue(locatorParameter)));
+						break;
+					default:
+						String msg = "Wrong identifier passed. Identifier Type : " + by.getIdType();
+						logger.error(msg);
+						break;
 				}
 			} catch (Exception e) {
 				// ignore. would continue polling.

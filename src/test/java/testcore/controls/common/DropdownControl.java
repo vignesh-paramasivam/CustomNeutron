@@ -46,7 +46,7 @@ public class DropdownControl extends WebControl {
 						setIfOptionAvailable = true;
 						this.getAgent().scrollIntoView(options);
 						options.click();
-						assertPageLoad();
+						getPage().assertPageLoad();
 						break; 	}
 				}
 
@@ -92,7 +92,7 @@ public class DropdownControl extends WebControl {
 
 		if (selectElements.size() > 0) {
 			selectElements.get(0).click();
-			assertPageLoad();
+			getPage().assertPageLoad();
 			return;
 		}
 
@@ -100,7 +100,7 @@ public class DropdownControl extends WebControl {
 		String locator = "//div[contains(@class,'Select-option')]";
 		List<WebElement> dropDownItem = selectElement.findElements(By.xpath(locator));
 		dropDownItem.get(0).click();
-		assertPageLoad();
+		getPage().assertPageLoad();
 	}
 
 	@Override

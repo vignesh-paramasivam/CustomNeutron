@@ -29,6 +29,7 @@ public class SupportTest {
 	protected static Logger logger = AutomationCentral.getLogger();
 	private Configuration conf = null;
 	protected HomePage home;
+	protected LoginPage login;
 	private IAgent agent;
 	private ITestContext context = null;
 	private String testName = null;
@@ -107,7 +108,7 @@ public class SupportTest {
 		testData.putAll(listOfHashMap.get(Testcount++));
 		this.testData.put("testName", testName);
 		home = new HomePage(this.conf, agent, testData);
-		createAsset = new CreateAssetPage(this.conf, agent, testData);
+		login = new LoginPage(this.conf, agent, testData);
 		logger.info(String.format("Set up for test method [%s] ended.", testName));
 	}
 

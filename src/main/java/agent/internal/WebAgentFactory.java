@@ -44,12 +44,6 @@ public class WebAgentFactory {
 			driver.get(getProperty("app_browser_url", config));
 			switch(browser){
 			case IE :
-				checkAlert();
-				((JavascriptExecutor)driver).executeScript("arguments[0].click();", driver.findElement(By.xpath("//span[@id='moreInfoContainer']//a")));
-				driver.findElement(By.id(GoOnToTheWebpageLocator)).click();
-				checkAlert();
-				checkAlert();
-				AutomationCentral.getLogger().info("Alert and Certificate handled successfully");
 				break;
 
 			case EDGE:

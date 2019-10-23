@@ -68,8 +68,8 @@ public enum AutomationCentral {
 		String testDataFilePath = String.format("%s/%s/testdata.ini", getDirPathForConf(ConfigType.DATA_DIR),
 				getProperty("platform", contextConf));
 		logger.debug(String.format("Loading Test Data File at Path :: %s", testDataFilePath));
-		IniReader reader = new IniReader(testDataFilePath);
-		this.contextTestData.put(context.getName().toLowerCase(), reader);
+//		IniReader reader = new IniReader(testDataFilePath);
+//		this.contextTestData.put(context.getName().toLowerCase(), reader);
 	}
 
 	public synchronized Configuration getContextConfig(ITestContext context) {

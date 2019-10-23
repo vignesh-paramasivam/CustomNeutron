@@ -46,8 +46,6 @@ public interface IControl {
 
 	void clear() throws Exception;
 
-	String placeHolderName() throws Exception;
-
 	ArrayList<String> column_headers() throws Exception;
 
 	void verifyValues(HashMap<String, String> unique_column_name_and_values,
@@ -58,8 +56,6 @@ public interface IControl {
 	void enterDate(String string) throws Exception;
 
 	void enterValue(String text) throws Exception;
-	
-	void selectCascadingOption(String value) throws Exception;
 
 	String getErrorMessage() throws Exception;
 
@@ -67,15 +63,11 @@ public interface IControl {
 	
 	boolean isReadOnly() throws Exception;
 
-	boolean isbreadcrumDropDown() throws Exception;
-
 	boolean isDropdown() throws Exception;
 
 	void clearfield() throws Exception;
 
 	boolean isElementPresent() throws Exception;
-
-	boolean checkDuplicateValueInDropDownbox() throws Exception;
 
 	void clear_via_javascript() throws Exception;
 
@@ -87,8 +79,6 @@ public interface IControl {
 
 	void checkboxUnCheck() throws Exception;
 
-	void sendKeysAfterRemovingExistingValue(String text) throws Exception;
-	
 	List<WebElement> rows() throws Exception;
 	
 	void  scrollDownAndUp() throws Exception;
@@ -97,5 +87,4 @@ public interface IControl {
 
     WebElement thisControlElement() throws Exception;   
 
-   void enterDateRange(String text1, String text2) throws Exception;
 }

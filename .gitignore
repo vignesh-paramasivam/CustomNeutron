@@ -1,2 +1,7 @@
 /target/
 /.idea/
+/allure-results/*
+/log/*
+/screenshots/*
+/drivers/*
+automation.iml

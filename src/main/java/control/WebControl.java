@@ -1,8 +1,5 @@
 package control;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -14,8 +11,10 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
 import page.IPage;
-/*import testcore.controls.dialog.ConfirmActionDialog;
-import testcore.controls.dialog.NotificationDialog;*/
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class WebControl extends Control {
 
@@ -24,6 +23,106 @@ public class WebControl extends Control {
 
 	public WebControl(String name, IPage page, WebElement element) {
 		super(name, page, element);
+	}
+
+	@Override
+	public String getValue() throws Exception {
+		return null;
+	}
+
+	@Override
+	public ArrayList<String> column_headers() throws Exception {
+		return null;
+	}
+
+	@Override
+	public void verifyValues(HashMap<String, String> unique_column_name_and_values, HashMap<String, String> expected_column_name_and_values) throws Exception {
+
+	}
+
+	@Override
+	public boolean isMandatoryField() throws Exception {
+		return false;
+	}
+
+	@Override
+	public void enterDate(String string) throws Exception {
+
+	}
+
+	@Override
+	public void enterValue(String text) throws Exception {
+
+	}
+
+	@Override
+	public String getErrorMessage() throws Exception {
+		return null;
+	}
+
+	@Override
+	public boolean isSelected() throws Exception {
+		return false;
+	}
+
+	@Override
+	public boolean isReadOnly() throws Exception {
+		return false;
+	}
+
+	@Override
+	public boolean isDropdown() throws Exception {
+		return false;
+	}
+
+	@Override
+	public void clearfield() throws Exception {
+
+	}
+
+	@Override
+	public boolean isElementPresent() throws Exception {
+		return false;
+	}
+
+	@Override
+	public WebElement label() throws Exception {
+		return null;
+	}
+
+	@Override
+	public WebElement getTooltip() throws Exception {
+		return null;
+	}
+
+	@Override
+	public void checkboxCheck() throws Exception {
+
+	}
+
+	@Override
+	public void checkboxUnCheck() throws Exception {
+
+	}
+
+	@Override
+	public List<WebElement> rows() throws Exception {
+		return null;
+	}
+
+	@Override
+	public void scrollDownAndUp() throws Exception {
+
+	}
+
+	@Override
+	public void pageUpAndDown() throws Exception {
+
+	}
+
+	@Override
+	public WebElement thisControlElement() throws Exception {
+		return null;
 	}
 
 	@Override
@@ -207,6 +306,5 @@ public class WebControl extends Control {
 		Actions action = new Actions(getAgent().getWebDriver());
 		action.moveToElement(this.getRawWebElement()).build().perform();
 	}
-
 
 }
