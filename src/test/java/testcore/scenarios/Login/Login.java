@@ -9,8 +9,8 @@ public class Login extends SupportTest {
     @Test(enabled = true)
     public void Login_ValidateLoginAndLogout() throws Exception {
         ctms.login()
-        .navigateTo("Study Management;Study");
+        .navigateTo("Study Management;Study")
+        .addStudy();
     }
-
 
 }
