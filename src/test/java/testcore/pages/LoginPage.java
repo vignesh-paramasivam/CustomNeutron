@@ -37,14 +37,7 @@ public class LoginPage extends BasePage {
 		return LoginPage.class.getSimpleName();
 	}
 
-
 	public HomePage login() throws Exception {
-		getTextboxControl("user").enterText(getTestData().get("User"));
-		getTextboxControl("pwd").enterText(getTestData().get("Password"));
-		getButtonControl("btnLogin").click();
-		this.getAgent().getWaiter().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#leftPaneDiv")));
 		return new HomePage(getConfig(), getAgent(), getTestData());
 	}
-
-	
 }

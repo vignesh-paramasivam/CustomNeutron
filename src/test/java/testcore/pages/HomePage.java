@@ -11,7 +11,6 @@ import testcore.pages.desktop.DesktopHomePage;
 import utils.RandomData;
 
 import java.util.Map;
-import java.util.Random;
 
 public class HomePage extends BasePage {
 
@@ -42,26 +41,7 @@ public class HomePage extends BasePage {
 	}
 
 	public HomePage navigateTo(String menuName) throws Exception {
-		WebElement menuTopElement = this.getAgent().getWebDriver().findElement(By.id("jsm"));
-		new MenuControl("menucontrol", this, menuTopElement).selectMenu(menuName);
 		return new HomePage(getConfig(), getAgent(), getTestData());
-	}
-
-	public void addStudy() throws Exception {
-		//TODO: The below items needs to be placed in respective page steps;
-		//TODO: All sleeps will be removed after adding the page wait strategy
-
-		getLinkControl("Add record(s)").click();
-		Thread.sleep(5000);
-
-		String studyName = "Test24Oct - " + RandomData.alpha_numeric_string(3);
-		getTextboxControl("name").enterValue(studyName);
-		logger.info(studyName);
-
-		getDropdownControl("phase_cb").enterValue("Phase II/III");
-		getDropdownControl("status_cb").enterValue("Planning");
-		getButtonControl("save2").click();
-		Thread.sleep(10000);
 	}
 	
 }
