@@ -3,12 +3,10 @@ package testcore.pages;
 import agent.IAgent;
 import central.Configuration;
 
+import io.qameta.allure.Step;
 import org.apache.commons.lang3.NotImplementedException;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import testcore.controls.common.MenuControl;
+import org.testng.Assert;
 import testcore.pages.desktop.DesktopHomePage;
-import utils.RandomData;
 
 import java.util.Map;
 
@@ -40,8 +38,13 @@ public class HomePage extends BasePage {
 		return HomePage.class.getSimpleName();
 	}
 
+	@Step("Navigate to {menuName}")
 	public HomePage navigateTo(String menuName) throws Exception {
+		Assert.fail("Method implementation done in desktop page class");
 		return new HomePage(getConfig(), getAgent(), getTestData());
 	}
-	
+
+	public AllPages on() throws Exception {
+		return new AllPages(getConfig(), getAgent(), getTestData());
+	}
 }

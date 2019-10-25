@@ -10,26 +10,5 @@
 	},
 	"body": {
 		"DESKTOP_WEB": "id=body"
-	},
-	"btnMenubar": {
-		"DESKTOP_WEB": "id=ToolTipExpandbtn"
-	},
-	"icoCreateAsset": {
-		"DESKTOP_WEB": "xpath=//a[contains(@class, 'sideNavItem')]//span[contains(@class, 'addAsset')][contains(text(), 'Create Asset')]"
-	},
-	"icoServiceRequest": {
-		"DESKTOP_WEB": "xpath=//a[contains(@class, 'sideNavItem')]//span[contains(@class, 'addAsset')][contains(text(), 'Service Request')]"
-	},
-	"icoSignOut": {
-		"DESKTOP_WEB": "xpath=//a[contains(@class, 'sideNavItem')]//span[contains(@class, 'addAsset')][contains(text(), 'Sign Out')]"
-	},
-	"dialogModal": {
-		"DESKTOP_WEB": "css=div.modal-content"
-	},
-	"alertError": {
-		"DESKTOP_WEB": "css=div.alert-danger[role='alert']"
-	},
-	"lnkForgotPassword": {
-		"DESKTOP_WEB": "css=a > span.forgotPassword"
 	}
 }

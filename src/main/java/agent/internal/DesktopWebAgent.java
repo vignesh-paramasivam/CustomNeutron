@@ -19,7 +19,9 @@ public class DesktopWebAgent extends WebAgent {
 	
 	@Override
 	public void assertPageLoad() throws Exception {
-		// LEPANTO RELATED CHANGE: Page load parameters to be identified and defined for lepanto, until that we will not use this wait.
+
+		//TODO: Sleep is added for quick feasibility check on controls, once we get the page wait elements, it will be removed
+		Thread.sleep(2000);
 		if(true) { return;	}
 		if (Platform.isWebPlatform(this.getPlatform()) || isWebView()) {
 			ExpectedCondition<Boolean> pageLoadCondition = new ExpectedCondition<Boolean>() {

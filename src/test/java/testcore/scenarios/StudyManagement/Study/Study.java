@@ -6,12 +6,12 @@ import testcore.scenarios.SupportTest;
 public class Study extends SupportTest {
 
 
-    @Test(enabled = true)
-    public void AddStudy() throws Exception {
-        ctms.createInstance().login()
-        .navigateTo("Study Management;Study")
-
-        //Fix this
-        .addStudy();
+    @Test(enabled = true, description = "Verify adding a new study successfully")
+    public void AddNewStudy() throws Exception {
+        ctms.createInstance()
+                .login()
+                .navigateTo("Study Management;Study")
+                .on().studyPage()
+                .addNewStudy();
     }
 }

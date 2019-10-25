@@ -2,6 +2,7 @@ package testcore.pages;
 
 import agent.IAgent;
 import central.Configuration;
+import io.qameta.allure.Step;
 import org.apache.commons.lang3.NotImplementedException;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -38,6 +39,6 @@ public class LoginPage extends BasePage {
 	}
 
 	public HomePage login() throws Exception {
-		return new HomePage(getConfig(), getAgent(), getTestData());
+		return new HomePage(getConfig(), getAgent(), getTestData()).createInstance();
 	}
 }
