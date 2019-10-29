@@ -34,5 +34,8 @@
 	},
 	"RadioControl": {
 		"DESKTOP_WEB": "xpath=//input[@type='radio']/ancestor::label//span[text()='%1$s']/preceding-sibling::span//input[@type='radio']"
+	},
+	"NotificationControl": {
+		"DESKTOP_WEB": "xpath=//div[contains(@class, 'notification_content')]"
 	}
 }

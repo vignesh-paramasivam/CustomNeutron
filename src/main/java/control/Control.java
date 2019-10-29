@@ -282,8 +282,10 @@ public abstract class Control implements IControl {
 				return new SectionControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
 			case "RadioControl":
 				return new RadioControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
+			case "NotificationControl":
+				return new NotificationControl(locatorParameter, page, (WebElement) identify(finder, by, locatorParameter).get(0));
 			default:
-				throw new Error("Invalid control type");
+				throw new Error("Invalid control type; fix it under control.Control.java");
 		}
 	}
 

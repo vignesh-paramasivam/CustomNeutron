@@ -61,4 +61,8 @@ public interface IPage extends IWindowActions {
 
 	IControl getRadioControl(String string, WebElement parentElement) throws Exception;
 
+	IControl getNotificationControl(String string) throws Exception;
+
+	IControl getNotificationControl(String string, WebElement parentElement) throws Exception;
+
 }

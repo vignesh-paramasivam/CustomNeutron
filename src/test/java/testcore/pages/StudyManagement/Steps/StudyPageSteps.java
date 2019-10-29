@@ -5,6 +5,7 @@ import central.Configuration;
 import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonAnyFormatVisitor;
 import io.qameta.allure.Step;
 import org.apache.commons.lang3.NotImplementedException;
+import org.testng.Assert;
 import testcore.pages.BasePage;
 import testcore.pages.StudyManagement.StudyPage;
 import testcore.pages.desktop.StudyManagement.DesktopStudyPage;
@@ -42,6 +43,10 @@ public class StudyPageSteps extends BasePage {
 		getDropdownControl("phase_cb").enterValue(getTestData().get("Study Phase"));
 		getDropdownControl("status_cb").enterValue(getTestData().get("Status"));
 		getButtonControl("save2").click();
+		String actualMessage = getNotificationControl("").getValue();
+		String expectedMessage = "1 record(s) successfully entered.";
+
+		Assert.assertEquals(expectedMessage, actualMessage);
 		assertPageLoad();
 	}
 

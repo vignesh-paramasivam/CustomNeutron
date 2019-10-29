@@ -134,19 +134,6 @@ public abstract class BasePage extends Page {
 		return generateDynamicControlFromParent(locatorVariable, controlType, parentElement);
 	}
 
-/*	protected WebElement elementConfirmActionDialog() throws Exception {
-		this.getAgent().getWaiter().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(CONFIRMATION_DIALOG_IDENTIFIER)));
-		WebElement dialogElement = this.getAgent().getWebDriver().findElement(By.cssSelector(CONFIRMATION_DIALOG_IDENTIFIER));
-		waitUntilVisible(dialogElement);
-		return dialogElement;
-	}*/
-
-/*	public ConfirmActionDialog confirmActionDialog() throws Exception {
-		WebElement dialog = elementConfirmActionDialog();
-		ConfirmActionDialog confirmActiondialog = new ConfirmActionDialog(null, this, dialog);
-		return confirmActiondialog;
-	}*/
-
 	public WebElement elementNotificationDialog() throws Exception {
 		this.getAgent().getWaiter().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".ant-notification-notice-message, .ant-notification-notice-with-icon")));
 		if(this.getAgent().getWebDriver().findElements(By.cssSelector(".ant-notification-notice-message, .ant-notification-notice-with-icon")).size() < 0){
@@ -155,17 +142,10 @@ public abstract class BasePage extends Page {
 		return this.getAgent().getWebDriver().findElement(By.cssSelector(".ant-notification"));
 	}
 
-/*	public NotificationDialog notificationDialog() throws Exception {
-		WebElement dialog = elementNotificationDialog();
-		NotificationDialog NotificationDialog = new NotificationDialog(null, this, dialog);
-		return NotificationDialog;
-	}*/
-
 	public IControl getMenuControl(String locatorVariable) throws Exception {
 		String controlType = new Object(){}.getClass().getEnclosingMethod().getName().substring(3);
 		return generateDynamicControl(locatorVariable, controlType);
 	}
-
 
 	public IControl getSectionControl(String locatorVariable) throws Exception {
 		String controlType = new Object(){}.getClass().getEnclosingMethod().getName().substring(3);
@@ -190,6 +170,16 @@ public abstract class BasePage extends Page {
 	public IControl getRadioControl(String locatorVariable, WebElement parentElement) throws Exception {
 		String controlType = new Object(){}.getClass().getEnclosingMethod().getName().substring(3);
 		return generateDynamicControlFromParent(locatorVariable, controlType, parentElement);
+	}
+
+	public IControl getNotificationControl(String locatorVariable) throws Exception {
+		String controlType = new Object(){}.getClass().getEnclosingMethod().getName().substring(3);
+		return generateDynamicControl("", controlType);
+	}
+
+	public IControl getNotificationControl(String locatorVariable, WebElement parentElement) throws Exception {
+		String controlType = new Object(){}.getClass().getEnclosingMethod().getName().substring(3);
+		return generateDynamicControlFromParent("", controlType, parentElement);
 	}
 
 	public void logScreenShot(String logScreenShotName) throws Exception {
