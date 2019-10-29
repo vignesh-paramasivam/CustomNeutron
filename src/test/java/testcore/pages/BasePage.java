@@ -17,7 +17,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public abstract class BasePage extends Page {
 
-	String CONFIRMATION_DIALOG_IDENTIFIER = "div.ant-modal-content";
 
 	public BasePage(Configuration config, IAgent agent, Map<String, String> testData) throws Exception {
 		super(config, agent, testData);
@@ -135,12 +134,12 @@ public abstract class BasePage extends Page {
 		return generateDynamicControlFromParent(locatorVariable, controlType, parentElement);
 	}
 
-	protected WebElement elementConfirmActionDialog() throws Exception {
+/*	protected WebElement elementConfirmActionDialog() throws Exception {
 		this.getAgent().getWaiter().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(CONFIRMATION_DIALOG_IDENTIFIER)));
 		WebElement dialogElement = this.getAgent().getWebDriver().findElement(By.cssSelector(CONFIRMATION_DIALOG_IDENTIFIER));
 		waitUntilVisible(dialogElement);
 		return dialogElement;
-	}
+	}*/
 
 /*	public ConfirmActionDialog confirmActionDialog() throws Exception {
 		WebElement dialog = elementConfirmActionDialog();
