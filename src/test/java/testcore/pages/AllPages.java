@@ -25,7 +25,7 @@ public class AllPages extends BasePage {
 	}
 
 	public SitesPage sitesPage() throws Exception {
-		return new SitesPage(getConfig(), getAgent(), getTestData());
+		return new SitesPage(getConfig(), getAgent(), getTestData()).createInstance();
 	}
 
 }

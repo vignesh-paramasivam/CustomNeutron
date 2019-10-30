@@ -31,8 +31,8 @@ public class StudyPageSteps extends HomePage {
 
 	//TEST STEPS RELATED TO STUDY PAGE NEEDS TO BE ADDED BELOW
 
-	@Step("Add a new study")
-	public StudyPageSteps addNewStudy() throws Exception {
+	@Step("Add new study details and save")
+	public StudyPageSteps addNewStudyDetailsAndSave() throws Exception {
 		//TODO: All sleeps will be removed after adding the page wait strategy
 
 		getLinkControl("Add record(s)").click();
@@ -74,6 +74,13 @@ public class StudyPageSteps extends HomePage {
 		getTextboxControl("drugtrialNameSearch").enterValue(getTestData().get("StudyName"));
 		getButtonControl("btnSearch").click();
 		assertPageLoad();
+		return new StudyPageSteps(getConfig(), getAgent(), getTestData());
+	}
+
+	public StudyPageSteps addNewStudy() throws Exception {
+		navigateTo("Study Management;Study")
+				.on().studyPage()
+				.addNewStudyDetailsAndSave();
 		return new StudyPageSteps(getConfig(), getAgent(), getTestData());
 	}
 }

@@ -21,7 +21,7 @@ public class DesktopWebAgent extends WebAgent {
 	public void assertPageLoad() throws Exception {
 
 		//TODO: Sleep is added for quick feasibility check on controls, once we get the page wait elements, it will be removed
-		Thread.sleep(2000);
+		Thread.sleep(3000);
 		if(true) { return;	}
 		if (Platform.isWebPlatform(this.getPlatform()) || isWebView()) {
 			ExpectedCondition<Boolean> pageLoadCondition = new ExpectedCondition<Boolean>() {

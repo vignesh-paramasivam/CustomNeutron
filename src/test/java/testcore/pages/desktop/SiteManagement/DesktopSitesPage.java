@@ -1,14 +1,15 @@
-package testcore.pages.desktop.StudyManagement;
+package testcore.pages.desktop.SiteManagement;
 
 import agent.IAgent;
 import central.Configuration;
+import testcore.pages.SiteManagement.SitesPage;
 import testcore.pages.StudyManagement.StudyPage;
 
 import java.util.Map;
 
-public class DesktopStudyPage extends StudyPage {
+public class DesktopSitesPage extends SitesPage {
 
-	public DesktopStudyPage(Configuration conf, IAgent agent, Map<String, String> testData) throws Exception {
+	public DesktopSitesPage(Configuration conf, IAgent agent, Map<String, String> testData) throws Exception {
 		super(conf, agent, testData);
 		assertPageLoad();
 	}
