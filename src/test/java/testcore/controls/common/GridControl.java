@@ -17,12 +17,9 @@ import page.IPage;
 
 public class GridControl extends WebControl {
 
-	/* These identifiers are added based on BaseListing ag-grid, which can be updated for generic usage across the application*/
-	String COLUMNS_HEADERS_IDENTIFIER = "div.rt-th.rt-resizable-header div.rt-resizable-header-content span";
-	String COLUMNS_IDS_IDENTIFIER = "div.ag-header-viewport div.ag-header-row div.ag-header-cell , div.ant-table-header tr th:not(.ant-table-selection-column)";
-	String ROWS_IDENTIFIER = "div[class=rt-tr-group][role='rowgroup']";
-	String COLUMNS_IDENTIFIER = "div[role='gridcell']";
-	String COLUMNS_SEARCH_ROW_IDENTIFIER = "div.rt-thead.-filters div.rt-tr div.rt-th input";
+	String COLUMNS_HEADERS_IDENTIFIER = "thead tr th";
+	String ROWS_IDENTIFIER = "tbody tr";
+	String COLUMNS_IDENTIFIER = "td";
 
 	public GridControl(String name, IPage page, WebElement element) {
 		super(name, page, element);
@@ -64,9 +61,10 @@ public class GridControl extends WebControl {
 	private List<String> get_column_values_based_on_column_positions(WebElement identified_row, ArrayList<Integer> column_positions) {
 		List<String> values = new ArrayList<String>();
 
-		List<WebElement> columns = identified_row.findElements(By.cssSelector(COLUMNS_IDENTIFIER));
+		List<WebElement> columns = columns(identified_row);
 		for(int i = 0; i < column_positions.size(); i++) {
-			values.add(columns.get(column_positions.get(i)).getText());
+			String val = columns.get(column_positions.get(i)).getText();
+			values.add(val);
 		}
 
 		return values;
@@ -82,27 +80,13 @@ public class GridControl extends WebControl {
 		compare_expected_vs_actual(expected_column_name_and_values, actual_column_name_and_values);
 	}
 
-	public ArrayList<String> column_ids() throws Exception {
-		ArrayList<String> column_ids = new ArrayList<String>();
-		WebElement grid_element = this.getRawWebElement();
-		List<WebElement> temp_ids = grid_element.findElements(By.cssSelector(COLUMNS_IDS_IDENTIFIER));
-		temp_ids.forEach(header -> column_ids.add(header.getAttribute("col-id")));
-		return column_ids;
-	}
-
 	private HashMap<String, String> get_column_values(WebElement identified_row) throws Exception {
-		/*Store all column ids available in the grid*/
-		ArrayList<String> all_columns_ids = column_ids();
+		ArrayList<String> all_columns_ids = column_headers();
 
 		WebElement grid_element = this.getRawWebElement();
 		List<WebElement> headers = grid_element.findElements(By.cssSelector(COLUMNS_HEADERS_IDENTIFIER));
 
 		List<WebElement> headers_values = identified_row.findElements(By.cssSelector(COLUMNS_IDENTIFIER));
-
-		if(grid_element.getAttribute("id").contains("borderLayout_eGridPanel")) {
-			/*Clicks on the second cell of the identified row*/
-			headers_values.get(1).click();
-		}
 
 		HashMap<String, String> actual_column_name_and_values = new HashMap<String, String>();
 
@@ -110,21 +94,7 @@ public class GridControl extends WebControl {
 			String this_column_name = headers.get(id).getText();
 			String this_column_value = headers_values.get(id).getText();
 
-			if(grid_element.getAttribute("id").contains("borderLayout_eGridPanel")) {
-				/* hack to navigate to columns to get visibility and read the value since it is dynamically loading */
-				Actions builder = new Actions(this.getAgent().getWebDriver());
-				builder.sendKeys(Keys.ARROW_RIGHT).release().build().perform();
-			}
-
 			actual_column_name_and_values.put(this_column_name, this_column_value);
-		}
-
-		/*Scroll back to start of the grid*/
-		if(grid_element.getAttribute("id").contains("borderLayout_eGridPanel")) {
-			for (int id = 0; id < all_columns_ids.size(); id++) {
-				Actions builder = new Actions(this.getAgent().getWebDriver());
-				builder.sendKeys(Keys.ARROW_LEFT).release().build().perform();
-			}
 		}
 
 		return actual_column_name_and_values;
@@ -165,7 +135,6 @@ public class GridControl extends WebControl {
 
 			column_positions.add(all_columns_names.indexOf(key));
 			unique_column_values.add(value);
-
 		}
 
 		/* find the row, to verify its column value */
@@ -176,28 +145,6 @@ public class GridControl extends WebControl {
 		}
 		
 		return expected_row;
-	}
-	
-	public void  scrollDownAndUp() throws Exception{
-		List<WebElement> rowList = rows();
-		this.getRawWebElement().click();
-		for(int i =0 ; i < rowList.size() ;i++){			
-			Actions builder = new Actions(this.getAgent().getWebDriver());
-			builder.sendKeys(Keys.ARROW_DOWN).release().build().perform();
-		}
-		for(int i =0 ; i < rowList.size() ;i++){			
-			Actions builder = new Actions(this.getAgent().getWebDriver());
-			builder.sendKeys(Keys.ARROW_UP).release().build().perform();
-		}	
-	}
-
-	public void  pageUpAndDown() throws Exception{
-		this.getRawWebElement().click();	
-		Actions builder = new Actions(this.getAgent().getWebDriver());
-		builder.sendKeys(Keys.PAGE_DOWN).release().build().perform();
-		builder = new Actions(this.getAgent().getWebDriver());
-		builder.sendKeys(Keys.PAGE_UP).release().build().perform();
-
 	}
 
 	@Override
@@ -210,14 +157,4 @@ public class GridControl extends WebControl {
 	    DropdownControl dropdownControl = new DropdownControl(getName(), getPage(), element);
 	    dropdownControl.enterText(value);
     }
-	
-	public void searchWithColumnHeader(String columnHeader, String value) throws Exception{
-		WebElement grid_element = this.getRawWebElement();
-		List<WebElement> column_search_input = grid_element.findElements(By.cssSelector(COLUMNS_SEARCH_ROW_IDENTIFIER));
-		int indexOfHeader = column_headers().indexOf(columnHeader.toUpperCase().trim());
-		WebElement col_input = column_search_input.get(indexOfHeader);
-		col_input.sendKeys(value);
-	}
 }
-
-

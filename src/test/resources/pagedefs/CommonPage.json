@@ -12,7 +12,7 @@
 		"DESKTOP_WEB": "css=div.modal-content, div.ant-modal-content"
 	},
 	"GridControl": {
-		"DESKTOP_WEB": "xpath=//div[@id='%1$s']//div[@role='tabpanel'][@aria-hidden='false']//div[@id='borderLayout_eGridPanel'] | //div[@id='%1$s']//div[@id='borderLayout_eGridPanel'] | //div[contains(@class, '%1$s')]//div[contains(@class, 'Pane vertical Pane')]"
+		"DESKTOP_WEB": "xpath=//table[contains(@class, '%1$s')] | //table[@id='%1$s']"
 	},
 	"TextareaControl": {
 		"DESKTOP_WEB": "xpath=//textarea[@id='%1$s']"

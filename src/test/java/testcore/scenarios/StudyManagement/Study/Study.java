@@ -12,6 +12,10 @@ public class Study extends SupportTest {
                 .login()
                 .navigateTo("Study Management;Study")
                 .on().studyPage()
-                .addNewStudy();
+                .addNewStudy().createInstance()
+                .navigateTo("Study Management;Study")
+                .on().studyPage()
+                .searchNewlyAddedStudy()
+                .verifyValuesInGrid();
     }
 }
