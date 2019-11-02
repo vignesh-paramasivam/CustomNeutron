@@ -4,6 +4,7 @@ import agent.IAgent;
 import central.Configuration;
 import control.Control;
 import control.IControl;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -14,12 +15,20 @@ import java.util.Map;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import testcore.controls.common.MenuControl;
 
 public abstract class BasePage extends Page {
 
 
 	public BasePage(Configuration config, IAgent agent, Map<String, String> testData) throws Exception {
 		super(config, agent, testData);
+	}
+
+	@Step("Navigate to {menuName}")
+	public AllPages navigateTo(String menuName) throws Exception {
+		WebElement menuTopElement = this.getAgent().getWebDriver().findElement(By.id("jsm"));
+		new MenuControl("menucontrol", this, menuTopElement).selectMenu(menuName);
+		return new AllPages(getConfig(), getAgent(), getTestData());
 	}
 
 	@Override

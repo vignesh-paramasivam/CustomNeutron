@@ -2,7 +2,13 @@ package testcore.pages;
 
 import agent.IAgent;
 import central.Configuration;
+import io.qameta.allure.Step;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import testcore.controls.common.MenuControl;
 import testcore.pages.SiteManagement.SitesPage;
+import testcore.pages.SiteManagement.Steps.SitesPageSteps;
+import testcore.pages.StudyManagement.Steps.StudyPageSteps;
 import testcore.pages.StudyManagement.StudyPage;
 
 import java.util.Map;
@@ -20,12 +26,13 @@ public class AllPages extends BasePage {
 		return AllPages.class.getSimpleName();
 	}
 
-	public StudyPage studyPage() throws Exception {
-		return new StudyPage(getConfig(), getAgent(), getTestData()).createInstance();
+
+	public StudyPageSteps studyPage() throws Exception {
+		return new StudyPageSteps(getConfig(), getAgent(), getTestData());
 	}
 
-	public SitesPage sitesPage() throws Exception {
-		return new SitesPage(getConfig(), getAgent(), getTestData()).createInstance();
+	public SitesPageSteps sitesPage() throws Exception {
+		return new SitesPageSteps(getConfig(), getAgent(), getTestData());
 	}
 
 }

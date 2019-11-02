@@ -11,7 +11,7 @@ import testcore.pages.desktop.StudyManagement.DesktopStudyPage;
 
 import java.util.Map;
 
-public class SitesPage extends SitesPageSteps {
+public class SitesPage extends BasePage {
 
 
 	public SitesPage(Configuration conf, IAgent agent, Map<String, String> testData) throws Exception {

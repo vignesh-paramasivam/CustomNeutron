@@ -11,10 +11,10 @@ public class Study extends SupportTest {
         ctms.createInstance()
                 .login()
                 .navigateTo("Study Management;Study")
-                .on().studyPage()
+                .studyPage()
                 .addNewStudyDetailsAndSave()
                 .navigateTo("Study Management;Study")
-                .on().studyPage()
+                .studyPage()
                 .searchNewlyAddedStudy()
                 .verifyValuesInGrid();
     }

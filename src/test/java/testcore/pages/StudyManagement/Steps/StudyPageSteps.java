@@ -2,20 +2,14 @@ package testcore.pages.StudyManagement.Steps;
 
 import agent.IAgent;
 import central.Configuration;
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonAnyFormatVisitor;
 import io.qameta.allure.Step;
-import org.apache.commons.lang3.NotImplementedException;
 import org.testng.Assert;
-import testcore.pages.BasePage;
-import testcore.pages.HomePage;
 import testcore.pages.StudyManagement.StudyPage;
-import testcore.pages.desktop.StudyManagement.DesktopStudyPage;
 import utils.RandomData;
-
 import java.util.HashMap;
 import java.util.Map;
 
-public class StudyPageSteps extends HomePage {
+public class StudyPageSteps extends StudyPage {
 
 
 	public StudyPageSteps(Configuration conf, IAgent agent, Map<String, String> testData) throws Exception {
@@ -38,8 +32,7 @@ public class StudyPageSteps extends HomePage {
 		getLinkControl("Add record(s)").click();
 		assertPageLoad();
 
-		String studyName = "Test30Oct - " + RandomData.alpha_numeric_string(3);
-
+		String studyName = "Test - " + RandomData.dateTime_yyyyMMddHHmmss();
 		this.getTestData().put("StudyName", studyName);
 		getTextboxControl("name").enterValue(studyName);
 		logger.info(studyName);
@@ -79,7 +72,7 @@ public class StudyPageSteps extends HomePage {
 
 	public StudyPageSteps addNewStudy() throws Exception {
 		navigateTo("Study Management;Study")
-				.on().studyPage()
+				.studyPage()
 				.addNewStudyDetailsAndSave();
 		return new StudyPageSteps(getConfig(), getAgent(), getTestData());
 	}

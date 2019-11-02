@@ -3,12 +3,15 @@ package testcore.pages.StudyManagement;
 import agent.IAgent;
 import central.Configuration;
 import org.apache.commons.lang3.NotImplementedException;
+import org.testng.Assert;
+import testcore.pages.BasePage;
+import testcore.pages.HomePage;
 import testcore.pages.StudyManagement.Steps.StudyPageSteps;
 import testcore.pages.desktop.StudyManagement.DesktopStudyPage;
 
 import java.util.Map;
 
-public class StudyPage extends StudyPageSteps {
+public class StudyPage extends BasePage {
 
 
 	public StudyPage(Configuration conf, IAgent agent, Map<String, String> testData) throws Exception {
@@ -34,4 +37,5 @@ public class StudyPage extends StudyPageSteps {
 	public String pageName() {
 		return StudyPage.class.getSimpleName();
 	}
+
 }

@@ -16,11 +16,4 @@ public class DesktopHomePage extends HomePage {
         assertPageLoad();
     }
 
-    @Override
-    public HomePage navigateTo(String menuName) throws Exception {
-        WebElement menuTopElement = this.getAgent().getWebDriver().findElement(By.id("jsm"));
-        new MenuControl("menucontrol", this, menuTopElement).selectMenu(menuName);
-        return new HomePage(getConfig(), getAgent(), getTestData());
-    }
-
 }
