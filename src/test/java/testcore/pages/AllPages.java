@@ -2,14 +2,8 @@ package testcore.pages;
 
 import agent.IAgent;
 import central.Configuration;
-import io.qameta.allure.Step;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import testcore.controls.common.MenuControl;
-import testcore.pages.SiteManagement.SitesPage;
 import testcore.pages.SiteManagement.Steps.SitesPageSteps;
 import testcore.pages.StudyManagement.Steps.StudyPageSteps;
-import testcore.pages.StudyManagement.StudyPage;
 
 import java.util.Map;
 

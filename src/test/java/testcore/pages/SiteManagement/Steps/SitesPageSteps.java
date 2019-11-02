@@ -40,7 +40,7 @@ public class SitesPageSteps extends SitesPage {
 		getLinkControl("Add a new site").click();
 		assertPageLoad();
 
-		String studySiteNumber = "TestSite - " + RandomData.alpha_numeric_string(3);
+		String studySiteNumber = "TestSite - " + RandomData.dateTime_yyyyMMddHHmmss();
 
 		getTestData().put("studySiteNumber", studySiteNumber);
 
@@ -83,7 +83,7 @@ public class SitesPageSteps extends SitesPage {
 
 	public SitesPageSteps searchNewlyAddedSite() throws Exception {
 		String studyName = getTestData().get("StudyName");
-		getDropdownControl("drugtrialId_cb").enterValue(studyName);
+		getDropdownControl("drugtrialIdSrch_cb").enterValue(studyName);
 		getButtonControl("btnSearch").click();
 		assertPageLoad();
 		return new SitesPageSteps(getConfig(), getAgent(), getTestData());

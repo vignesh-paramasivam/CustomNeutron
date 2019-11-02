@@ -21,7 +21,7 @@ public class RandomData {
 	}
 
 	public static String dateTime_yyyyMMddHHmmss() {
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMss HHmmss");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd HHmmss");
 		Calendar calendar = Calendar.getInstance();
 		return formatter.format(calendar.getTime());
 	}
