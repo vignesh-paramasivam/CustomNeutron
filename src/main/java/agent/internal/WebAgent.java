@@ -25,6 +25,7 @@ import enums.ConfigType;
 import enums.Direction;
 import enums.Platform;
 import utils.JavaUtils;
+import utils.RandomData;
 
 public abstract class WebAgent implements IAgent {
 	protected static Logger logger = AutomationCentral.getLogger();
@@ -149,9 +150,8 @@ public abstract class WebAgent implements IAgent {
 		try {
 			TakesScreenshot scrShot = ((TakesScreenshot) driver);
 			File SrcFile = scrShot.getScreenshotAs(OutputType.FILE);
-			// JavaUtils.datetime(screenDateFormat) - timestamp is removed for zicos reporting purpose.
 			File DestFile = new File(
-					this.screenShotsDir + File.separator + System.getProperty("browser") + "_" + testname + ".png");
+					this.screenShotsDir + File.separator + System.getProperty("browser") + RandomData.dateTime_yyyyMMddHHmmss() + "_" + testname + ".png");
 			FileUtils.copyFile(SrcFile, DestFile);
 			return DestFile;
 		} catch (Exception e) {
