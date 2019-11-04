@@ -41,18 +41,13 @@ public class SitesPageSteps extends SitesPage {
 		assertPageLoad();
 
 		String studySiteNumber = "TestSite - " + RandomData.dateTime_yyyyMMddHHmmss();
-
 		getTestData().put("studySiteNumber", studySiteNumber);
 
 		getTextboxControl("Study Site Number").enterValue(studySiteNumber);
 		getLinkControl("Pick Address").click();
-
 		assertPageLoad();
 
 		onOrgAddressPick();
-
-		assertPageLoad();
-
 		return new SitesPageSteps(getConfig(), getAgent(), getTestData());
 	}
 
@@ -60,22 +55,22 @@ public class SitesPageSteps extends SitesPage {
 		switchToNewWindow();
 		getTextboxControl("companyNameSrch").enterValue("*");
 		getButtonControl("btnSearch").click();
-
 		assertPageLoad();
-		String orgName = getTestData().get("StudyName");
+
+		//Using the existing Org name for test purpose
+		String orgName = "Test25 - Org1"; // getTestData().get("StudyName");
 		HashMap<String, String> uniqueValuesToIdentifyRow = new HashMap<>();
-		uniqueValuesToIdentifyRow.put("Organization Name", "Test25 - Org1");
+		uniqueValuesToIdentifyRow.put("Organization Name", orgName);
 
 		GridControl grid = new GridControl("myGrid", this, getGridControl("Gentable").thisControlElement());
 		WebElement row = grid.getRow_BasedOnUniqueColumnValues(uniqueValuesToIdentifyRow);
 		List<WebElement> expectedColumn = grid.columns(row);
 		expectedColumn.get(expectedColumn.size() - 1).findElement(By.cssSelector("input")).click();
-
 		assertPageLoad();
 
 		switchToMainWindow();
-
 		getButtonControl("save2").click();
+		assertPageLoad();
 
 		return new StudyPageSteps(getConfig(), getAgent(), getTestData());
 	}
@@ -92,6 +87,8 @@ public class SitesPageSteps extends SitesPage {
 
 	public SitesPageSteps verifyValuesInGrid() throws Exception {
 		HashMap<String, String> uniqueValuesToIdentifyRow = new HashMap<>();
+
+		System.out.println(getTestData().get("studySiteNumber"));
 		uniqueValuesToIdentifyRow.put("Study Site Number", getTestData().get("studySiteNumber"));
 
 		HashMap<String, String> allValuesToIdentifyRow = new HashMap<>();
