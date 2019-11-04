@@ -5,6 +5,8 @@ import central.Configuration;
 import testcore.pages.SiteManagement.Steps.SiteVisitsPageSteps;
 import testcore.pages.SiteManagement.Steps.SitesPageSteps;
 import testcore.pages.StudyManagement.Steps.StudyPageSteps;
+import testcore.pages.Templates.Questionnaire.AssignedQuesMasterTmplPage;
+import testcore.pages.Templates.Steps.AssignedQuesMasterTmplPageSteps;
 
 import java.util.Map;
 
@@ -32,6 +34,10 @@ public class AllPages extends BasePage {
 
 	public SiteVisitsPageSteps onSiteVisitsPage() throws Exception {
 		return new SiteVisitsPageSteps(getConfig(), getAgent(), getTestData());
+	}
+
+	public AssignedQuesMasterTmplPageSteps onAssignedQuesMasterTmplPageSteps() throws Exception {
+		return new AssignedQuesMasterTmplPageSteps(getConfig(), getAgent(), getTestData());
 	}
 
 }

@@ -5,7 +5,7 @@ import testcore.scenarios.SupportTest;
 
 public class Sites extends SupportTest {
 
-    @Test(enabled = true, description = "Verify adding a new study successfully")
+    @Test(enabled = true, description = "Verify adding a new site successfully")
     public void AddNewSite() throws Exception {
         ctms.createInstance()
                 .login()
@@ -22,7 +22,7 @@ public class Sites extends SupportTest {
     }
 
 
-    @Test(enabled = true, description = "Verify adding a new study successfully")
+    @Test(enabled = true, description = "Verify adding a visit schedule successfully")
     public void AddVisitScheduleForSite() throws Exception {
         ctms.createInstance()
                 .login()
@@ -35,7 +35,9 @@ public class Sites extends SupportTest {
                 .navigateTo("Site Management;Site Visits")
                 .onSiteVisitsPage()
                 .addVisitScheduleForSite()
-                .verifyValuesInGrid();
-
+                .verifyValuesInGrid()
+                .navigateTo("Templates;Questionnaire Tmpls;Assigned Questionnaires Master Group")
+                .onAssignedQuesMasterTmplPageSteps()
+                .addAssignedQuesMasterTmplForSite();
     }
 }

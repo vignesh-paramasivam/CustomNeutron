@@ -3,10 +3,7 @@ package testcore.pages.StudyManagement;
 import agent.IAgent;
 import central.Configuration;
 import org.apache.commons.lang3.NotImplementedException;
-import org.testng.Assert;
 import testcore.pages.BasePage;
-import testcore.pages.HomePage;
-import testcore.pages.StudyManagement.Steps.StudyPageSteps;
 import testcore.pages.desktop.StudyManagement.DesktopStudyPage;
 
 import java.util.Map;

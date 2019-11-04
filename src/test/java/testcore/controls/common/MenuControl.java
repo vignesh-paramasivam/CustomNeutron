@@ -26,8 +26,14 @@ public class MenuControl  extends WebControl {
 
 		//TODO: Handle menu selection in multiple levels
 		WebElement menuParent = this.getRawWebElement();
-		menuParent.findElement(By.xpath(".//table[@class='TMenuItemChild0']//td[contains(text(), '" + mainMenu + "')]")).click();
+		menuParent.findElement(By.xpath(".//table[@class='TMenuItemChild0']//td[text()='" + mainMenu + "']")).click();
 		menuParent.findElement(By.xpath(".//div[@class='TPopUp0']//td[text()='" + childMenu + "']")).click();
+
+		if(menus.length > 2) {
+			String subChild = menus[2];
+			menuParent.findElement(By.xpath(".//div[@class='TPopUpItem0']//td[text()='" + subChild + "']")).click();
+		}
+
 		Thread.sleep(5000);
 	}
 }
