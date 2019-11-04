@@ -33,7 +33,7 @@ public class StudyPageSteps extends StudyPage {
 		assertPageLoad();
 
 		String studyName = "Test - " + RandomData.dateTime_yyyyMMddHHmmss();
-		this.getTestData().put("StudyName", studyName);
+		this.getTestData().put("studyName", studyName);
 		getTextboxControl("name").enterValue(studyName);
 		logger.info(studyName);
 
@@ -53,10 +53,10 @@ public class StudyPageSteps extends StudyPage {
 
 	public StudyPageSteps verifyValuesInGrid() throws Exception {
 		HashMap<String, String> uniqueValuesToIdentifyRow = new HashMap<>();
-		uniqueValuesToIdentifyRow.put("Study Name", getTestData().get("StudyName"));
+		uniqueValuesToIdentifyRow.put("Study Name", getTestData().get("studyName"));
 
 		HashMap<String, String> allValuesToIdentifyRow = new HashMap<>();
-		uniqueValuesToIdentifyRow.put("Study Name", getTestData().get("StudyName"));
+		uniqueValuesToIdentifyRow.put("Study Name", getTestData().get("studyName"));
 
 		getGridControl("Gentable").verifyValues(uniqueValuesToIdentifyRow, allValuesToIdentifyRow);
 		return new StudyPageSteps(getConfig(), getAgent(), getTestData());
@@ -64,16 +64,14 @@ public class StudyPageSteps extends StudyPage {
 
 
 	public StudyPageSteps searchNewlyAddedStudy() throws Exception {
-		getTextboxControl("drugtrialNameSearch").enterValue(getTestData().get("StudyName"));
+		getTextboxControl("drugtrialNameSearch").enterValue(getTestData().get("studyName"));
 		getButtonControl("btnSearch").click();
 		assertPageLoad();
 		return new StudyPageSteps(getConfig(), getAgent(), getTestData());
 	}
 
 	public StudyPageSteps addNewStudy() throws Exception {
-		navigateTo("Study Management;Study")
-				.studyPage()
-				.addNewStudyDetailsAndSave();
+		addNewStudyDetailsAndSave();
 		return new StudyPageSteps(getConfig(), getAgent(), getTestData());
 	}
 }

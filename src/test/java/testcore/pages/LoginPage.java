@@ -2,10 +2,7 @@ package testcore.pages;
 
 import agent.IAgent;
 import central.Configuration;
-import io.qameta.allure.Step;
 import org.apache.commons.lang3.NotImplementedException;
-import org.openqa.selenium.By;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import testcore.pages.desktop.DesktopLoginPage;
 
 import java.util.Map;

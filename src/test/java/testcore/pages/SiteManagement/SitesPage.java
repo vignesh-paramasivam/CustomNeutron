@@ -36,5 +36,11 @@ public class SitesPage extends BasePage {
 	public String pageName() {
 		return SitesPage.class.getSimpleName();
 	}
+
+	protected SitesPage clickSave() throws Exception {
+		getButtonControl("save2").click();
+		assertPageLoad();
+		return new SitesPage(getConfig(), getAgent(), getTestData());
+	}
 	
 }

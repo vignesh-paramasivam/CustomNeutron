@@ -26,7 +26,8 @@ public class DropdownControl extends WebControl {
 			List<WebElement> options = this.getAgent().getWebDriver().findElements(By.xpath(options_xpath));
 
 			for (WebElement option : options) {
-				if (option.getText().equalsIgnoreCase(value)) {
+				//TODO: Value should be verified with equals instead of contains(modified - as the text box prints [] during sendKeys)
+				if (option.getText().contains(value)) {
 					this.getAgent().getWaiter().until(ExpectedConditions.visibilityOf(option));
 					option.click();
 					return;

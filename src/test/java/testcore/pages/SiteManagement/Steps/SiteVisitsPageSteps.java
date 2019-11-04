@@ -28,4 +28,33 @@ public class SiteVisitsPageSteps extends SiteVisitsPage {
 		return SiteVisitsPage.class.getSimpleName();
 	}
 
+
+	public SiteVisitsPageSteps addVisitScheduleForSite() throws Exception {
+		getDropdownControl("drugtrialId_cb").enterValue(getTestData().get("studyName"));
+		getDropdownControl("siteIdSrch_cb").enterValue(getTestData().get("studySiteNumber"));
+		getButtonControl("btnSearch").click();
+		assertPageLoad();
+		getLinkControl("Add a new activity").click();
+
+		String visitScheduleName = "SQV Visit" + RandomData.dateTime_yyyyMMddHHmmss();
+		this.getTestData().put("visitScheduleName", visitScheduleName);
+		getTextboxControl("name").enterValue(visitScheduleName);
+		getDropdownControl("category_cb").enterValue(getTestData().get("Category"));
+
+		clickSaveAndClose();
+
+		return new SiteVisitsPageSteps(getConfig(), getAgent(), getTestData());
+	}
+
+	public SitesPageSteps verifyValuesInGrid() throws Exception {
+		HashMap<String, String> uniqueValuesToIdentifyRow = new HashMap<>();
+
+		uniqueValuesToIdentifyRow.put("Study Site Number", getTestData().get("studySiteNumber"));
+
+		HashMap<String, String> allValuesToIdentifyRow = new HashMap<>();
+		allValuesToIdentifyRow.put("Activity Name", getTestData().get("visitScheduleName"));
+
+		getGridControl("summaryTable").verifyValues(uniqueValuesToIdentifyRow, allValuesToIdentifyRow);
+		return new SitesPageSteps(getConfig(), getAgent(), getTestData());
+	}
 }

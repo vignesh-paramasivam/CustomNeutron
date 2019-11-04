@@ -44,7 +44,12 @@ public class GridControl extends WebControl {
 		return row.findElements(By.cssSelector(COLUMNS_IDENTIFIER));
 	}
 
-	private WebElement get_row(List<WebElement> rows, ArrayList<Integer> column_positions ,List<String> expected_column_values) {
+	public WebElement getColumn(WebElement row, String columnName) throws Exception {
+		int position = column_headers().indexOf(columnName);
+		return row.findElements(By.cssSelector(COLUMNS_IDENTIFIER)).get(position);
+	}
+
+	private WebElement getRow(List<WebElement> rows, ArrayList<Integer> column_positions ,List<String> expected_column_values) {
 		WebElement expected_row = null;
 
 		/*Iterate over all the rows in the grid and verify any row has the expected column values*/
@@ -138,7 +143,7 @@ public class GridControl extends WebControl {
 		}
 
 		/* find the row, to verify its column value */
-		WebElement expected_row = get_row(rows, column_positions, unique_column_values);
+		WebElement expected_row = getRow(rows, column_positions, unique_column_values);
 		
 		if(expected_row == null) {
 			Assert.fail("Unable to find the expected rows based on the given column values");

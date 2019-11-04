@@ -36,7 +36,4 @@ public class HomePage extends BasePage {
 		return HomePage.class.getSimpleName();
 	}
 
-	public AllPages on() throws Exception {
-		return new AllPages(getConfig(), getAgent(), getTestData());
-	}
 }

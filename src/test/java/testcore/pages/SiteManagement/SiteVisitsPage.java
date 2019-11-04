@@ -33,5 +33,16 @@ public class SiteVisitsPage extends BasePage {
 	public String pageName() {
 		return SiteVisitsPage.class.getSimpleName();
 	}
-	
+
+	protected SitesPage clickSave() throws Exception {
+		getButtonControl("save2").click();
+		assertPageLoad();
+		return new SitesPage(getConfig(), getAgent(), getTestData());
+	}
+
+	protected SitesPage clickSaveAndClose() throws Exception {
+		getButtonControl("save1").click();
+		assertPageLoad();
+		return new SitesPage(getConfig(), getAgent(), getTestData());
+	}
 }
