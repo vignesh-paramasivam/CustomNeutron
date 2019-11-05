@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import control.WebControl;
 import page.IPage;
 
-public class MenuControl  extends WebControl {
+public class MenuControl extends WebControl {
 
 	public MenuControl(String name, IPage page, WebElement element) {
 		super(name, page, element);
@@ -34,6 +34,5 @@ public class MenuControl  extends WebControl {
 			menuParent.findElement(By.xpath(".//div[@class='TPopUpItem0']//td[text()='" + subChild + "']")).click();
 		}
 
-		Thread.sleep(5000);
 	}
 }

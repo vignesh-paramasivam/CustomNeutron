@@ -19,10 +19,6 @@ public class DesktopWebAgent extends WebAgent {
 	
 	@Override
 	public void assertPageLoad() throws Exception {
-
-		//TODO: Sleep is added for quick feasibility check on controls, once we get the page wait elements, it will be removed
-		Thread.sleep(3000);
-		if(true) { return;	}
 		if (Platform.isWebPlatform(this.getPlatform()) || isWebView()) {
 			ExpectedCondition<Boolean> pageLoadCondition = new ExpectedCondition<Boolean>() {
 				public Boolean apply(WebDriver driver) {
@@ -43,25 +39,13 @@ public class DesktopWebAgent extends WebAgent {
 					 * and fail stating the page is not loaded.
 					 */
 
-					boolean pageLoaded;
-
-					if (driver.findElements(By.cssSelector("body#runtime")).size() > 0) {
-						// Admin page doesn't have pace-done class, so taking this approach.
-						pageLoaded = driver.findElements(By.cssSelector("body#runtime.pc")).size() > 0;
-					}
-					else {
-						pageLoaded = driver.findElements(By.cssSelector("body.pace-done")).size() > 0;
-					}
-					boolean loadingSpinnerDisplayed = driver.findElements(By.cssSelector("div.ant-spin-spinning")).size() == 0;
-					boolean gridSpinnerDisplayed = driver.findElements(By.cssSelector(".ant-spin-dot")).size() == 0;
-					boolean pageBlur = driver.findElements(By.cssSelector(".ant-spin-blur")).size() == 0;
-					boolean loadingBtn = driver.findElements(By.cssSelector("button#loadingBtn")).size() == 0;
-
+					boolean pageLoaded = driver.findElements(By.cssSelector("body")).size() > 0;
+					boolean loadingSpinnerDisplayed = driver.findElements(By.xpath("//div[@id='divContentLoadingSpinner'][contains(@style,'display: block')]")).size() == 0;
 
 					int timeOut = System.getProperty("implicit_wait") == null ? Integer.parseInt(getConfig().getValue(ConfigType.IMPLICIT_WAIT)) : Integer.parseInt(System.getProperty("implicit_wait"));
 					driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
 
-					return (pageLoaded && loadingSpinnerDisplayed && documentReady && gridSpinnerDisplayed && pageBlur && loadingBtn);
+					return (pageLoaded && loadingSpinnerDisplayed && documentReady);
 				}
 			};
 			this.getWaiter().until(pageLoadCondition);

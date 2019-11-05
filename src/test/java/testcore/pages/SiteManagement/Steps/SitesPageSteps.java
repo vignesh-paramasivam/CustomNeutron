@@ -83,10 +83,10 @@ public class SitesPageSteps extends SitesPage {
 	}
 
 	public VisitReportPageSteps openVisitReportForSite() throws Exception {
-		getDropdownControl("drugtrialIdSrch_cb").enterValue("Test - 20191104 200633");
+		Thread.sleep(3000); //TODO: Looks like page is getting refreshed in splits. Static wait will be removed after fix
+		getDropdownControl("drugtrialIdSrch_cb").enterValue(getTestData().get("studyName"));
 		getButtonControl("btnSearch").click();
 		assertPageLoad();
-		getTestData().put("studySiteNumber", "TestSite - 20191104 200715");
 		HashMap<String, String> uniqueValuesToIdentifyRow = new HashMap<>();
 		uniqueValuesToIdentifyRow.put("Study Site Number", getTestData().get("studySiteNumber"));
 
@@ -125,8 +125,8 @@ public class SitesPageSteps extends SitesPage {
 		List<WebElement> expectedColumn = grid.columns(row);
 		//Clicking on the pick button
 		expectedColumn.get(expectedColumn.size() - 1).findElement(By.cssSelector("input")).click();
+		switchToMainWindow();
 		assertPageLoad();
 
-		switchToMainWindow();
 	}
 }

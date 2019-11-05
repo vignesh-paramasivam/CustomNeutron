@@ -35,5 +35,5 @@ public class VisitReportPage extends BasePage {
 	public String pageName() {
 		return VisitReportPage.class.getSimpleName();
 	}
-	
+
 }
