@@ -31,12 +31,13 @@ public class SiteVisitsPageSteps extends SiteVisitsPage {
 
 	public SiteVisitsPageSteps addVisitScheduleForSite() throws Exception {
 		getDropdownControl("drugtrialId_cb").enterValue(getTestData().get("studyName"));
-		getDropdownControl("siteIdSrch_cb").enterValue(getTestData().get("studySiteNumber"));
+		//TODO: Added hack to continue with the test flow; Appending [] in site search dropdown - needs further analysis
+		getDropdownControl("siteIdSrch_cb").enterValue(getTestData().get("studySiteNumber") + " []");
 		getButtonControl("btnSearch").click();
 		assertPageLoad();
 		getLinkControl("Add a new activity").click();
 
-		String visitScheduleName = "SQV Visit" + RandomData.dateTime_yyyyMMddHHmmss();
+		String visitScheduleName = "SQV Visit - " + RandomData.dateTime_yyyyMMddHHmmss();
 		this.getTestData().put("visitScheduleName", visitScheduleName);
 		getTextboxControl("name").enterValue(visitScheduleName);
 		getDropdownControl("category_cb").enterValue(getTestData().get("Category"));

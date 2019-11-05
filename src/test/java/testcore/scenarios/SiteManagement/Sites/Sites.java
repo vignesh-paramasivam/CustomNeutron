@@ -22,8 +22,8 @@ public class Sites extends SupportTest {
     }
 
 
-    @Test(enabled = true, description = "Verify adding a visit schedule successfully")
-    public void AddVisitScheduleForSite() throws Exception {
+    @Test(enabled = true, description = "Verify adding a visit report & schedule successfully for a site")
+    public void AddVisitReportAndScheduleForSite() throws Exception {
         ctms.createInstance()
                 .login()
                 .navigateTo("Study Management;Study")
