@@ -27,8 +27,6 @@ public class StudyPageSteps extends StudyPage {
 
 	@Step("Add new study details and save")
 	public StudyPageSteps addNewStudyDetailsAndSave() throws Exception {
-		//TODO: All sleeps will be removed after adding the page wait strategy
-
 		getLinkControl("Add record(s)").click();
 		assertPageLoad();
 

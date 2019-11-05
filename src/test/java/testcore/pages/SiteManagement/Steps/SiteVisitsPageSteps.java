@@ -42,6 +42,7 @@ public class SiteVisitsPageSteps extends SiteVisitsPage {
 		getTextboxControl("name").enterValue(visitScheduleName);
 		getDropdownControl("category_cb").enterValue(getTestData().get("Category"));
 
+		//TODO: "Save and Close" does not navigate to the visits page when performed in IE. To be fixed.
 		clickSaveAndClose();
 
 		return new SiteVisitsPageSteps(getConfig(), getAgent(), getTestData());

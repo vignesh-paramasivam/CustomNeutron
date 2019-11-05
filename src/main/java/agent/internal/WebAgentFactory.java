@@ -261,8 +261,6 @@ public class WebAgentFactory {
 			caps.setCapability("enablePersistentHover", true);
 			caps.setCapability("ignoreZoomLevel", true);
 			caps.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
-			/*SSL Certs are not getting ignored or Accepted for the application
-			 * TODO: Need to find a way to bypass it*/
 			caps.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
 			caps.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS, false);
 			setPropertyByOS(browser);
