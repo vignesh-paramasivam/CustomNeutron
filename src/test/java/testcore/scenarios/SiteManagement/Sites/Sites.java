@@ -38,6 +38,11 @@ public class Sites extends SupportTest {
                 .verifyValuesInGrid()
                 .navigateTo("Templates;Questionnaire Tmpls;Assigned Questionnaires Master Group")
                 .onAssignedQuesMasterTmplPageSteps()
-                .addAssignedQuesMasterTmplForSite();
+                .addAssignedQuesMasterTmplForSite()
+                .navigateTo("Site Management;Sites")
+                .onSitesPage()
+                .openVisitReportForSite()
+                .selectVisitActivityAndReportName()
+                .verifyValuesInGrid();
     }
 }

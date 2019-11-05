@@ -1,16 +1,12 @@
-package testcore.pages.Templates.Steps;
+package testcore.pages.Templates.Steps.Questionnaire;
 
 import agent.IAgent;
 import central.Configuration;
-import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import testcore.controls.common.GridControl;
-import testcore.pages.SiteManagement.Steps.SiteVisitsPageSteps;
-import testcore.pages.StudyManagement.StudyPage;
 import testcore.pages.Templates.Questionnaire.AssignedQuesMasterTmplPage;
-import utils.RandomData;
 
 import java.util.HashMap;
 import java.util.Map;

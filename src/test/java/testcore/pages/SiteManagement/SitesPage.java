@@ -32,10 +32,13 @@ public class SitesPage extends BasePage {
 		}
 		return derivedSitesPage;
 	}
+
+
 	@Override
 	public String pageName() {
 		return SitesPage.class.getSimpleName();
 	}
+
 
 	protected SitesPage clickSave() throws Exception {
 		getButtonControl("save2").click();

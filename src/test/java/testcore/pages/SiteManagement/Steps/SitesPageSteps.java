@@ -8,6 +8,7 @@ import testcore.controls.common.GridControl;
 import testcore.pages.SiteManagement.SitesPage;
 import testcore.pages.StudyManagement.Steps.StudyPageSteps;
 import testcore.pages.StudyManagement.StudyPage;
+import testcore.pages.Templates.Steps.Questionnaire.AssignedQuesMasterTmplPageSteps;
 import utils.RandomData;
 
 import java.util.HashMap;
@@ -48,28 +49,6 @@ public class SitesPageSteps extends SitesPage {
 		return new SitesPageSteps(getConfig(), getAgent(), getTestData());
 	}
 
-	public SitesPageSteps onOrgAddressPick() throws Exception {
-		switchToNewWindow();
-		getTextboxControl("companyNameSrch").enterValue("*");
-		getButtonControl("btnSearch").click();
-		assertPageLoad();
-
-		//Using the existing Org name for test purpose
-		String orgName = "Test25 - Org1"; // getTestData().get("studyName");
-		HashMap<String, String> uniqueValuesToIdentifyRow = new HashMap<>();
-		uniqueValuesToIdentifyRow.put("Organization Name", orgName);
-
-		GridControl grid = new GridControl("myGrid", this, getGridControl("Gentable").thisControlElement());
-		WebElement row = grid.getRow_BasedOnUniqueColumnValues(uniqueValuesToIdentifyRow);
-		List<WebElement> expectedColumn = grid.columns(row);
-		//Clicking on the pick button
-		expectedColumn.get(expectedColumn.size() - 1).findElement(By.cssSelector("input")).click();
-		assertPageLoad();
-
-		switchToMainWindow();
-		return new SitesPageSteps(getConfig(), getAgent(), getTestData());
-	}
-
 
 	public SitesPageSteps searchNewlyAddedSite() throws Exception {
 		String studyName = getTestData().get("studyName");
@@ -103,8 +82,51 @@ public class SitesPageSteps extends SitesPage {
 		return new SiteVisitsPageSteps(getConfig(), getAgent(), getTestData());
 	}
 
+	public VisitReportPageSteps openVisitReportForSite() throws Exception {
+		getDropdownControl("drugtrialIdSrch_cb").enterValue("Test - 20191104 200633");
+		getButtonControl("btnSearch").click();
+		assertPageLoad();
+		getTestData().put("studySiteNumber", "TestSite - 20191104 200715");
+		HashMap<String, String> uniqueValuesToIdentifyRow = new HashMap<>();
+		uniqueValuesToIdentifyRow.put("Study Site Number", getTestData().get("studySiteNumber"));
+
+		GridControl grid = new GridControl("myGrid", this, getGridControl("summaryTable").thisControlElement());
+		WebElement row = grid.getRow_BasedOnUniqueColumnValues(uniqueValuesToIdentifyRow);
+		grid.getColumn(row, "Visit Reports").findElement(By.cssSelector("a img")).click();
+		assertPageLoad();
+		return new VisitReportPageSteps(getConfig(), getAgent(), getTestData());
+	}
+
+
 	public SitesPageSteps addNewSite() throws Exception {
 		addNewSiteAndSave();
 		return new SitesPageSteps(getConfig(), getAgent(), getTestData());
+	}
+
+	/*
+	*PRIVATE METHODS TO BE ADDED BELOW: USED AS SUB-STEP UNDER STEP
+	* Add methods as private only when it is used as a sub-step. Else, make it public to use..
+	* ..it under test cases
+	*/
+
+	private void onOrgAddressPick() throws Exception {
+		switchToNewWindow();
+		getTextboxControl("companyNameSrch").enterValue("*");
+		getButtonControl("btnSearch").click();
+		assertPageLoad();
+
+		//Using the existing Org name for test purpose
+		String orgName = "Test25 - Org1"; // getTestData().get("studyName");
+		HashMap<String, String> uniqueValuesToIdentifyRow = new HashMap<>();
+		uniqueValuesToIdentifyRow.put("Organization Name", orgName);
+
+		GridControl grid = new GridControl("myGrid", this, getGridControl("Gentable").thisControlElement());
+		WebElement row = grid.getRow_BasedOnUniqueColumnValues(uniqueValuesToIdentifyRow);
+		List<WebElement> expectedColumn = grid.columns(row);
+		//Clicking on the pick button
+		expectedColumn.get(expectedColumn.size() - 1).findElement(By.cssSelector("input")).click();
+		assertPageLoad();
+
+		switchToMainWindow();
 	}
 }

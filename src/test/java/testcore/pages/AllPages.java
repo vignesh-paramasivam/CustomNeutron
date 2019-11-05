@@ -5,8 +5,7 @@ import central.Configuration;
 import testcore.pages.SiteManagement.Steps.SiteVisitsPageSteps;
 import testcore.pages.SiteManagement.Steps.SitesPageSteps;
 import testcore.pages.StudyManagement.Steps.StudyPageSteps;
-import testcore.pages.Templates.Questionnaire.AssignedQuesMasterTmplPage;
-import testcore.pages.Templates.Steps.AssignedQuesMasterTmplPageSteps;
+import testcore.pages.Templates.Steps.Questionnaire.AssignedQuesMasterTmplPageSteps;
 
 import java.util.Map;
 
