@@ -135,7 +135,6 @@ public abstract class BasePage extends Page {
 
 	public IControl getDropdownControl(String locatorVariable) throws Exception {
 		String controlType = new Object(){}.getClass().getEnclosingMethod().getName().substring(3);
-		System.out.println(controlType);
 		return generateDynamicControl(locatorVariable, controlType);
 	}
 

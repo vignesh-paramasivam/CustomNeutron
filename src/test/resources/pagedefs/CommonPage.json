@@ -1,12 +1,12 @@
 {
 	"TextboxControl": {
-		"DESKTOP_WEB": "xpath=//input[@name='%1$s'] | //input[@id='%1$s'] | //input[@caption='%1$s']"
+		"DESKTOP_WEB": "xpath=//input[@id='%1$s'] | //input[@name='%1$s'] | //input[@caption='%1$s']"
 	},
 	"ButtonControl": {
 		"DESKTOP_WEB": "xpath=//button[@type='submit'][@id='%1$s'] | //*[@id='%1$s'] | //input[@name='%1$s'] | //button[text()='%1$s'] | //button/span[text()='%1$s']/.."
 	},
 	"LinkControl": {
-		"DESKTOP_WEB": "xpath=//a[@title='%1$s'] | //a[contains(@class, '%1$s')]/i | //a//i[@id='%1$s'] | //a[@id='%1$s']"
+		"DESKTOP_WEB": "xpath=//a[@id='%1$s'] | //a[@title='%1$s'] | //a[contains(@class, '%1$s')]/i | //a//i[@id='%1$s']"
 	},
 	"DialogControl": {
 		"DESKTOP_WEB": "css=div.modal-content, div.ant-modal-content"

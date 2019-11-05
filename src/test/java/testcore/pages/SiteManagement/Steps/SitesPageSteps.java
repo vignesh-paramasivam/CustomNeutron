@@ -4,6 +4,7 @@ import agent.IAgent;
 import central.Configuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import testcore.controls.common.GridControl;
 import testcore.pages.SiteManagement.SitesPage;
 import testcore.pages.StudyManagement.Steps.StudyPageSteps;
@@ -110,7 +111,9 @@ public class SitesPageSteps extends SitesPage {
 	*/
 
 	private void onOrgAddressPick() throws Exception {
+		waiter().until(ExpectedConditions.numberOfWindowsToBe(2));
 		switchToNewWindow();
+		getTextboxControl("companyNameSrch").waitUntilVisible();
 		getTextboxControl("companyNameSrch").enterValue("*");
 		getButtonControl("btnSearch").click();
 		assertPageLoad();

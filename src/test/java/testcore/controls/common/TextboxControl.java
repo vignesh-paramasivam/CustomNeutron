@@ -17,8 +17,8 @@ public class TextboxControl extends WebControl {
 		try {
 			this.waitUntilClickable();
 			WebElement element = this.getRawWebElement();
-			element.click();
 			element.clear();
+			element.click();
 			element.sendKeys(text);
 		} catch (Exception e) {
 			throwControlActionException(e);

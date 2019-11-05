@@ -30,25 +30,40 @@ public class SiteVisitsPageSteps extends SiteVisitsPage {
 
 
 	public SiteVisitsPageSteps addVisitScheduleForSite() throws Exception {
+		Thread.sleep(3000);
+
 		getDropdownControl("drugtrialId_cb").enterValue(getTestData().get("studyName"));
+		//getDropdownControl("drugtrialId_cb").enterValue("Test - 20191105 191724");//getTestData().get("studyName")
+
 		//TODO: Added hack to continue with the test flow; Appending [] in site search dropdown - needs further analysis
 		getDropdownControl("siteIdSrch_cb").enterValue(getTestData().get("studySiteNumber") + " []");
+		//getDropdownControl("siteIdSrch_cb").enterValue("TestSite - 20191105 191800 []");
+
 		getButtonControl("btnSearch").click();
 		assertPageLoad();
+
 		getLinkControl("Add a new activity").click();
+		assertPageLoad();
+
+		Thread.sleep(2000);
 
 		String visitScheduleName = "SQV Visit - " + RandomData.dateTime_yyyyMMddHHmmss();
 		this.getTestData().put("visitScheduleName", visitScheduleName);
 		getTextboxControl("name").enterValue(visitScheduleName);
 		getDropdownControl("category_cb").enterValue(getTestData().get("Category"));
 
-		//TODO: "Save and Close" does not navigate to the visits page when performed in IE. To be fixed.
 		clickSaveAndClose();
+		//TODO: "Save and Close" does not navigate to the visits page when performed in IE. Added hack - To be fixed.
+		if(getButtonControl("save1").isVisible()){
+			getLinkControl("Back to previous view").click();
+			assertPageLoad();
+		}
 
 		return new SiteVisitsPageSteps(getConfig(), getAgent(), getTestData());
 	}
 
 	public SitesPageSteps verifyValuesInGrid() throws Exception {
+		Thread.sleep(2000);
 		HashMap<String, String> uniqueValuesToIdentifyRow = new HashMap<>();
 
 		uniqueValuesToIdentifyRow.put("Study Site Number", getTestData().get("studySiteNumber"));

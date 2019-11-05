@@ -260,9 +260,10 @@ public class WebAgentFactory {
 			caps.setCapability("disable-popup-blocking", true);
 			caps.setCapability("enablePersistentHover", true);
 			caps.setCapability("ignoreZoomLevel", true);
-			caps.setCapability(CapabilityType.ForSeleniumServer.ENSURING_CLEAN_SESSION, true);
+			caps.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
 			caps.setCapability(CapabilityType.ACCEPT_SSL_CERTS, true);
-			caps.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS, false);
+			caps.setCapability(InternetExplorerDriver.REQUIRE_WINDOW_FOCUS, true);
+			caps.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
 			setPropertyByOS(browser);
 			break;
 		case SAFARI:

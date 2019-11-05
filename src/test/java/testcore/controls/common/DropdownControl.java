@@ -17,24 +17,33 @@ public class DropdownControl extends WebControl {
 	//CTMS - Dropdown
 	@Override
 	public void enterValue(String value) throws Exception {
-		try {
-			WebElement inputBox = this.getRawWebElement();
-			inputBox.clear();
-			inputBox.sendKeys(value);
+		int count = 0;
+		int maxTries = 3;
+		while (true) {
+			try {
+				WebElement inputBox = this.getRawWebElement();
+				inputBox.clear();
+				inputBox.click();
+				inputBox.sendKeys(value);
 
-			String options_xpath = "//ul[not(contains(@style,'display:none'))]//li[@class='ui-menu-item']/a";
-			List<WebElement> options = this.getAgent().getWebDriver().findElements(By.xpath(options_xpath));
+				String options_xpath = "//ul[not(contains(@style,'display:none'))]//li[@class='ui-menu-item']/a";
+				List<WebElement> options = this.getAgent().getWebDriver().findElements(By.xpath(options_xpath));
 
-			for (WebElement option : options) {
-				if (option.getText().equalsIgnoreCase(value)) {
-					this.getAgent().getWaiter().until(ExpectedConditions.visibilityOf(option));
-					option.click();
-					return;
+				for (WebElement option : options) {
+					if (option.getText().equalsIgnoreCase(value)) {
+						this.getAgent().getWaiter().until(ExpectedConditions.visibilityOf(option));
+						option.click();
+						return;
+					}
+				}
+				throw new Exception("Retry");
+			} catch (Exception e) {
+				Thread.sleep(2000);
+				if (++count == maxTries) {
+					Assert.fail("Unable to select dropdown value: " + value + "; Failed due to " + e);
+					throwControlActionException(e);
 				}
 			}
-			Assert.fail("Unable to find the desired dropdown value:" + value);
-		} catch (Exception e) {
-			throwControlActionException(e);
 		}
 
 	}
