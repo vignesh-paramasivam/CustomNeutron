@@ -120,7 +120,7 @@ public class SitesPageSteps extends SitesPage {
 	private void onOrgAddressPick() throws Exception {
 		waiter().until(ExpectedConditions.numberOfWindowsToBe(2));
 		switchToNewWindow();
-		getTextboxControl("companyNameSrch").waitUntilVisible();
+		waiter().until(ExpectedConditions.visibilityOfElementLocated(By.id("companyNameSrch")));
 		getTextboxControl("companyNameSrch").enterValue("*");
 		getButtonControl("btnSearch").click();
 		assertPageLoad();
