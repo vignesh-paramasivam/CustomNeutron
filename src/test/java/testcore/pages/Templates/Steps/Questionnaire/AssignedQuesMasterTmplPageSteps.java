@@ -48,7 +48,7 @@ public class AssignedQuesMasterTmplPageSteps extends AssignedQuesMasterTmplPage 
 		assertPageLoad();
 
 		String actualMessage = getNotificationControl("").getValue();
-		String expectedMessage = "Successfully created 1 records";
+		String expectedMessage = getTestData().get("SuccessMsgMasterTmplCreation");
 		Assert.assertTrue(actualMessage.contains(expectedMessage));
 
 		return new AssignedQuesMasterTmplPageSteps(getConfig(), getAgent(), getTestData());

@@ -24,7 +24,6 @@ public class MenuControl extends WebControl {
 		String mainMenu = menus[0];
 		String childMenu = menus[1];
 
-		//TODO: Handle menu selection in multiple levels dynamically
 		WebElement menuParent = this.getRawWebElement();
 		menuParent.findElement(By.xpath(".//table[@class='TMenuItemChild0']//td[text()='" + mainMenu + "']")).click();
 		menuParent.findElement(By.xpath(".//div[@class='TPopUp0']//td[text()='" + childMenu + "']")).click();

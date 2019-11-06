@@ -18,4 +18,19 @@ public class Study extends SupportTest {
                 .searchNewlyAddedStudy()
                 .verifyValuesInGrid();
     }
+
+
+    @Test(enabled = true, description = "Verify adding a new study and fail it")
+    public void AddNewStudyAndFailIt() throws Exception {
+        ctms.createInstance()
+                .login()
+                .navigateTo("Study Management;Study")
+                .onStudyPage()
+                .addNewStudyDetailsAndSave()
+                .navigateTo("Study Management;Study")
+                .onStudyPage()
+                .searchNewlyAddedStudy()
+                .verifyValuesInGrid();
+    }
+
 }

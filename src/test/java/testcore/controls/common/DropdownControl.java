@@ -7,6 +7,7 @@ import control.WebControl;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import page.IPage;
+import utils.RandomData;
 
 public class DropdownControl extends WebControl {
 
@@ -24,14 +25,17 @@ public class DropdownControl extends WebControl {
 				WebElement inputBox = this.getRawWebElement();
 				inputBox.clear();
 				inputBox.click();
-				inputBox.sendKeys(value);
+
+				for(int i = 0; i < 4; i++){
+					String charVal = new StringBuilder().append(value.charAt(i)).toString();
+					inputBox.sendKeys(charVal);
+				}
 
 				String options_xpath = "//ul[not(contains(@style,'display:none'))]//li[@class='ui-menu-item']/a";
 				List<WebElement> options = this.getAgent().getWebDriver().findElements(By.xpath(options_xpath));
 
 				for (WebElement option : options) {
 					if (option.getText().equalsIgnoreCase(value)) {
-						this.getAgent().getWaiter().until(ExpectedConditions.visibilityOf(option));
 						option.click();
 						return;
 					}

@@ -30,7 +30,7 @@ public class StudyPageSteps extends StudyPage {
 		getLinkControl("Add record(s)").click();
 		assertPageLoad();
 
-		String studyName = "A_TestStudy - " + RandomData.dateTime_yyyyMMddHHmmss();
+		String studyName = "AA_TestStudy - " + RandomData.dateTime_yyyyMMddHHmmss();
 		this.getTestData().put("studyName", studyName);
 		getTextboxControl("name").enterValue(studyName);
 		logger.info(studyName);
@@ -43,7 +43,7 @@ public class StudyPageSteps extends StudyPage {
 
 		getNotificationControl("").waitUntilVisible();
 		String actualMessage = getNotificationControl("").getValue();
-		String expectedMessage = "1 record(s) successfully entered.";
+		String expectedMessage = getTestData().get("SuccessMsg");
 		Assert.assertEquals(expectedMessage, actualMessage);
 		assertPageLoad();
 
@@ -51,6 +51,7 @@ public class StudyPageSteps extends StudyPage {
 	}
 
 	public StudyPageSteps verifyValuesInGrid() throws Exception {
+		waitForVisibilityByClass("Gentable");
 		HashMap<String, String> uniqueValuesToIdentifyRow = new HashMap<>();
 		uniqueValuesToIdentifyRow.put("Study Name", getTestData().get("studyName"));
 

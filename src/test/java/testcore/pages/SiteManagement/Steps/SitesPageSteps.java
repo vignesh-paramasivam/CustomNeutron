@@ -38,7 +38,7 @@ public class SitesPageSteps extends SitesPage {
 		getLinkControl("Add a new site").click();
 		assertPageLoad();
 
-		String studySiteNumber = "A_TestSite - " + RandomData.dateTime_yyyyMMddHHmmss();
+		String studySiteNumber = "AA_TestSite - " + RandomData.dateTime_yyyyMMddHHmmss();
 		this.getTestData().put("studySiteNumber", studySiteNumber);
 
 		getTextboxControl("Study Site Number").enterValue(studySiteNumber);
@@ -48,8 +48,8 @@ public class SitesPageSteps extends SitesPage {
 		onOrgAddressPick();
 		clickSaveAndClose();
 
-		//TODO: "Save and Close" does not navigate to the visits page when performed in IE. Added hack - To be fixed.
-		if(driver().findElements(By.id("save1")).size() > 0) {
+		//TODO: IE SPECIFIC - "Save and Close" does not navigate to the visits page when performed in IE. Added hack - To be fixed.
+		if(System.getProperty("browser").equalsIgnoreCase("ie")) {
 			getLinkControl("Back to previous view").click();
 			assertPageLoad();
 		}
@@ -59,6 +59,7 @@ public class SitesPageSteps extends SitesPage {
 
 
 	public SitesPageSteps searchNewlyAddedSite() throws Exception {
+		waitForVisibilityById("drugtrialIdSrch_cb");
 		String studyName = getTestData().get("studyName");
 		getDropdownControl("drugtrialIdSrch_cb").enterValue(studyName);
 		getButtonControl("btnSearch").click();
@@ -91,7 +92,7 @@ public class SitesPageSteps extends SitesPage {
 	}
 
 	public VisitReportPageSteps openVisitReportForSite() throws Exception {
-		staticWait(); //TODO: Looks like page is getting refreshed in splits. Static wait will be removed after fix
+		waitForVisibilityById("summaryTable");
 		getDropdownControl("drugtrialIdSrch_cb").enterValue(getTestData().get("studyName"));
 		getButtonControl("btnSearch").click();
 		assertPageLoad();
@@ -119,7 +120,9 @@ public class SitesPageSteps extends SitesPage {
 
 	private void onOrgAddressPick() throws Exception {
 		waiter().until(ExpectedConditions.numberOfWindowsToBe(2));
+		assertPageLoad();
 		switchToNewWindow();
+		assertPageLoad();
 		waiter().until(ExpectedConditions.visibilityOfElementLocated(By.id("companyNameSrch")));
 		getTextboxControl("companyNameSrch").enterValue("*");
 		getButtonControl("btnSearch").click();

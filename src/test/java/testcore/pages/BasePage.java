@@ -32,6 +32,18 @@ public abstract class BasePage extends Page {
 		return new AllPages(getConfig(), getAgent(), getTestData());
 	}
 
+	//Wrapper methods for wait for element: Begins
+	protected void waitForVisibilityById(String id) throws Exception {
+		waiter().until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));
+		Thread.sleep(2000); //TODO: Page loading in splits, to be fixed
+	}
+
+	protected void waitForVisibilityByClass(String className) throws Exception {
+		waiter().until(ExpectedConditions.visibilityOfElementLocated(By.className(className)));
+		Thread.sleep(2000); //TODO: Page loading in splits, to be fixed
+	}
+	//Wrapper methods for wait for element: Ends
+
 	@Override
 	public IControl getControl(String name) throws Exception {
 		IControl control = Control.createControl(this, name, getIdentifier(name));
@@ -50,12 +62,6 @@ public abstract class BasePage extends Page {
 	public WebDriverWait waiter() throws Exception {
 		return this.getAgent().getWaiter();
 	}
-
-	//TODO: This method will be removed once the dynamic wait elements are identified
-	public void staticWait() throws Exception {
-		Thread.sleep(3000);
-	}
-
 
 	public void waitUntilVisible(WebElement element) {
 		this.getAgent().getWaiter().until(ExpectedConditions.visibilityOf(element));

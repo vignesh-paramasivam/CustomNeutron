@@ -33,8 +33,8 @@ public class VisitReportPageSteps extends SiteVisitsPage {
 		selectActivity();
 		selectReportName();
 
-		//TODO: After selecting report, page does not navigate back when performed in IE. Added hack - To be fixed.
-		if(driver().findElements(By.id("activityName")).size() > 0) {
+		//TODO: IE SPECIFIC - After selecting report, page does not navigate back when performed in IE. Added hack - To be fixed.
+		if(System.getProperty("browser").equalsIgnoreCase("ie")) {
 			getLinkControl("Back to previous view").click();
 			assertPageLoad();
 		}
@@ -68,8 +68,7 @@ public class VisitReportPageSteps extends SiteVisitsPage {
 		switchToNewWindow();
 		assertPageLoad();
 
-		waiter().until(ExpectedConditions.visibilityOfElementLocated(By.id("summaryTable")));
-
+		waitForVisibilityById("summaryTable");
 		HashMap<String, String> uniqueValuesToIdentifyRow = new HashMap<>();
 		uniqueValuesToIdentifyRow.put("Activity Name", getTestData().get("visitScheduleName"));
 

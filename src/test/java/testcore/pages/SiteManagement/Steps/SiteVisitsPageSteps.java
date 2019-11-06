@@ -46,15 +46,15 @@ public class SiteVisitsPageSteps extends SiteVisitsPage {
 		String visitScheduleName = "SQV Visit - " + RandomData.dateTime_yyyyMMddHHmmss();
 		this.getTestData().put("visitScheduleName", visitScheduleName);
 
-		//TODO: SendKeys is inconsistent in entering value for IE browser. Modified with JS script as workaround until rca/ fix
+		//TODO: IE SPECIFIC - SendKeys is inconsistent in entering value for IE browser. Modified with JS script as workaround until rca/ fix
 		//getTextboxControl("name").enterValue(visitScheduleName);
 		((JavascriptExecutor) driver()).executeScript(String.format("document.getElementById('name').value='" + visitScheduleName + "';"));
 
 		getDropdownControl("category_cb").enterValue(getTestData().get("Category"));
 
 		clickSaveAndClose();
-		//TODO: "Save and Close" does not navigate to the visits page when performed in IE. Added hack - To be fixed.
-		if(driver().findElements(By.id("save1")).size() > 0){
+		//TODO: IE SPECIFIC - "Save and Close" does not navigate to the visits page when performed in IE. Added hack - To be fixed.
+		if(System.getProperty("browser").equalsIgnoreCase("ie")){
 			getLinkControl("Back to previous view").click();
 			assertPageLoad();
 		}
@@ -63,8 +63,7 @@ public class SiteVisitsPageSteps extends SiteVisitsPage {
 	}
 
 	public SitesPageSteps verifyValuesInGrid() throws Exception {
-		waiter().until(ExpectedConditions.visibilityOfElementLocated(By.id("summaryTable")));
-
+		waitForVisibilityById("summaryTable");
 		HashMap<String, String> uniqueValuesToIdentifyRow = new HashMap<>();
 		uniqueValuesToIdentifyRow.put("Study Site Number", getTestData().get("studySiteNumber"));
 
