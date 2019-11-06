@@ -3,6 +3,7 @@ package testcore.pages.SiteManagement.Steps;
 import agent.IAgent;
 import central.Configuration;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import testcore.controls.common.GridControl;
 import testcore.pages.SiteManagement.SiteVisitsPage;
@@ -30,31 +31,30 @@ public class SiteVisitsPageSteps extends SiteVisitsPage {
 
 
 	public SiteVisitsPageSteps addVisitScheduleForSite() throws Exception {
-		Thread.sleep(3000);
+		staticWait();
 
-		getDropdownControl("drugtrialId_cb").enterValue(getTestData().get("studyName"));
-		//getDropdownControl("drugtrialId_cb").enterValue("Test - 20191105 191724");//getTestData().get("studyName")
-
+		/*getDropdownControl("drugtrialId_cb").enterValue(getTestData().get("studyName"));
 		//TODO: Added hack to continue with the test flow; Appending [] in site search dropdown - needs further analysis
-		getDropdownControl("siteIdSrch_cb").enterValue(getTestData().get("studySiteNumber") + " []");
-		//getDropdownControl("siteIdSrch_cb").enterValue("TestSite - 20191105 191800 []");
+		  getDropdownControl("siteIdSrch_cb").enterValue(getTestData().get("studySiteNumber") + " []");
+		  getButtonControl("btnSearch").click(); */
 
-		getButtonControl("btnSearch").click();
 		assertPageLoad();
 
 		getLinkControl("Add a new activity").click();
 		assertPageLoad();
 
-		Thread.sleep(2000);
-
 		String visitScheduleName = "SQV Visit - " + RandomData.dateTime_yyyyMMddHHmmss();
 		this.getTestData().put("visitScheduleName", visitScheduleName);
-		getTextboxControl("name").enterValue(visitScheduleName);
+
+		//TODO: SendKeys is inconsistent in entering value for IE browser. Modified with JS script as workaround until rca/ fix
+		//getTextboxControl("name").enterValue(visitScheduleName);
+		((JavascriptExecutor) driver()).executeScript(String.format("document.getElementById('name').value='" + visitScheduleName + "';"));
+
 		getDropdownControl("category_cb").enterValue(getTestData().get("Category"));
 
 		clickSaveAndClose();
 		//TODO: "Save and Close" does not navigate to the visits page when performed in IE. Added hack - To be fixed.
-		if(getButtonControl("save1").isVisible()){
+		if(driver().findElements(By.id("save1")).size() > 0){
 			getLinkControl("Back to previous view").click();
 			assertPageLoad();
 		}

@@ -38,7 +38,7 @@ public class DropdownControl extends WebControl {
 				}
 				throw new Exception("Retry");
 			} catch (Exception e) {
-				Thread.sleep(2000);
+				Thread.sleep(500);
 				if (++count == maxTries) {
 					Assert.fail("Unable to select dropdown value: " + value + "; Failed due to " + e);
 					throwControlActionException(e);

@@ -45,5 +45,11 @@ public class SitesPage extends BasePage {
 		assertPageLoad();
 		return new SitesPage(getConfig(), getAgent(), getTestData());
 	}
+
+	protected SitesPage clickSaveAndClose() throws Exception {
+		getButtonControl("save1").click();
+		assertPageLoad();
+		return new SitesPage(getConfig(), getAgent(), getTestData());
+	}
 	
 }

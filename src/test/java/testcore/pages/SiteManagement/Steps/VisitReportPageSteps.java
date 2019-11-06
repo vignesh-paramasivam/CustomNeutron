@@ -4,6 +4,7 @@ import agent.IAgent;
 import central.Configuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import testcore.controls.common.GridControl;
 import testcore.pages.SiteManagement.SiteVisitsPage;
 import utils.RandomData;
@@ -56,12 +57,14 @@ public class VisitReportPageSteps extends SiteVisitsPage {
 
 	private void selectActivity() throws Exception {
 		getLinkControl("Pick Site Visit Activity").click();
+		waiter().until(ExpectedConditions.numberOfWindowsToBe(2));
 		switchToNewWindow();
+		assertPageLoad();
 
 		HashMap<String, String> uniqueValuesToIdentifyRow = new HashMap<>();
 		uniqueValuesToIdentifyRow.put("Activity Name", getTestData().get("visitScheduleName"));
 
-		GridControl grid = new GridControl("myGrid", this, getGridControl("Gentable").thisControlElement());
+		GridControl grid = new GridControl("myGrid", this, getGridControl("summaryTable").thisControlElement());
 		WebElement row = grid.getRow_BasedOnUniqueColumnValues(uniqueValuesToIdentifyRow);
 		List<WebElement> expectedColumn = grid.columns(row);
 		//Clicking on the pick button
@@ -73,6 +76,7 @@ public class VisitReportPageSteps extends SiteVisitsPage {
 	private void selectReportName() throws Exception {
 		switchToMainWindow();
 		getLinkControl("pickAndCommitQuestionnaire").click();
+		waiter().until(ExpectedConditions.numberOfWindowsToBe(2));
 		switchToNewWindow();
 
 		HashMap<String, String> uniqueValuesToIdentifyRow = new HashMap<>();

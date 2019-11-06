@@ -38,7 +38,7 @@ public class SitesPageSteps extends SitesPage {
 		getLinkControl("Add a new site").click();
 		assertPageLoad();
 
-		String studySiteNumber = "TestSite - " + RandomData.dateTime_yyyyMMddHHmmss();
+		String studySiteNumber = "A_TestSite - " + RandomData.dateTime_yyyyMMddHHmmss();
 		this.getTestData().put("studySiteNumber", studySiteNumber);
 
 		getTextboxControl("Study Site Number").enterValue(studySiteNumber);
@@ -46,7 +46,14 @@ public class SitesPageSteps extends SitesPage {
 		assertPageLoad();
 
 		onOrgAddressPick();
-		clickSave();
+		clickSaveAndClose();
+
+		//TODO: "Save and Close" does not navigate to the visits page when performed in IE. Added hack - To be fixed.
+		if(driver().findElements(By.id("save1")).size() > 0) {
+			getLinkControl("Back to previous view").click();
+			assertPageLoad();
+		}
+
 		return new SitesPageSteps(getConfig(), getAgent(), getTestData());
 	}
 
@@ -77,14 +84,14 @@ public class SitesPageSteps extends SitesPage {
 		HashMap<String, String> uniqueValuesToIdentifyRow = new HashMap<>();
 		uniqueValuesToIdentifyRow.put("Study Site Number", getTestData().get("studySiteNumber"));
 
-		GridControl grid = new GridControl("myGrid", this, getGridControl("Gentable").thisControlElement());
+		GridControl grid = new GridControl("myGrid", this, getGridControl("summaryTable").thisControlElement());
 		WebElement row = grid.getRow_BasedOnUniqueColumnValues(uniqueValuesToIdentifyRow);
-		grid.getColumn(row, "Study Site Number");
+		grid.getColumn(row, "Visit Schedule").findElement(By.cssSelector("a img")).click();;
 		return new SiteVisitsPageSteps(getConfig(), getAgent(), getTestData());
 	}
 
 	public VisitReportPageSteps openVisitReportForSite() throws Exception {
-		Thread.sleep(3000); //TODO: Looks like page is getting refreshed in splits. Static wait will be removed after fix
+		staticWait(); //TODO: Looks like page is getting refreshed in splits. Static wait will be removed after fix
 		getDropdownControl("drugtrialIdSrch_cb").enterValue(getTestData().get("studyName"));
 		getButtonControl("btnSearch").click();
 		assertPageLoad();

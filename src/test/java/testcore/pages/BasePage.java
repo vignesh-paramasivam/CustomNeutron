@@ -51,6 +51,11 @@ public abstract class BasePage extends Page {
 		return this.getAgent().getWaiter();
 	}
 
+	//TODO: This method will be removed once the dynamic wait elements are identified
+	public void staticWait() throws Exception {
+		Thread.sleep(3000);
+	}
+
 
 	public void waitUntilVisible(WebElement element) {
 		this.getAgent().getWaiter().until(ExpectedConditions.visibilityOf(element));

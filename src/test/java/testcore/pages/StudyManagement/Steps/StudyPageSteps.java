@@ -30,7 +30,7 @@ public class StudyPageSteps extends StudyPage {
 		getLinkControl("Add record(s)").click();
 		assertPageLoad();
 
-		String studyName = "Test - " + RandomData.dateTime_yyyyMMddHHmmss();
+		String studyName = "A_TestStudy - " + RandomData.dateTime_yyyyMMddHHmmss();
 		this.getTestData().put("studyName", studyName);
 		getTextboxControl("name").enterValue(studyName);
 		logger.info(studyName);
@@ -41,6 +41,7 @@ public class StudyPageSteps extends StudyPage {
 
 		assertPageLoad();
 
+		getNotificationControl("").waitUntilVisible();
 		String actualMessage = getNotificationControl("").getValue();
 		String expectedMessage = "1 record(s) successfully entered.";
 		Assert.assertEquals(expectedMessage, actualMessage);
