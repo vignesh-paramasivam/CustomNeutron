@@ -63,9 +63,9 @@ public class SiteVisitsPageSteps extends SiteVisitsPage {
 	}
 
 	public SitesPageSteps verifyValuesInGrid() throws Exception {
-		Thread.sleep(2000);
-		HashMap<String, String> uniqueValuesToIdentifyRow = new HashMap<>();
+		waiter().until(ExpectedConditions.visibilityOfElementLocated(By.id("summaryTable")));
 
+		HashMap<String, String> uniqueValuesToIdentifyRow = new HashMap<>();
 		uniqueValuesToIdentifyRow.put("Study Site Number", getTestData().get("studySiteNumber"));
 
 		HashMap<String, String> allValuesToIdentifyRow = new HashMap<>();
