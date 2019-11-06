@@ -61,6 +61,8 @@ public class VisitReportPageSteps extends SiteVisitsPage {
 		switchToNewWindow();
 		assertPageLoad();
 
+		waiter().until(ExpectedConditions.visibilityOfElementLocated(By.id("summaryTable")));
+
 		HashMap<String, String> uniqueValuesToIdentifyRow = new HashMap<>();
 		uniqueValuesToIdentifyRow.put("Activity Name", getTestData().get("visitScheduleName"));
 

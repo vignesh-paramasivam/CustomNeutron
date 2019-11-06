@@ -5,6 +5,7 @@ import central.Configuration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import testcore.controls.common.GridControl;
 import testcore.pages.SiteManagement.SiteVisitsPage;
 import testcore.pages.SiteManagement.SitesPage;
@@ -31,8 +32,6 @@ public class SiteVisitsPageSteps extends SiteVisitsPage {
 
 
 	public SiteVisitsPageSteps addVisitScheduleForSite() throws Exception {
-		staticWait();
-
 		/*getDropdownControl("drugtrialId_cb").enterValue(getTestData().get("studyName"));
 		//TODO: Added hack to continue with the test flow; Appending [] in site search dropdown - needs further analysis
 		  getDropdownControl("siteIdSrch_cb").enterValue(getTestData().get("studySiteNumber") + " []");
@@ -40,6 +39,7 @@ public class SiteVisitsPageSteps extends SiteVisitsPage {
 
 		assertPageLoad();
 
+		waiter().until(ExpectedConditions.visibilityOfElementLocated(By.id("toolBarTable")));
 		getLinkControl("Add a new activity").click();
 		assertPageLoad();
 
