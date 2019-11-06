@@ -32,6 +32,13 @@ public class VisitReportPageSteps extends SiteVisitsPage {
 		assertPageLoad();
 		selectActivity();
 		selectReportName();
+
+		//TODO: After selecting report, page does not navigate back when performed in IE. Added hack - To be fixed.
+		if(driver().findElements(By.id("activityName")).size() > 0) {
+			getLinkControl("Back to previous view").click();
+			assertPageLoad();
+		}
+
 		return new VisitReportPageSteps(getConfig(), getAgent(), getTestData());
 	}
 
@@ -80,6 +87,7 @@ public class VisitReportPageSteps extends SiteVisitsPage {
 		getLinkControl("pickAndCommitQuestionnaire").click();
 		waiter().until(ExpectedConditions.numberOfWindowsToBe(2));
 		switchToNewWindow();
+		waiter().until(ExpectedConditions.visibilityOfElementLocated(By.className("Gentable")));
 
 		HashMap<String, String> uniqueValuesToIdentifyRow = new HashMap<>();
 		uniqueValuesToIdentifyRow.put("Title", getTestData().get("Template Name"));
