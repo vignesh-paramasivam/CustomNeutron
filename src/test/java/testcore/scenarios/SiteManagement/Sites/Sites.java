@@ -5,23 +5,6 @@ import testcore.scenarios.SupportTest;
 
 public class Sites extends SupportTest {
 
-    @Test(enabled = true, description = "Verify adding a new site successfully")
-    public void AddNewSite() throws Exception {
-        ctms.createInstance()
-                .login()
-                .navigateTo("Study Management;Study")
-                .onStudyPage()
-                .addNewStudy()
-                .navigateTo("Site Management;Sites")
-                .onSitesPage()
-                .addNewSiteAndSave()
-                .navigateTo("Site Management;Sites")
-                .onSitesPage()
-                .searchNewlyAddedSite()
-                .verifyValuesInGrid();
-    }
-
-
     @Test(enabled = true, description = "Adding a visit report & submit it for CRA submission")
     public void AddVisitReportAndScheduleForSite() throws Exception {
         ctms.createInstance()
@@ -46,4 +29,22 @@ public class Sites extends SupportTest {
                 .openReportTrackingForSite()
                 .updateReportStatusUnderReportTracking();
     }
+
+
+    @Test(enabled = true, description = "Verify adding a new site successfully")
+    public void AddNewSite() throws Exception {
+        ctms.createInstance()
+                .login()
+                .navigateTo("Study Management;Study")
+                .onStudyPage()
+                .addNewStudy()
+                .navigateTo("Site Management;Sites")
+                .onSitesPage()
+                .addNewSiteAndSave()
+                .navigateTo("Site Management;Sites")
+                .onSitesPage()
+                .searchNewlyAddedSite()
+                .verifyValuesInGrid();
+    }
+
 }
