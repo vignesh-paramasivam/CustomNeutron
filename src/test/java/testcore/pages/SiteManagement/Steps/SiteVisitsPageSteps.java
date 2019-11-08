@@ -73,4 +73,5 @@ public class SiteVisitsPageSteps extends SiteVisitsPage {
 		getGridControl("summaryTable").verifyValues(uniqueValuesToIdentifyRow, allValuesToIdentifyRow);
 		return new SitesPageSteps(getConfig(), getAgent(), getTestData());
 	}
+
 }

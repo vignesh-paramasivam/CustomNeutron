@@ -22,7 +22,7 @@ public class Sites extends SupportTest {
     }
 
 
-    @Test(enabled = true, description = "Verify adding a visit report & schedule successfully for a site")
+    @Test(enabled = true, description = "Adding a visit report & submit it for CRA submission")
     public void AddVisitReportAndScheduleForSite() throws Exception {
         ctms.createInstance()
                 .login()
@@ -42,6 +42,8 @@ public class Sites extends SupportTest {
                 .onSitesPage()
                 .openVisitReportForSite()
                 .selectVisitActivityAndReportName()
-                .verifyValuesInGrid();
+                .verifyValuesInGrid()
+                .openReportTrackingForSite()
+                .updateReportStatusUnderReportTracking();
     }
 }

@@ -43,7 +43,7 @@ public class StudyPageSteps extends StudyPage {
 
 		getNotificationControl("").waitUntilVisible();
 		String actualMessage = getNotificationControl("").getValue();
-		String expectedMessage = getTestData().get("SuccessMsg");
+		String expectedMessage = getTestData().get("SuccessMsgForRecordCreation");
 		Assert.assertEquals(expectedMessage, actualMessage);
 		assertPageLoad();
 

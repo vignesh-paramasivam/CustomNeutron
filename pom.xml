@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>automation</groupId>
-	<artifactId>automation</artifactId>
+	<groupId>ctms</groupId>
+	<artifactId>ctms</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Automation Test Project</name>
-	<description>Automation Test Project</description>
+	<name>CTMS Automation Test Project</name>
+	<description>CTMS Automation Test Project</description>
 
 	<properties>
 		<selenium-version>3.141.59</selenium-version>

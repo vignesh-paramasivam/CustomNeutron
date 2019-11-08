@@ -101,7 +101,9 @@ public class SitesPageSteps extends SitesPage {
 
 		GridControl grid = new GridControl("myGrid", this, getGridControl("summaryTable").thisControlElement());
 		WebElement row = grid.getRow_BasedOnUniqueColumnValues(uniqueValuesToIdentifyRow);
-		grid.getColumn(row, "Visit Reports").findElement(By.cssSelector("a img")).click();
+		WebElement columnIcon = grid.getColumn(row, "Visit Reports").findElement(By.cssSelector("a img"));
+		waitUntilElementVisible(columnIcon);
+		columnIcon.click();
 		assertPageLoad();
 		return new VisitReportPageSteps(getConfig(), getAgent(), getTestData());
 	}
@@ -112,34 +114,15 @@ public class SitesPageSteps extends SitesPage {
 		return new SitesPageSteps(getConfig(), getAgent(), getTestData());
 	}
 
-	/*
-	*PRIVATE METHODS TO BE ADDED BELOW: USED AS SUB-STEP UNDER STEP
-	* Add methods as private only when it is used as a sub-step. Else, make it public to use..
-	* ..it under test cases
-	*/
-
-	private void onOrgAddressPick() throws Exception {
-		waiter().until(ExpectedConditions.numberOfWindowsToBe(2));
-		assertPageLoad();
-		switchToNewWindow();
-		assertPageLoad();
-		waiter().until(ExpectedConditions.visibilityOfElementLocated(By.id("companyNameSrch")));
-		getTextboxControl("companyNameSrch").enterValue("*");
-		getButtonControl("btnSearch").click();
-		assertPageLoad();
-
-		//Using the existing Org name for test purpose
-		String orgName = "Test25 - Org1"; // getTestData().get("studyName");
+	public VisitReportPageSteps openReportTrackingForSite() throws Exception {
 		HashMap<String, String> uniqueValuesToIdentifyRow = new HashMap<>();
-		uniqueValuesToIdentifyRow.put("Organization Name", orgName);
+		uniqueValuesToIdentifyRow.put("Study Site Number", getTestData().get("studySiteNumber"));
 
-		GridControl grid = new GridControl("myGrid", this, getGridControl("Gentable").thisControlElement());
+		GridControl grid = new GridControl("myGrid", this, getGridControl("summaryTable").thisControlElement());
 		WebElement row = grid.getRow_BasedOnUniqueColumnValues(uniqueValuesToIdentifyRow);
-		List<WebElement> expectedColumn = grid.columns(row);
-		//Clicking on the pick button
-		expectedColumn.get(expectedColumn.size() - 1).findElement(By.cssSelector("input")).click();
-		switchToMainWindow();
+		grid.getColumn(row, "Report Tracking").findElement(By.cssSelector("a img")).click();
 		assertPageLoad();
-
+		return new VisitReportPageSteps(getConfig(), getAgent(), getTestData());
 	}
+
 }

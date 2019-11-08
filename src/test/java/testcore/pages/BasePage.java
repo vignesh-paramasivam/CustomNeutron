@@ -16,6 +16,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import testcore.controls.common.MenuControl;
+import testcore.pages.SiteManagement.SitesPage;
 
 public abstract class BasePage extends Page {
 
@@ -41,6 +42,10 @@ public abstract class BasePage extends Page {
 	protected void waitForVisibilityByClass(String className) throws Exception {
 		waiter().until(ExpectedConditions.visibilityOfElementLocated(By.className(className)));
 		Thread.sleep(2000); //TODO: Page loading in splits, to be fixed
+	}
+
+	protected void waitUntilElementVisible(WebElement element) throws Exception {
+		waiter().until(ExpectedConditions.visibilityOf(element));
 	}
 	//Wrapper methods for wait for element: Ends
 
