@@ -106,7 +106,7 @@ public class VisitReportPage extends BasePage {
 		getTextboxControl("username").enterValue(getTestData().get("User"));
 		getTextboxControl("password").enterValue(getTestData().get("Password"));
 		getButtonControl("create_session_link").click();
-		switchToMainWindow();
+		waiter().until(ExpectedConditions.numberOfWindowsToBe(1));
 	}
 
 }
