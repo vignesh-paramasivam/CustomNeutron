@@ -4,36 +4,35 @@ import agent.IAgent;
 import central.Configuration;
 import org.apache.commons.lang3.NotImplementedException;
 import testcore.pages.BasePage;
-import testcore.pages.desktop.StudyManagement.DesktopStudyPage;
-import testcore.pages.desktop.StudyManagement.DesktopStudyVendorsPage;
+import testcore.pages.desktop.Connect.DesktopSegmentsPage;
 
 import java.util.Map;
 
-public class StudyVendorsPage extends BasePage {
+public class SegmentsPage extends BasePage {
 
 
-	public StudyVendorsPage(Configuration conf, IAgent agent, Map<String, String> testData) throws Exception {
+	public SegmentsPage(Configuration conf, IAgent agent, Map<String, String> testData) throws Exception {
 		super(conf, agent, testData);
 		assertPageLoad();
 	}
 
-	public StudyVendorsPage createInstance() throws Exception{
+	public SegmentsPage createInstance() throws Exception{
 		logger.info(String.format("started with the create instance"));
 		logger.info(getPlatform().toString());
-		StudyVendorsPage derivedStudyVendorsPage;
+		SegmentsPage derivedSegmentsPage;
 		switch(getPlatform()){
 		case DESKTOP_WEB:
-			derivedStudyVendorsPage = new DesktopStudyVendorsPage(getConfig(),getAgent(),getTestData());
+			derivedSegmentsPage = new DesktopSegmentsPage(getConfig(),getAgent(),getTestData());
 			break;
 		default:
 			throw new NotImplementedException("Invalid platform - please check the platform argument: " + getPlatform().toString()) ;
 		}
-		return derivedStudyVendorsPage;
+		return derivedSegmentsPage;
 	}
 
 	@Override
 	public String pageName() {
-		return StudyVendorsPage.class.getSimpleName();
+		return SegmentsPage.class.getSimpleName();
 	}
-	
+
 }

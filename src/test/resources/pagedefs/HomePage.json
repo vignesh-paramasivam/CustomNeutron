@@ -1,14 +1,5 @@
 {
-	"txtUserEmail": {
-		"DESKTOP_WEB": "xpath=//input[@name='userName']"
-	},
-	"txtPassword": {
-		"DESKTOP_WEB": "xpath=//input[@name='password']"
-	},
-	"btnLogin": {
-		"DESKTOP_WEB": "id=loginButton"
-	},
 	"body": {
-		"DESKTOP_WEB": "id=body"
+		"DESKTOP_WEB": "css=body.bodyStyle"
 	}
 }

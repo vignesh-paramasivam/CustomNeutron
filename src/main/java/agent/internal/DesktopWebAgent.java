@@ -40,7 +40,7 @@ public class DesktopWebAgent extends WebAgent {
 					 */
 
 					boolean pageLoaded = driver.findElements(By.cssSelector("body")).size() > 0;
-					boolean loadingSpinnerDisplayed = driver.findElements(By.xpath("//div[@id='divContentLoadingSpinner'][contains(@style,'display: block')]")).size() == 0;
+					boolean loadingSpinnerDisplayed = driver.findElements(By.xpath("//div[contains(@class,'loader')]")).size() == 0;
 
 					int timeOut = System.getProperty("implicit_wait") == null ? Integer.parseInt(getConfig().getValue(ConfigType.IMPLICIT_WAIT)) : Integer.parseInt(System.getProperty("implicit_wait"));
 					driver.manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);

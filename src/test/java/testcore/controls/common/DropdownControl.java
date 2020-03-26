@@ -15,7 +15,6 @@ public class DropdownControl extends WebControl {
 		super(name, page, element);
 	}
 
-	//CTMS - Dropdown
 	@Override
 	public void enterValue(String value) throws Exception {
 		int count = 0;

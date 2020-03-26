@@ -29,7 +29,7 @@ public class SupportTest {
 	protected static Logger logger = AutomationCentral.getLogger();
 	private Configuration conf = null;
 	protected HomePage home;
-	protected LoginPage ctms;
+	protected LoginPage unity;
 	private IAgent agent;
 	private ITestContext context = null;
 	private String testName = null;
@@ -61,9 +61,13 @@ public class SupportTest {
 		this.context = context;
 		this.conf = AutomationCentral.INSTANCE.getContextConfig(context);
 		/*DataSheet name will be retrieved from the scenarios package name*/
-		String dataSheet = this.getClass().getName().split("\\.")[2];
+		String rawPath = this.getClass().getName().replace("testcore.scenarios.", "");
+		int index = rawPath.lastIndexOf(".");
+		String dataSheetPath = rawPath.substring(0, index).replace(".", "/");
+
+
 		String currentClassName = this.getClass().getSimpleName();
-		dataTable = new DataTable(dataSheet);
+		dataTable = new DataTable(dataSheetPath);
 		dataTable.capturesRowOfTestCasesInSheet(currentClassName);
 	}
 
@@ -91,7 +95,7 @@ public class SupportTest {
 		testData.putAll(listOfHashMap.get(Testcount++));
 		this.testData.put("testName", testName);
 		home = new HomePage(this.conf, agent, testData);
-		ctms = new LoginPage(this.conf, agent, testData);
+		unity = new LoginPage(this.conf, agent, testData);
 		logger.info(String.format("Set up for test method [%s] ended.", testName));
 	}
 

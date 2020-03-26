@@ -38,7 +38,7 @@ public class DataTable {
 		InputStream inputFile;
 		try {
 			inputFile = new FileInputStream(new File(
-					System.getProperty("user.dir") + "/src/test/resources/data/DESKTOP_WEB/" + fileName + "/" + fileName + "TestData.xlsx"));
+					System.getProperty("user.dir") + "/src/test/resources/data/DESKTOP_WEB/" + fileName + "TestData.xlsx"));
 
 			// Buffering the whole stream into memory.
 			workbook = new XSSFWorkbook(inputFile);

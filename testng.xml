@@ -1,10 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 
-<suite name="Visit report" verbose="1">
+<suite name="Connect" verbose="1">
     <test name="E2E test">
         <classes>
-            <class name="testcore.scenarios.SiteManagement.Sites.Sites"/>
-            <class name="testcore.scenarios.StudyManagement.Study.Study"/>
+            <class name="testcore.scenarios.Connect.Segments.CreateSegment"/>
         </classes>
     </test>
 </suite>
