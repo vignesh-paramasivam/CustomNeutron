@@ -2,8 +2,8 @@ package testcore.pages.desktop.Connect;
 
 import agent.IAgent;
 import central.Configuration;
-import testcore.pages.StudyManagement.SegmentsPage;
-import testcore.pages.StudyManagement.SegmentDetailsPage;
+import testcore.pages.Connect.SegmentsPage;
+import testcore.pages.Connect.SegmentDetailsPage;
 
 import java.util.Map;
 

@@ -1,10 +1,10 @@
-package testcore.pages.StudyManagement.Steps;
+package testcore.pages.Connect.Steps;
 
 import agent.IAgent;
 import central.Configuration;
 import io.qameta.allure.Step;
 import org.testng.Assert;
-import testcore.pages.StudyManagement.SegmentsPage;
+import testcore.pages.Connect.SegmentsPage;
 import utils.RandomData;
 import java.util.HashMap;
 import java.util.Map;

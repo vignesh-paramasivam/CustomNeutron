@@ -1,9 +1,9 @@
-package testcore.pages.StudyManagement.Steps;
+package testcore.pages.Connect.Steps;
 
 import agent.IAgent;
 import central.Configuration;
 import testcore.pages.BasePage;
-import testcore.pages.StudyManagement.SegmentsPage;
+import testcore.pages.Connect.SegmentsPage;
 
 import java.util.Map;
 

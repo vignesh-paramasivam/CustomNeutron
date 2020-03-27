@@ -2,7 +2,7 @@ package testcore.pages;
 
 import agent.IAgent;
 import central.Configuration;
-import testcore.pages.StudyManagement.Steps.SegmentsPageSteps;
+import testcore.pages.Connect.Steps.SegmentsPageSteps;
 
 import java.util.Map;
 

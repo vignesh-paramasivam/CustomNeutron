@@ -1,4 +1,4 @@
-package testcore.pages.StudyManagement;
+package testcore.pages.Connect;
 
 import agent.IAgent;
 import central.Configuration;
