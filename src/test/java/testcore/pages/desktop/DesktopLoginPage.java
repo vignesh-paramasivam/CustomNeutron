@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import testcore.pages.HomePage;
 import testcore.pages.LoginPage;
+import utils.RandomData;
 
 import java.util.Map;
 
@@ -22,8 +23,9 @@ public class DesktopLoginPage extends LoginPage {
     public HomePage login() throws Exception {
 
         //Temp test data: To be added in excel file under resources
-        //getTestData().put("Email", "vignesh.paramasivam@zeotap.com");
-        //getTestData().put("Password", "Zeotap@123");
+        getTestData().put("Organization", "ZEOTAP");
+        getTestData().put("Country", "Spain");
+        getTestData().put("SegmentName", "MT-Automation" + RandomData.dateTime_yyyyMMddHHmmss());
 
 
         assertPageLoad();

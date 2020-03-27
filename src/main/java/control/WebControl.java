@@ -307,4 +307,9 @@ public class WebControl extends Control {
 		action.moveToElement(this.getRawWebElement()).build().perform();
 	}
 
+	public void waitForPageLoad() {
+		//This need to be override by assertPageLoad under DesktopWebAgent
+		this.getAgent().getWaiter().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(@class,'loader')]")));
+	}
+
 }

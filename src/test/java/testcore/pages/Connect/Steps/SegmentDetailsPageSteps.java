@@ -20,4 +20,10 @@ public class SegmentDetailsPageSteps extends BasePage {
 		return SegmentsPage.class.getSimpleName();
 	}
 
+	public SegmentDetailsPageSteps enterBasicDetails() throws Exception {
+		getTextboxControl("segmentName").enterValue(getTestData().get("SegmentName"));
+		return this;
+	}
+
+
 }
