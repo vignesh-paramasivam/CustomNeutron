@@ -20,8 +20,14 @@ public class DesktopLoginPage extends LoginPage {
     @Step("Enter the username and password to login")
     @Override
     public HomePage login() throws Exception {
+
+        //Temp test data: To be added in excel file under resources
+        //getTestData().put("Email", "vignesh.paramasivam@zeotap.com");
+        //getTestData().put("Password", "Zeotap@123");
+
+
         assertPageLoad();
-        getTextboxControl("email").enterText(getTestData().get("User"));
+        getTextboxControl("email").enterText(getTestData().get("Email"));
         getTextboxControl("password").enterText(getTestData().get("Password"));
         getButtonControl("LOGIN").click();
         this.getAgent().getWaiter().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("section.navBarContainer")));

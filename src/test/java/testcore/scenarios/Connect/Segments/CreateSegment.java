@@ -10,8 +10,7 @@ public class CreateSegment extends SupportTest {
     public void CreateNewSegment() throws Exception {
         unity.createInstance()
                 .login()
-                .navigateTo("Connect")
-                .onSegmentsPage();
+                .navigateTo("CONNECT");
     }
 
 }

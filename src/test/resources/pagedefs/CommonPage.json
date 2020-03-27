@@ -3,7 +3,7 @@
 		"DESKTOP_WEB": "xpath=//input[@id='%1$s'] | //input[@name='%1$s'] | //input[@caption='%1$s']"
 	},
 	"ButtonControl": {
-		"DESKTOP_WEB": "xpath=//button[contains(@class='submit-button')][@label='%1$s']/button | //button[@type='submit'][@id='%1$s'] | //*[@id='%1$s'] | //input[@name='%1$s'] | //button[text()='%1$s'] | //button/span[text()='%1$s']/.."
+		"DESKTOP_WEB": "xpath=//zui-button[contains(@class, 'submit-button')][@label='%1$s']/button | //button[@type='submit'][@id='%1$s'] | //*[@id='%1$s'] | //input[@name='%1$s'] | //button[text()='%1$s'] | //button/span[text()='%1$s']/.."
 	},
 	"LinkControl": {
 		"DESKTOP_WEB": "xpath=//a[@id='%1$s'] | //a[@title='%1$s'] | //a[contains(@class, '%1$s')]/i | //a//i[@id='%1$s']"
@@ -27,7 +27,7 @@
 		"DESKTOP_WEB": "xpath=//input[@id='%1$s']"
 	},
 	"MenuControl": {
-		"DESKTOP_WEB": "xpath=//div[@id='jsm']"
+		"DESKTOP_WEB": "xpath=//a[contains(@class, 'navLink')]/span[text()='%1$s']/.."
 	},
 	"SectionControl": {
 		"DESKTOP_WEB": "xpath=//div[contains(@id,'%1$s')] | //div[@role='dialog']//div[@class='%1$s'] | //span[text()='%1$s']//ancestor::div[@class='ant-modal-header']/following-sibling::div"

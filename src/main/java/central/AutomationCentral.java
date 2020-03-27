@@ -65,9 +65,9 @@ public enum AutomationCentral {
 	registerContext(ITestContext context) throws Exception {
 		Configuration contextConf = new Configuration(centralConf, context);
 		this.contextConfigs.put(context.getName().toLowerCase(), contextConf);
-		String testDataFilePath = String.format("%s/%s/testdata.ini", getDirPathForConf(ConfigType.DATA_DIR),
-				getProperty("platform", contextConf));
-		logger.debug(String.format("Loading Test Data File at Path :: %s", testDataFilePath));
+		/*String testDataFilePath = String.format("%s/%s/testdata.ini", getDirPathForConf(ConfigType.DATA_DIR),
+				getProperty("platform", contextConf));*/
+//		logger.debug(String.format("Loading Test Data File at Path :: %s", testDataFilePath));
 //		IniReader reader = new IniReader(testDataFilePath);
 //		this.contextTestData.put(context.getName().toLowerCase(), reader);
 	}

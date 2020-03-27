@@ -26,8 +26,8 @@ public abstract class BasePage extends Page {
 
 	@Step("Navigate to {menuName}")
 	public AllPages navigateTo(String menuName) throws Exception {
-		WebElement menuTopElement = this.getAgent().getWebDriver().findElement(By.id("jsm"));
-		new MenuControl("menucontrol", this, menuTopElement).selectMenu(menuName);
+		assertPageLoad();
+		getMenuControl(menuName).click();
 		assertPageLoad();
 		return new AllPages(getConfig(), getAgent(), getTestData());
 	}
