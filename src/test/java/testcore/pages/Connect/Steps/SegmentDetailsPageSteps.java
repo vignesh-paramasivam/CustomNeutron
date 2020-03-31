@@ -25,5 +25,18 @@ public class SegmentDetailsPageSteps extends BasePage {
 		return this;
 	}
 
+	public SegmentDetailsPageSteps enterBuildSegmentDetails() throws Exception {
+		getDropdownControl("Choose Data Collections to inc").enterValue(getTestData().get("DataCollections"));
+		getDropdownControl("Select your Input Identifiers").enterValue(getTestData().get("InputIdentifiers"));
+		getButtonControl("NEXT").click();
+		assertPageLoad();
+		return this;
+	}
+
+	public SegmentDetailsPageSteps addFiltersToDataCollections() throws Exception {
+		getButtonControl("FILTER DATA COLLECTIONS").click();
+		return this;
+	}
+
 
 }

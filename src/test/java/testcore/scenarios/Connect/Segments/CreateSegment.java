@@ -14,7 +14,9 @@ public class CreateSegment extends SupportTest {
                 .onSegmentsPage()
                 .selectOrgAndCountry()
                 .gotoCreateSegmentPage()
-                .enterBasicDetails();
+                .enterBasicDetails()
+                .enterBuildSegmentDetails()
+                .addFiltersToDataCollections();
     }
 
 }

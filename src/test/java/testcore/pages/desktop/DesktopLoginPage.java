@@ -26,7 +26,8 @@ public class DesktopLoginPage extends LoginPage {
         getTestData().put("Organization", "ZEOTAP");
         getTestData().put("Country", "Spain");
         getTestData().put("SegmentName", "MT-Automation" + RandomData.dateTime_yyyyMMddHHmmss());
-
+        getTestData().put("DataCollections", "test-ms-01;e2e-QA-Test-01");
+        getTestData().put("InputIdentifiers", "Email;Mobile");
 
         assertPageLoad();
         this.getAgent().getWaiter().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[name='email']")));

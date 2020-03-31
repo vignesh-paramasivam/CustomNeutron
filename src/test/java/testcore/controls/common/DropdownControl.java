@@ -54,12 +54,12 @@ public class DropdownControl extends WebControl {
 					inputBox.sendKeys(charVal);
 				}
 
-				String optionsRoot = "//div[(contains(@class,'ng-option'))][@role='option']";
-				String options_xpath = optionsRoot + "//span[contains(@class, 'ng-option-label')] | " +optionsRoot + "//span";
+				String options_xpath = "//div[(contains(@class,'ng-option'))][@role='option']";
 				List<WebElement> options = this.getAgent().getWebDriver().findElements(By.xpath(options_xpath));
 
 				for (WebElement option : options) {
-					if (option.getText().trim().equalsIgnoreCase(value)) {
+					//If the option has extra spaces when inspecting it, we will remove it and compare
+					if (option.getText().trim().replaceAll("\\s+", " ").equalsIgnoreCase(value)) {
 						option.click();
 						return;
 					}
@@ -87,7 +87,6 @@ public class DropdownControl extends WebControl {
 				inputBox.click();
 				inputBox.sendKeys(charVal);
 			}
-			Thread.sleep(500); //To avoid intermittent stale element error
 
 			String options_xpath = "//div[(contains(@class,'ng-option'))][@role='option']";
 			List<WebElement> options = this.getAgent().getWebDriver().findElements(By.xpath(options_xpath));
