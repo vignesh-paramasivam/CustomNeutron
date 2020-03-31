@@ -24,7 +24,7 @@
 		"DESKTOP_WEB": "xpath=//label[@for='%1$s']//parent::div//following-sibling::div//input"
 	},
 	"DropdownControl": {
-		"DESKTOP_WEB": "xpath=//ng-select[@role='listbox'][@placeholder='%1$s']"
+		"DESKTOP_WEB": "xpath=//ng-select[@role='listbox'][@placeholder='%1$s'] | //ng-select[@role='listbox'][@ng-reflect-placeholder='%1$s']"
 	},
 	"MenuControl": {
 		"DESKTOP_WEB": "xpath=//a[contains(@class, 'navLink')]/span[text()='%1$s']/.."

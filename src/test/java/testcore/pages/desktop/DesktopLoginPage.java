@@ -29,6 +29,7 @@ public class DesktopLoginPage extends LoginPage {
 
 
         assertPageLoad();
+        this.getAgent().getWaiter().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[name='email']")));
         getTextboxControl("email").enterText(getTestData().get("Email"));
         getTextboxControl("password").enterText(getTestData().get("Password"));
         getButtonControl("LOGIN").click();
