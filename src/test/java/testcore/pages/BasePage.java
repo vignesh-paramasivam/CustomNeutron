@@ -35,12 +35,10 @@ public abstract class BasePage extends Page {
 	//Wrapper methods for wait for element: Begins
 	protected void waitForVisibilityById(String id) throws Exception {
 		waiter().until(ExpectedConditions.visibilityOfElementLocated(By.id(id)));
-		Thread.sleep(2000); //TODO: Page loading in splits, to be fixed
 	}
 
 	protected void waitForVisibilityByClass(String className) throws Exception {
 		waiter().until(ExpectedConditions.visibilityOfElementLocated(By.className(className)));
-		Thread.sleep(2000); //TODO: Page loading in splits, to be fixed
 	}
 
 	protected void waitUntilElementVisible(WebElement element) throws Exception {

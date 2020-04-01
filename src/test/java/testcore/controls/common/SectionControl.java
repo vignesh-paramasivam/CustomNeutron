@@ -11,12 +11,10 @@ public class SectionControl extends WebControl {
 	public SectionControl(String name, IPage page, WebElement element) {
 		super(name, page, element);
 	}
-	
-	/**
-	*Returns the rows
-	*/
-	public List<WebElement> rows(){
-	return this.getRawWebElement().findElements(By.cssSelector(".ant-row"));
+
+	//Usage in Destinations page - to check whether it is selected or not
+	public boolean isSelected (){
+		return this.getRawWebElement().getAttribute("class").contains("active");
 	}
-		
+
 }

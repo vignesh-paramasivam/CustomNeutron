@@ -16,7 +16,13 @@ public class CreateSegment extends SupportTest {
                 .gotoCreateSegmentPage()
                 .enterBasicDetails()
                 .enterBuildSegmentDetails()
-                .addFiltersToDataCollections();
+                .addFiltersToDataCollections()
+                .extendFirstPartyAudience()
+                .chooseOutputIdentifiers()
+                .proceed()
+                .chooseDestinations()
+                .createAndDistribute()
+                .verifyNewSegmentIsCreated();
     }
 
 }

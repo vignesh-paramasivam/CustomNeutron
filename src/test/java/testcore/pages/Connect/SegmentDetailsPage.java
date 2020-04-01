@@ -34,5 +34,10 @@ public class SegmentDetailsPage extends BasePage {
 	public String pageName() {
 		return SegmentDetailsPage.class.getSimpleName();
 	}
+
+	public void clickNextButton() throws Exception {
+		getButtonControl("NEXT").click();
+		assertPageLoad();
+	}
 	
 }

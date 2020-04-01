@@ -3,9 +3,14 @@ package testcore.pages.Connect;
 import agent.IAgent;
 import central.Configuration;
 import org.apache.commons.lang3.NotImplementedException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import testcore.pages.BasePage;
 import testcore.pages.desktop.Connect.DesktopSegmentsPage;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class SegmentsPage extends BasePage {
@@ -34,5 +39,24 @@ public class SegmentsPage extends BasePage {
 	public String pageName() {
 		return SegmentsPage.class.getSimpleName();
 	}
+
+	//Poster methods
+
+	private WebElement getPoster(String segmentName) throws Exception {
+		String path = "//div[contains(@class, 'poster')]//zui-poster-header//div[contains(@class, 'segment-name')][text()='" + segmentName + "']";
+		return driver().findElement(By.xpath(path));
+	}
+
+	public List<String> getAllPostersNames() throws Exception {
+		String path = "//div[contains(@class, 'poster')]//zui-poster-header//div[contains(@class, 'segment-name')]";
+		List<WebElement> allPosters = driver().findElements(By.xpath(path));
+
+		List<String> allPostersNames = new ArrayList<>();
+		for (WebElement poster: allPosters) {
+			allPostersNames.add(poster.getText().trim());
+		}
+		return allPostersNames;
+	}
+
 
 }

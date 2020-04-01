@@ -1,9 +1,9 @@
 {
 	"TextboxControl": {
-		"DESKTOP_WEB": "xpath=//input[@id='%1$s'] | //input[@name='%1$s'] | //input[@caption='%1$s']"
+		"DESKTOP_WEB": "xpath=//input[@id='%1$s'] | //input[@name='%1$s'] | //input[@caption='%1$s'] | //zui-input[@ng-reflect-label='%1$s']//input[@type='text']"
 	},
 	"ButtonControl": {
-		"DESKTOP_WEB": "xpath=//zui-button[@label='%1$s']/button | //button[@type='submit'][@id='%1$s'] | //*[@id='%1$s'] | //input[@name='%1$s'] | //button[text()='%1$s'] | //button/span[text()='%1$s']/.. | //button/span[contains(text(), '%1$s')]/.."
+		"DESKTOP_WEB": "xpath=//zui-button[@label='%1$s']/button | //button[@type='submit'][@id='%1$s'] | //*[@id='%1$s'] | //input[@name='%1$s'] | //button[text()='%1$s'] | //button/span[text()='%1$s']/.. | //button/span[contains(text(), '%1$s')]/.. | //button//mat-icon[text()='%1$s']"
 	},
 	"LinkControl": {
 		"DESKTOP_WEB": "xpath=//a[@id='%1$s'] | //a[@title='%1$s'] | //a[contains(@class, '%1$s')]/i | //a//i[@id='%1$s']"
@@ -30,7 +30,7 @@
 		"DESKTOP_WEB": "xpath=//a[contains(@class, 'navLink')]/span[text()='%1$s']/.."
 	},
 	"SectionControl": {
-		"DESKTOP_WEB": "xpath=//div[contains(@id,'%1$s')] | //div[@role='dialog']//div[@class='%1$s'] | //span[text()='%1$s']//ancestor::div[@class='ant-modal-header']/following-sibling::div"
+		"DESKTOP_WEB": "xpath=//section[contains(@class, 'destinationCard')]//span[@title='%1$s']/ancestor::section[1]"
 	},
 	"RadioControl": {
 		"DESKTOP_WEB": "xpath=//input[@type='radio']/ancestor::label//span[text()='%1$s']/preceding-sibling::span//input[@type='radio']"

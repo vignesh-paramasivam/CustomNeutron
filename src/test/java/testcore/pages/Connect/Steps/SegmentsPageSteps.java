@@ -35,6 +35,16 @@ public class SegmentsPageSteps extends SegmentsPage {
 		assertPageLoad();
 		getDropdownControl("Select Country").enterValue(getTestData().get("Country"));
 		assertPageLoad();
-		return new SegmentsPageSteps(this.getConfig(), this.getAgent(), this.getTestData());
+		return this;
 	}
+
+	public SegmentsPageSteps verifyNewSegmentIsCreated() throws Exception {
+		String createdSegmentName = getTestData().get("SegmentName");
+		getTextboxControl("Search Segments").enterValue(createdSegmentName);
+		Thread.sleep(1000); // Static wait of 1s is added to get the loading spinner to display
+		assertPageLoad();
+		Assert.assertTrue(getAllPostersNames().contains(createdSegmentName), createdSegmentName + " is not available. Available posters:: " + getAllPostersNames());
+		return this;
+	}
+
 }

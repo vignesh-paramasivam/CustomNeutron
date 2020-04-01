@@ -49,7 +49,7 @@ public class DropdownControl extends WebControl {
 				inputBox.clear();
 				inputBox.click();
 
-				for(int i = 0; i < 4; i++){
+				for(int i = 0; i < 4 && i < value.toCharArray().length; i++){
 					String charVal = new StringBuilder().append(value.charAt(i)).toString();
 					inputBox.sendKeys(charVal);
 				}
@@ -99,7 +99,7 @@ public class DropdownControl extends WebControl {
 					break;
 				}
 			}
-			if(optionAvailable) {Assert.fail(valueToSelect + "option is not available in dropdown");}
+			if(optionAvailable) {Assert.fail(valueToSelect + " option is not available in dropdown");}
 		}
 		closeDropdownOptions();
 
