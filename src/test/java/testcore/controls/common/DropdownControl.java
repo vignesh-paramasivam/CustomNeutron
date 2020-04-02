@@ -46,11 +46,13 @@ public class DropdownControl extends WebControl {
 		while (true) {
 			try {
 				WebElement inputBox = this.getRawWebElement().findElement(By.xpath(".//input[@role='combobox']"));
+				this.getAgent().scrollIntoView(inputBox);
 				inputBox.clear();
 				inputBox.click();
 
 				for(int i = 0; i < 4 && i < value.toCharArray().length; i++){
 					String charVal = new StringBuilder().append(value.charAt(i)).toString();
+
 					inputBox.sendKeys(charVal);
 				}
 
@@ -80,26 +82,41 @@ public class DropdownControl extends WebControl {
 		String[] values = value.split(";");
 
 		for (String valueToSelect: values) {
-			WebElement inputBox = this.getRawWebElement().findElement(By.xpath(".//input[@role='combobox']"));
-			this.getAgent().scrollIntoView(inputBox);
-			for(int i = 0; i < 4; i++){
-				String charVal = new StringBuilder().append(valueToSelect.charAt(i)).toString();
-				inputBox.click();
-				inputBox.sendKeys(charVal);
-			}
+			int count = 0;
+			int maxTries = 3;
+			while (true) {
+				try {
+					WebElement inputBox = this.getRawWebElement().findElement(By.xpath(".//input[@role='combobox']"));
+					this.getAgent().scrollIntoView(inputBox);
+					for(int i = 0; i < 4 && i < value.toCharArray().length; i++){
+						String charVal = new StringBuilder().append(valueToSelect.charAt(i)).toString();
+						inputBox.click();
+						inputBox.sendKeys(charVal);
+					}
 
-			String options_xpath = "//div[(contains(@class,'ng-option'))][@role='option']";
-			List<WebElement> options = this.getAgent().getWebDriver().findElements(By.xpath(options_xpath));
+					String options_xpath = "//div[(contains(@class,'ng-option'))][@role='option']";
+					List<WebElement> options = this.getAgent().getWebDriver().findElements(By.xpath(options_xpath));
 
-			boolean optionAvailable = true;
-			for (WebElement option : options) {
-				if (option.getText().trim().equalsIgnoreCase(valueToSelect)) {
-					optionAvailable = false;
-					option.click();
+					boolean optionAvailable = true;
+					for (WebElement option : options) {
+						if (option.getText().trim().equalsIgnoreCase(valueToSelect)) {
+							option.click();
+							optionAvailable = false;
+							break;
+						}
+					}
+					if(optionAvailable) { throw new Exception("Retry on multi dropdown");}
 					break;
 				}
+				catch (Exception e) {
+					Thread.sleep(500);
+					if (++count == maxTries) {
+						waitForPageLoad();
+						Assert.fail(valueToSelect + " option is not available in dropdown");
+						throwControlActionException(e);
+					}
+				}
 			}
-			if(optionAvailable) {Assert.fail(valueToSelect + " option is not available in dropdown");}
 		}
 		closeDropdownOptions();
 

@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 
 import central.Configuration;
 import enums.Platform;
+import org.testng.Assert;
 
 import java.util.concurrent.TimeUnit;
 
@@ -48,7 +49,11 @@ public class DesktopWebAgent extends WebAgent {
 					return (pageLoaded && loadingSpinnerDisplayed && documentReady);
 				}
 			};
-			this.getWaiter().until(pageLoadCondition);
+			try {
+				this.getWaiter().until(pageLoadCondition);
+			} catch (Exception e) {
+				Assert.fail("Timed out - waiting for page to load" + e);
+			}
 		}
 	}
 
