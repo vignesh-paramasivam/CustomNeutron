@@ -22,7 +22,8 @@ public class CreateSegment extends SupportTest {
                 .proceed()
                 .chooseDestinations()
                 .createAndDistribute()
-                .verifyNewSegmentIsCreated();
+                .verifyNewSegmentIsDisplayed()
+                .verifyNewSegmentIsDatabase();
     }
 
 }
