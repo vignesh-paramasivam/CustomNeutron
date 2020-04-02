@@ -44,10 +44,18 @@ public class SegmentsPage extends BasePage {
 
 	private WebElement getPoster(String segmentName) throws Exception {
 		String path = "//div[contains(@class, 'poster')]//zui-poster-header//div[contains(@class, 'segment-name')][text()='" + segmentName + "']";
-		return driver().findElement(By.xpath(path));
+		return driver().findElement(By.xpath(path + "/ancestor::zui-poster[1]"));
 	}
 
-	public List<String> getAllPostersNames() throws Exception {
+	public String getSegmentStatus(String segmentName) throws Exception {
+		return getPoster(segmentName).findElement(By.xpath(".//div[contains(@class, 'status')]")).getAttribute("ng-reflect-ng-class").trim();
+	}
+
+	public String getSegmentID(String segmentName) throws Exception {
+		return getPoster(segmentName).findElement(By.xpath(".//div[contains(@class, 'segment-id')]")).getText().trim();
+	}
+
+	public List<String> getAllSegmentPostersNames() throws Exception {
 		String path = "//div[contains(@class, 'poster')]//zui-poster-header//div[contains(@class, 'segment-name')]";
 		List<WebElement> allPosters = driver().findElements(By.xpath(path));
 
