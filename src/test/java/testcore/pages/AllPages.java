@@ -26,6 +26,7 @@ public class AllPages extends BasePage {
 
 
 	public SegmentsPageSteps onSegmentsPage() throws Exception {
+		Thread.sleep(10000);
 		assertPageLoad();
 		return new SegmentsPageSteps(getConfig(), getAgent(), getTestData());
 	}
@@ -66,7 +67,7 @@ public class AllPages extends BasePage {
 	}
 
 	public void addRule(WebElement ruleSetElement) throws Exception {
-		getButtonControl("add", ruleSetElement);
+		getButtonControl("add", ruleSetElement).click();
 		assertPageLoad();
 	}
 
@@ -77,8 +78,9 @@ public class AllPages extends BasePage {
 
 	public void setRuleValues(WebElement ruleSetElement, String columnFromDC, String operator, String value, String valueType) throws Exception {
 		getDropdownControl("Select Column from Data Collec",ruleSetElement).enterValue(columnFromDC);
+		getDropdownControl("Select Operator", ruleSetElement).enterValue("Contains"); // Dummy step to invoke action
 		getDropdownControl("Select Operator", ruleSetElement).enterValue(operator);
-
+		Thread.sleep(2000);
 		switch (valueType.toLowerCase()) {
 			case "dropdown":
 				getDropdownControl("Select Values", ruleSetElement).enterValue(value);
