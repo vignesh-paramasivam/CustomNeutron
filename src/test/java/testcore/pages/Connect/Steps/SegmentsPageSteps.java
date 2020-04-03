@@ -59,7 +59,7 @@ public class SegmentsPageSteps extends SegmentsPage {
 		String username = "zatuser";
 		String password = "dNyEjFxtl88iaeuG";
 		String dbUrl = "jdbc:postgresql://localhost:5431/prod_zat_rds";
-		String query = "SELECT * FROM public.segment_details where segment_id_zat=50301;";
+		String query = "SELECT * FROM public.segment_details where segment_id_zat=" + getTestData().get("SegmentID") + ";";
 
 		String segmentIdFromDB = "";
 		String dbQueryAttributes = "";
