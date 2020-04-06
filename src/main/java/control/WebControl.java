@@ -312,4 +312,10 @@ public class WebControl extends Control {
 		this.getAgent().getWaiter().until(ExpectedConditions.invisibilityOfElementLocated(By.xpath("//div[contains(@class,'loader')]")));
 	}
 
+	@Override
+	public List<String> allDropdownOptions() throws Exception {
+		Assert.fail("Should be implemented in Dropdown Class");
+		return new ArrayList<>();
+	};
+
 }

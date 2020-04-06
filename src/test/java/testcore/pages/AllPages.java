@@ -22,7 +22,7 @@ public class AllPages extends BasePage {
 
 
 	public SegmentsPageSteps onSegmentsPage() throws Exception {
-		Thread.sleep(10000);
+		Thread.sleep(10000); //Todo: to be addressed
 		assertPageLoad();
 		return new SegmentsPageSteps(getConfig(), getAgent(), getTestData());
 	}

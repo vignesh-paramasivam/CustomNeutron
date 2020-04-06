@@ -85,6 +85,8 @@ public interface IControl {
 	
     void  pageUpAndDown() throws Exception;
 
-    WebElement thisControlElement() throws Exception;   
+    WebElement thisControlElement() throws Exception;
+
+	List<String> allDropdownOptions() throws Exception;
 
 }

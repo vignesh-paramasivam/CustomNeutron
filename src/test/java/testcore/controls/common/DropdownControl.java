@@ -24,8 +24,8 @@ public class DropdownControl extends WebControl {
 		}
 	}
 
-
-	public ArrayList<String> allDropdownOptions() throws Exception {
+	@Override
+	public List<String> allDropdownOptions() throws Exception {
 		this.getRawWebElement().findElement(By.xpath(".//input[@role='combobox']")).click();
 		String optionsRoot = "//div[(contains(@class,'ng-option'))][@role='option']";
 		String options_xpath = optionsRoot + "//span[contains(@class, 'ng-option-label')] | " +optionsRoot + "//span |" + optionsRoot;
