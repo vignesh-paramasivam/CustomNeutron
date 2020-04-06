@@ -16,6 +16,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import testcore.controls.common.MenuControl;
+import testcore.pages.libraries.FilterForQueryBuilder;
 
 public abstract class BasePage extends Page {
 
@@ -30,6 +31,10 @@ public abstract class BasePage extends Page {
 		getMenuControl(menuName).click();
 		assertPageLoad();
 		return new AllPages(getConfig(), getAgent(), getTestData());
+	}
+
+	public FilterForQueryBuilder filter() throws Exception {
+		return new FilterForQueryBuilder(getConfig(), getAgent(), getTestData());
 	}
 
 	//Wrapper methods for wait for element: Begins

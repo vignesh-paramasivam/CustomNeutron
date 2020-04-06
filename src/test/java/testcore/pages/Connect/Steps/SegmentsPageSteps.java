@@ -53,7 +53,7 @@ public class SegmentsPageSteps extends SegmentsPage {
 		return this;
 	}
 
-	public SegmentsPageSteps verifyNewSegmentIsDatabase() throws Exception {
+	public SegmentsPageSteps verifyNewSegmentInDatabase() throws Exception {
 		//todo: THIS METHOD IS WIP
 
 		String username = "zatuser";

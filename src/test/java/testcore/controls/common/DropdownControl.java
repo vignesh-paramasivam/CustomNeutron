@@ -45,6 +45,7 @@ public class DropdownControl extends WebControl {
 		int maxTries = 3;
 		while (true) {
 			try {
+				closeDropdownOptions();
 				WebElement inputBox = this.getRawWebElement().findElement(By.xpath(".//input[@role='combobox']"));
 				this.getAgent().scrollIntoView(inputBox);
 				inputBox.clear();
@@ -52,10 +53,10 @@ public class DropdownControl extends WebControl {
 
 				for(int i = 0; i < 4 && i < value.toCharArray().length; i++){
 					String charVal = new StringBuilder().append(value.charAt(i)).toString();
-
 					inputBox.sendKeys(charVal);
 				}
 
+				openDropdownOptions();
 				String options_xpath = "//div[(contains(@class,'ng-option'))][@role='option']";
 				List<WebElement> options = this.getAgent().getWebDriver().findElements(By.xpath(options_xpath));
 
@@ -86,11 +87,13 @@ public class DropdownControl extends WebControl {
 			int maxTries = 3;
 			while (true) {
 				try {
+					closeDropdownOptions();
 					WebElement inputBox = this.getRawWebElement().findElement(By.xpath(".//input[@role='combobox']"));
 					this.getAgent().scrollIntoView(inputBox);
+					inputBox.click();
+
 					for(int i = 0; i < 4 && i < value.toCharArray().length; i++){
 						String charVal = new StringBuilder().append(valueToSelect.charAt(i)).toString();
-						inputBox.click();
 						inputBox.sendKeys(charVal);
 					}
 
@@ -99,7 +102,8 @@ public class DropdownControl extends WebControl {
 
 					boolean optionAvailable = true;
 					for (WebElement option : options) {
-						if (option.getText().trim().equalsIgnoreCase(valueToSelect)) {
+						String optionTxt = option.getText().trim().replaceAll("\\s+", " ");
+						if (optionTxt.equalsIgnoreCase(valueToSelect)) {
 							option.click();
 							optionAvailable = false;
 							break;
@@ -112,7 +116,7 @@ public class DropdownControl extends WebControl {
 					Thread.sleep(500);
 					if (++count == maxTries) {
 						waitForPageLoad();
-						Assert.fail(valueToSelect + " option is not available in dropdown");
+						Assert.fail(valueToSelect + " option is not available in dropdown" + e);
 						throwControlActionException(e);
 					}
 				}
@@ -122,9 +126,16 @@ public class DropdownControl extends WebControl {
 
 	}
 
-	private void closeDropdownOptions(){
-		if(this.getRawWebElement().findElements(By.xpath(".//ng-dropdown-panel[contains(@class, 'ng-select-multiple')]")).size() > 0) {
+	private void closeDropdownOptions() throws Exception {
+		if(this.getRawWebElement().findElements(By.xpath(".//ng-dropdown-panel[contains(@class, 'ng-select-multiple')]")).size() > 0 || this.getAgent().getWebDriver().findElements(By.xpath("//body//ng-dropdown-panel[contains(@class, 'ng-select-multiple')]")).size() > 0) {
 			//Dropdown options list is displayed - close it
+			this.getRawWebElement().findElement(By.xpath(".//span[contains(@class, 'ng-arrow-wrapper')]")).click();
+		}
+	}
+
+	private void openDropdownOptions(){
+		if(this.getRawWebElement().findElements(By.xpath(".//ng-dropdown-panel")).size() < 1 && this.getRawWebElement().findElements(By.xpath("//body//ng-dropdown-panel")).size() < 1) {
+			//Dropdown options list is not displayed - open it
 			this.getRawWebElement().findElement(By.xpath(".//span[contains(@class, 'ng-arrow-wrapper')]")).click();
 		};
 	}
