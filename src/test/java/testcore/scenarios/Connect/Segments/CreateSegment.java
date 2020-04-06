@@ -18,12 +18,14 @@ public class CreateSegment extends SupportTest {
                 .enterBuildSegmentDetails()
                 .addFiltersToDataCollections()
                 .extendFirstPartyAudience()
+                .verifyOutputIdentifiersOptions()
                 .chooseOutputIdentifiers()
                 .proceed()
                 .chooseDestinations()
                 .createAndDistribute()
                 .verifyNewSegmentIsDisplayed()
-                .verifyNewSegmentInDatabase();
+                .verifyNewSegmentInDatabase()
+                .verifyDataLayerStatus();
     }
 
 }

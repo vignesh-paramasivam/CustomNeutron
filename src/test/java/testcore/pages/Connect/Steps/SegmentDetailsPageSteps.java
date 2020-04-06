@@ -3,12 +3,12 @@ package testcore.pages.Connect.Steps;
 import agent.IAgent;
 import central.Configuration;
 import org.openqa.selenium.WebElement;
-import testcore.pages.AllPages;
-import testcore.pages.BasePage;
+import org.testng.asserts.SoftAssert;
 import testcore.pages.Connect.SegmentDetailsPage;
 import testcore.pages.Connect.SegmentsPage;
 import testcore.pages.libraries.FilterForQueryBuilder;
 
+import java.util.List;
 import java.util.Map;
 
 public class SegmentDetailsPageSteps extends SegmentDetailsPage {
@@ -74,6 +74,20 @@ public class SegmentDetailsPageSteps extends SegmentDetailsPage {
 			getCheckboxControl(value).checkboxCheck();
 		}
 		clickNextButton();
+		return this;
+	}
+
+
+	public SegmentDetailsPageSteps verifyOutputIdentifiersOptions() throws Exception {
+		List<String> allOptions = getDropdownControl("Choose Output Identifiers").allDropdownOptions();
+		String[] optionsToCheck = getTestData().get("OptionsOfOutputIdentifiers").split(";");
+
+		SoftAssert softAssert = new SoftAssert();
+		for(String option: optionsToCheck){
+			softAssert.assertTrue(allOptions.contains(option), option + " is not available");
+		}
+
+		softAssert.assertAll();
 		return this;
 	}
 
