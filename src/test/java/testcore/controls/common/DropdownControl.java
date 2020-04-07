@@ -2,7 +2,10 @@ package testcore.controls.common;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
+import central.AutomationCentral;
+import enums.ConfigType;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import control.WebControl;
@@ -27,6 +30,7 @@ public class DropdownControl extends WebControl {
 	@Override
 	public List<String> allDropdownOptions() throws Exception {
 		this.getRawWebElement().findElement(By.xpath(".//input[@role='combobox']")).click();
+		openDropdownOptions();
 		String optionsRoot = "//div[(contains(@class,'ng-option'))][@role='option']";
 		String options_xpath = optionsRoot + "//span[contains(@class, 'ng-option-label')] | " +optionsRoot + "//span |" + optionsRoot;
 		List<WebElement> options = this.getAgent().getWebDriver().findElements(By.xpath(options_xpath));
@@ -64,6 +68,7 @@ public class DropdownControl extends WebControl {
 					//If the option has extra spaces when inspecting it, we will remove it and compare
 					if (option.getText().trim().replaceAll("\\s+", " ").equalsIgnoreCase(value)) {
 						option.click();
+						closeDropdownOptions();
 						return;
 					}
 				}
@@ -105,6 +110,7 @@ public class DropdownControl extends WebControl {
 						String optionTxt = option.getText().trim().replaceAll("\\s+", " ");
 						if (optionTxt.equalsIgnoreCase(valueToSelect)) {
 							option.click();
+							closeDropdownOptions();
 							optionAvailable = false;
 							break;
 						}
@@ -127,16 +133,28 @@ public class DropdownControl extends WebControl {
 	}
 
 	private void closeDropdownOptions() throws Exception {
+		//Increasing the implicit wait time here will exponentially increase the execution time
+		int timeOut = Integer.parseInt(System.getProperty("implicit_wait"));
+		this.getAgent().getWebDriver().manage().timeouts().implicitlyWait(100, TimeUnit.MILLISECONDS);
+
 		if(this.getRawWebElement().findElements(By.xpath(".//ng-dropdown-panel[contains(@class, 'ng-select-multiple')]")).size() > 0 || this.getAgent().getWebDriver().findElements(By.xpath("//body//ng-dropdown-panel[contains(@class, 'ng-select-multiple')]")).size() > 0) {
 			//Dropdown options list is displayed - close it
 			this.getRawWebElement().findElement(By.xpath(".//span[contains(@class, 'ng-arrow-wrapper')]")).click();
 		}
+
+		this.getAgent().getWebDriver().manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
 	}
 
-	private void openDropdownOptions(){
+	private void openDropdownOptions() throws Exception {
+		//Increasing the implicit wait time here will exponentially increase the execution time
+		int timeOut = Integer.parseInt(System.getProperty("implicit_wait"));
+		this.getAgent().getWebDriver().manage().timeouts().implicitlyWait(100, TimeUnit.MILLISECONDS);
+
 		if(this.getRawWebElement().findElements(By.xpath(".//ng-dropdown-panel")).size() < 1 && this.getRawWebElement().findElements(By.xpath("//body//ng-dropdown-panel")).size() < 1) {
 			//Dropdown options list is not displayed - open it
 			this.getRawWebElement().findElement(By.xpath(".//span[contains(@class, 'ng-arrow-wrapper')]")).click();
 		};
+
+		this.getAgent().getWebDriver().manage().timeouts().implicitlyWait(timeOut, TimeUnit.SECONDS);
 	}
 }

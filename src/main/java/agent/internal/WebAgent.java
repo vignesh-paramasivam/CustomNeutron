@@ -61,6 +61,8 @@ public abstract class WebAgent implements IAgent {
 		} else {
 			driver.manage().timeouts().implicitlyWait(Integer.valueOf(config.getValue(ConfigType.IMPLICIT_WAIT)),
 					TimeUnit.SECONDS);
+
+			System.setProperty("implicit_wait", config.getValue(ConfigType.IMPLICIT_WAIT));
 		}
 	}
 

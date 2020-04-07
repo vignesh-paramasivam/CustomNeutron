@@ -84,7 +84,7 @@ public class SegmentDetailsPageSteps extends SegmentDetailsPage {
 
 		SoftAssert softAssert = new SoftAssert();
 		for(String option: optionsToCheck){
-			softAssert.assertTrue(allOptions.contains(option), option + " is not available");
+			softAssert.assertTrue(allOptions.contains(option), option + " is not available in " + allOptions);
 		}
 
 		softAssert.assertAll();
