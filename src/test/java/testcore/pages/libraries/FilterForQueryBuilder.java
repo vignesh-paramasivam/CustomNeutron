@@ -58,7 +58,6 @@ public class FilterForQueryBuilder extends BasePage {
     public void setRuleValues(WebElement ruleSetElement, String columnFromDC, String operator, String value, String valueType) throws Exception {
         getDropdownControl("Select Column from Data Collec",ruleSetElement).enterValue(columnFromDC);
         getDropdownControl("Select Operator", ruleSetElement).enterValue(operator);
-        Thread.sleep(5000); //Todo: to be addressed
         switch (valueType.toLowerCase()) {
             case "dropdown":
                 getDropdownControl("Select Values", ruleSetElement).enterValue(value);
