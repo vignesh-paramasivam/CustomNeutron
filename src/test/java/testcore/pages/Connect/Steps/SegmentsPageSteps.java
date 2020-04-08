@@ -96,7 +96,7 @@ public class SegmentsPageSteps extends SegmentsPage {
 		String partialStringToVerify = getTestData().get("SegmentID") + " as segmentid"; // e.g. "50414 as segmentid"
 		softAssert.assertTrue(dbQueryAttributes.contains(partialStringToVerify), partialStringToVerify + " not added to the query");
 
-		//softAssert.assertAll();
+		softAssert.assertAll();
 		return this;
 	}
 
