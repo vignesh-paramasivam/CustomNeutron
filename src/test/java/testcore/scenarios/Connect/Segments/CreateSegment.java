@@ -25,7 +25,9 @@ public class CreateSegment extends SupportTest {
                 .createAndDistribute()
                 .verifyNewSegmentIsDisplayed()
                 .verifyNewSegmentInDatabase()
-                .verifyDataLayerStatus();
+                .fetchJobIIDWithType()
+                .verifyDataLayerJobStatus(10) //Parameter - wait time in minutes for data layer status validation
+                .verifyDataLayerWorkflowStatus();
     }
 
 }
