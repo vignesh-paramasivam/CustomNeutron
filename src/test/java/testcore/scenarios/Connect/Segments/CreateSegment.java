@@ -10,7 +10,7 @@ public class CreateSegment extends SupportTest {
     public void CreateNewSegment() throws Exception {
         unity.createInstance()
                 .login()
-                .navigateTo("CONNECT")
+                /*.navigateTo("CONNECT")
                 .onSegmentsPage()
                 .selectOrgAndCountry()
                 .gotoCreateSegmentPage()
@@ -27,7 +27,7 @@ public class CreateSegment extends SupportTest {
                 .verifyNewSegmentInDatabase()
                 .fetchJobIIDWithType()
                 .verifyDataLayerJobStatus(10) //Parameter - wait time in minutes for data layer status validation
-                .verifyDataLayerWorkflowStatus();
+                .verifyDataLayerWorkflowStatus()*/;
     }
 
 }

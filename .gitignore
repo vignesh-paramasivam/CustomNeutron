@@ -1,6 +1,7 @@
 /target/
 /.idea/
 /allure-results/*
+/allure-report/*
 /log/*
 /screenshots/*
 /drivers/*
