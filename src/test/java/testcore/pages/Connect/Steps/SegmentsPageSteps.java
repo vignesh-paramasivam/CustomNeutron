@@ -127,7 +127,8 @@ public class SegmentsPageSteps extends SegmentsPage {
 		return this;
 	}
 
-	public SegmentsPageSteps verifyWorkflowAndJobStatus(int waitTimeInSec) throws SQLException, ClassNotFoundException, InterruptedException {
+	@Step("Verify workflow status changed to success by waiting for {waitTimeInMin} ")
+	public SegmentsPageSteps verifyWorkflowAndJobStatus(int waitTimeInMin) throws SQLException, ClassNotFoundException, InterruptedException {
 		String query = "SELECT workflow_status FROM workflow_jobs WHERE workflow_id in('"+getTestData().get("JobId_matchtest")+"','"+getTestData().get("JobId_export")+"') " +
 				"AND update_ts IN (SELECT max(update_ts) FROM workflow_jobs WHERE workflow_id in ('"+getTestData().get("JobId_matchtest")+"','"+getTestData().get("JobId_export")+"'))";
 		String username = "connect-user";
@@ -137,7 +138,7 @@ public class SegmentsPageSteps extends SegmentsPage {
 		DBUtils dbConnection = new DBUtils(username, password, dbUrl);
 
 		int count = 0;
-		int maxWaitTime = waitTimeInSec * 2; //To have polling interval as 30s
+		int maxWaitTime = waitTimeInMin * 2; //To have polling interval as 30s
 		int pollingWaitTimeInMilliSec = 30000; //waitTimeInSec * pollingWaitTimeInMilliSec = Total wait time; 10 * 2 * 30000 = 10Mins;
 
 		while (true) {
