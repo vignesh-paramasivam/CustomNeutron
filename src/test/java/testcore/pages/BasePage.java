@@ -30,12 +30,19 @@ public abstract class BasePage extends Page {
 		assertPageLoad();
 		getMenuControl(menuName).click();
 
-		/*
+
 		//Todo: This is a cheap hack - need to address from application side
-		Thread.sleep(3000);
+		int count = 0;
+		while (true) {
+			count++;
+			if (driver().getCurrentUrl().contains(menuName.toLowerCase())){ break; }
+			if (count > 100) { break; }
+			Thread.sleep(100);
+		}
+
 		driver().navigate().refresh();
 		waiter().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class,'loader')]")));
-		*/
+
 		assertPageLoad();
 		return new AllPages(getConfig(), getAgent(), getTestData());
 	}

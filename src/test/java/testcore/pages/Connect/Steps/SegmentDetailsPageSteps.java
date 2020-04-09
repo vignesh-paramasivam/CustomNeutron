@@ -60,8 +60,8 @@ public class SegmentDetailsPageSteps extends SegmentDetailsPage {
 		WebElement queryBuilder_rule1 = filter.getAllRulesFromRuleSet(queryBuilder).get(0);
 		WebElement queryBuilder_rule2 = filter.getAllRulesFromRuleSet(queryBuilder).get(1);
 
-		filter.setRuleValues(queryBuilder_rule1, "Gender in test-ms-01", "In", "Male", "Dropdown");
-		filter.setRuleValues(queryBuilder_rule2, "Currency in test-ms-01", "Equal", "Pound", "Dropdown");
+		filter.setRuleValues(queryBuilder_rule1, "Gender in mt_dc_esp", "In", "Male", "Dropdown");
+		filter.setRuleValues(queryBuilder_rule2, "Model in mt_dc_esp", "Equal", "GTI", "Dropdown");
 		filter.setRuleSetCondition(queryBuilder, "AND");
 
 		filter.addRuleSet(queryBuilder);
@@ -72,8 +72,8 @@ public class SegmentDetailsPageSteps extends SegmentDetailsPage {
 		WebElement queryBuilder_ruleSet1_rule1 = filter.getAllRulesFromRuleSet(queryBuilder_ruleSet1).get(0);
 		WebElement queryBuilder_ruleSet1_rule2 = filter.getAllRulesFromRuleSet(queryBuilder_ruleSet1).get(1);
 
-		filter.setRuleValues(queryBuilder_ruleSet1_rule1, "Name in e2e-QA-Test-01", "Equal", "Teacher", "Dropdown");
-		filter.setRuleValues(queryBuilder_ruleSet1_rule2, "Name in e2e-QA-Test-01", "Equal", "Editor", "Dropdown");
+		filter.setRuleValues(queryBuilder_ruleSet1_rule1, "Price in mt_dc_esp", "Equal", "10", "Textbox");
+		filter.setRuleValues(queryBuilder_ruleSet1_rule2, "Price in mt_dc_esp", "Equal", "20", "Textbox");
 		filter.setRuleSetCondition(queryBuilder_ruleSet1, "OR");
 
 		clickNextButton();
@@ -99,7 +99,7 @@ public class SegmentDetailsPageSteps extends SegmentDetailsPage {
 
 		SoftAssert softAssert = new SoftAssert();
 		for(String option: optionsToCheck){
-			softAssert.assertTrue(allOptions.contains(option), option + " is not available in " + allOptions);
+			softAssert.assertTrue(allOptions.contains(option), option + " is not available in input identifier " + allOptions);
 		}
 
 		softAssert.assertAll();
@@ -113,7 +113,7 @@ public class SegmentDetailsPageSteps extends SegmentDetailsPage {
 
 		SoftAssert softAssert = new SoftAssert();
 		for(String option: optionsToCheck){
-			softAssert.assertTrue(allOptions.contains(option), option + " is not available in " + allOptions);
+			softAssert.assertTrue(allOptions.contains(option), option + " is not available in output identifiers " + allOptions);
 		}
 
 		softAssert.assertAll();
