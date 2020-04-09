@@ -127,7 +127,7 @@ public class SegmentsPageSteps extends SegmentsPage {
 		return this;
 	}
 
-	@Step("Verify workflow status changed to success by waiting for {waitTimeInMin} ")
+	@Step("Verify workflow status changed to success by waiting for {waitTimeInMin} mins")
 	public SegmentsPageSteps verifyWorkflowAndJobStatus(int waitTimeInMin) throws SQLException, ClassNotFoundException, InterruptedException {
 		String query = "SELECT workflow_status FROM workflow_jobs WHERE workflow_id in('"+getTestData().get("JobId_matchtest")+"','"+getTestData().get("JobId_export")+"') " +
 				"AND update_ts IN (SELECT max(update_ts) FROM workflow_jobs WHERE workflow_id in ('"+getTestData().get("JobId_matchtest")+"','"+getTestData().get("JobId_export")+"'))";
@@ -172,7 +172,7 @@ public class SegmentsPageSteps extends SegmentsPage {
 				sf.assertAll();
 			} else if(count == maxWaitTime) {
 				SoftAssert sf = verifyJobStatus();
-				sf.fail("Failing the test due to: Workflow is still running after " + maxWaitTime + "Mins");
+				sf.fail("Failing the test due to: Workflow is still running after " + waitTimeInMin + "Mins");
 				sf.assertAll();
 			}
 
