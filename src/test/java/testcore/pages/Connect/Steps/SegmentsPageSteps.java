@@ -54,7 +54,10 @@ public class SegmentsPageSteps extends SegmentsPage {
 
 		//Adding the segment status to testdata, it can be accessed as getTestData().get("SegmentStatus");
 		getTestData().put("SegmentStatus", getSegmentStatus(createdSegmentName));
-		getTestData().put("SegmentID", getSegmentID(createdSegmentName));
+
+		String segmentId = getSegmentID(createdSegmentName);
+		getTestData().put("SegmentID", segmentId);
+		logger.info(segmentId);
 
 		Assert.assertTrue(getAllSegmentPostersNames().contains(createdSegmentName), createdSegmentName + " is not available. Available posters:: " + getAllSegmentPostersNames());
 		return this;
@@ -124,11 +127,9 @@ public class SegmentsPageSteps extends SegmentsPage {
 		return this;
 	}
 
-	public SegmentsPageSteps verifyDataLayerJobStatus(int waitTimeInSec) throws SQLException, ClassNotFoundException, InterruptedException {
-		String query = "SELECT workflow_id, job_name, job_status, workflow_name, workflow_status FROM public.workflow_jobs " +
-				"where workflow_id IN('" + getTestData().get("JobId_export") + "','"+ getTestData().get("JobId_matchtest") +"') " +
-				" order by create_ts asc";
-
+	public SegmentsPageSteps verifyWorkflowAndJobStatus(int waitTimeInSec) throws SQLException, ClassNotFoundException, InterruptedException {
+		String query = "SELECT workflow_status FROM workflow_jobs WHERE workflow_id in('"+getTestData().get("JobId_matchtest")+"','"+getTestData().get("JobId_export")+"') " +
+				"AND update_ts IN (SELECT max(update_ts) FROM workflow_jobs WHERE workflow_id in ('"+getTestData().get("JobId_matchtest")+"','"+getTestData().get("JobId_export")+"'))";
 		String username = "connect-user";
 		String password = "MzHsjB7u2KL4B8dA";
 		String dbUrl = "jdbc:postgresql://localhost:5443/segments";
@@ -141,66 +142,43 @@ public class SegmentsPageSteps extends SegmentsPage {
 
 		while (true) {
 			ResultSet queryResult = dbConnection.select(query);
-			boolean isAllJobSuccess = true;
+			boolean isWorkflowSuccess = true;
+			String workflow_status = "";
 
-			ArrayList<String> jobsInfo = new ArrayList<>();
+			int rsCount = 0;
 
 			while (queryResult.next()) {
-				String job_status = queryResult.getString("job_status");
-				String job_name = queryResult.getString("job_name");
-				String workflow_name = queryResult.getString("workflow_name");
-				String workflow_status = queryResult.getString("workflow_status");
+				rsCount++;
 
-				jobsInfo.add("Workflow Name=" + workflow_name + "::Job Name=" + job_name + "::Job status=" + job_status + "::Workflow status=" + workflow_status);
-				if (!job_status.equalsIgnoreCase("success")) {
-					isAllJobSuccess = false;
+				workflow_status = queryResult.getString("workflow_status");
+				if (!workflow_status.equalsIgnoreCase("success")) {
+					isWorkflowSuccess = false;
 				}
 			}
 
+			if(rsCount == 0) {
+				Assert.fail("There are no rows from the output result");
+			}
+
 			//If all job status are success - break the loop
-			if (isAllJobSuccess) {
-				logger.info(jobsInfo);
+			if (isWorkflowSuccess) {
+				SoftAssert sf = verifyJobStatus();
+				sf.assertAll();
 				break;
+			} else if(workflow_status.equalsIgnoreCase("failed")){
+				SoftAssert sf = verifyJobStatus();
+				sf.fail("Workflow failed");
+				sf.assertAll();
 			} else if(count == maxWaitTime) {
-				logger.info(jobsInfo);
-				Assert.fail("Jobs are still running" + jobsInfo);
+				SoftAssert sf = verifyJobStatus();
+				sf.fail("Failing the test due to: Workflow is still running after " + maxWaitTime + "Mins");
+				sf.assertAll();
 			}
 
 			// Some of the job status are not success - wait for 30s and continue checking again
 			Thread.sleep(pollingWaitTimeInMilliSec);
 			count++;
 		}
-		return this;
-	}
-
-
-	public SegmentsPageSteps verifyDataLayerWorkflowStatus() throws SQLException, ClassNotFoundException, InterruptedException {
-		String query = "SELECT workflow_id, job_name, job_status, workflow_name, workflow_status FROM public.workflow_jobs " +
-				"where workflow_id IN('" + getTestData().get("JobId_export") + "','"+ getTestData().get("JobId_matchtest") +"') " +
-				"and job_name IN ('connect_output_generator_export', 'connect_insights_processor')";
-
-		String username = "connect-user";
-		String password = "MzHsjB7u2KL4B8dA";
-		String dbUrl = "jdbc:postgresql://localhost:5443/segments";
-
-		DBUtils dbConnection = new DBUtils(username, password, dbUrl);
-		ResultSet queryResult = dbConnection.select(query);
-
-		ArrayList<String> jobsInfo = new ArrayList<>();
-
-		SoftAssert softAssert = new SoftAssert();
-		while (queryResult.next()) {
-			String job_status = queryResult.getString("job_status");
-			String job_name = queryResult.getString("job_name");
-			String workflow_name = queryResult.getString("workflow_name");
-			String workflow_status = queryResult.getString("workflow_status");
-
-			jobsInfo.add("Workflow Name=" + workflow_name + "::Job Name=" + job_name + "::Job status=" + job_status + "::Workflow status=" + workflow_status);
-			softAssert.assertEquals(workflow_status.toLowerCase(), "success", "Workflow status is " + workflow_status + ";" + jobsInfo);
-		}
-
-		logger.info(jobsInfo);
-		softAssert.assertAll();
 		return this;
 	}
 }

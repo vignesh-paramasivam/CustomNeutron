@@ -27,8 +27,7 @@ public class CreateSegment extends SupportTest {
                 .verifyNewSegmentIsDisplayed()
                 .verifyNewSegmentInDatabase()
                 .fetchJobIIDWithType()
-                .verifyDataLayerJobStatus(10) //Parameter - wait time in minutes for data layer status validation
-                .verifyDataLayerWorkflowStatus();
+                .verifyWorkflowAndJobStatus(10);
     }
 
     //We are deliberately making this test to fail by passing invalid expected values
