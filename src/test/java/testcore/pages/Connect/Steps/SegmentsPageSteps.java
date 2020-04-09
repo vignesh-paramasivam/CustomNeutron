@@ -28,12 +28,14 @@ public class SegmentsPageSteps extends SegmentsPage {
 	}
 
 
+	@Step("Go to create segment page")
 	public SegmentDetailsPageSteps gotoCreateSegmentPage() throws Exception {
 		getButtonControl("CREATE SEGMENT").click();
 		assertPageLoad();
 		return new SegmentDetailsPageSteps(this.getConfig(), this.getAgent(), this.getTestData());
 	}
 
+	@Step("Select organization and country")
 	public SegmentsPageSteps selectOrgAndCountry() throws Exception {
 		assertPageLoad();
 		getDropdownControl("Select Organization").enterValue(getTestData().get("Organization"));
@@ -43,6 +45,7 @@ public class SegmentsPageSteps extends SegmentsPage {
 		return this;
 	}
 
+	@Step("Verify new segment is displayed in segments page")
 	public SegmentsPageSteps verifyNewSegmentIsDisplayed() throws Exception {
 		String createdSegmentName = getTestData().get("SegmentName");
 		getTextboxControl("Search Segments").enterValue(createdSegmentName);

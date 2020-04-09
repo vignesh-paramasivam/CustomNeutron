@@ -159,6 +159,11 @@ public class DataTable {
 		row = sheet.getRow(currRow++);
 		int rowsize = row.getLastCellNum();
 		for (int i = 1; i < rowsize; i++) {
+			if(row.getCell(i) == null) {
+				//If the column value is empty - break; This may happen if the cells are emptied / cleared
+				rowsize = i;
+				break;
+			}
 			headerList.add(row.getCell(i).getStringCellValue());
 		}
 

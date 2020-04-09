@@ -7,6 +7,7 @@ import java.util.concurrent.TimeUnit;
 import central.AutomationCentral;
 import enums.ConfigType;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
 import control.WebControl;
 import org.testng.Assert;
@@ -67,7 +68,8 @@ public class DropdownControl extends WebControl {
 				for (WebElement option : options) {
 					//If the option has extra spaces when inspecting it, we will remove it and compare
 					if (option.getText().trim().replaceAll("\\s+", " ").equalsIgnoreCase(value)) {
-						option.click();
+						//option.click();
+						((JavascriptExecutor) this.getAgent().getWebDriver()).executeScript("arguments[0].click();", option);
 						closeDropdownOptions();
 						return;
 					}

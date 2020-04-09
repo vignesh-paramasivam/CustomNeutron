@@ -29,6 +29,13 @@ public abstract class BasePage extends Page {
 	public AllPages navigateTo(String menuName) throws Exception {
 		assertPageLoad();
 		getMenuControl(menuName).click();
+
+		/*
+		//Todo: This is a cheap hack - need to address from application side
+		Thread.sleep(3000);
+		driver().navigate().refresh();
+		waiter().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(@class,'loader')]")));
+		*/
 		assertPageLoad();
 		return new AllPages(getConfig(), getAgent(), getTestData());
 	}

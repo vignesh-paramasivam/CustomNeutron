@@ -2,11 +2,13 @@ package testcore.pages.Connect.Steps;
 
 import agent.IAgent;
 import central.Configuration;
+import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
 import org.testng.asserts.SoftAssert;
 import testcore.pages.Connect.SegmentDetailsPage;
 import testcore.pages.Connect.SegmentsPage;
 import testcore.pages.libraries.FilterForQueryBuilder;
+import utils.RandomData;
 
 import java.util.List;
 import java.util.Map;
@@ -24,19 +26,30 @@ public class SegmentDetailsPageSteps extends SegmentDetailsPage {
 		return SegmentsPage.class.getSimpleName();
 	}
 
+	@Step("Enter basic details for create segment")
 	public SegmentDetailsPageSteps enterBasicDetails() throws Exception {
+		String newSegmentName = "MT-Automation" + RandomData.dateTime_yyyyMMddHHmmss();
+		getTestData().put("SegmentName", newSegmentName);
 		getTextboxControl("segmentName").enterValue(getTestData().get("SegmentName"));
 		return this;
 	}
 
-	public SegmentDetailsPageSteps enterBuildSegmentDetails() throws Exception {
+	@Step("Choose data collections")
+	public SegmentDetailsPageSteps chooseDataCollections() throws Exception {
 		getDropdownControl("Choose Data Collections to inc").enterValue(getTestData().get("DataCollections"));
+		assertPageLoad();
+		return this;
+	}
+
+	@Step("Choose input identifiers")
+	public SegmentDetailsPageSteps chooseInputIdentifiers() throws Exception {
 		getDropdownControl("Select your Input Identifiers").enterValue(getTestData().get("InputIdentifiers"));
 		clickNextButton();
 		assertPageLoad();
 		return this;
 	}
 
+	@Step("Add filter for data collections")
 	public SegmentDetailsPageSteps addFiltersToDataCollections() throws Exception {
 		getButtonControl("FILTER DATA COLLECTIONS").click();
 
@@ -68,6 +81,7 @@ public class SegmentDetailsPageSteps extends SegmentDetailsPage {
 	}
 
 
+	@Step("Extend first party audience")
 	public SegmentDetailsPageSteps extendFirstPartyAudience() throws Exception {
 		String[] valuesToSelect = getTestData().get("ExtendFirstPartyAudience").split(";"); //Delimit data with ";"
 		for ( String value: valuesToSelect) {
@@ -78,6 +92,21 @@ public class SegmentDetailsPageSteps extends SegmentDetailsPage {
 	}
 
 
+	@Step("Verify options of input identifiers")
+	public SegmentDetailsPageSteps verifyInputIdentifiersOptions() throws Exception {
+		List<String> allOptions = getDropdownControl("Select your Input Identifiers").allDropdownOptions();
+		String[] optionsToCheck = getTestData().get("OptionsOfInputIdentifiers").split(";");
+
+		SoftAssert softAssert = new SoftAssert();
+		for(String option: optionsToCheck){
+			softAssert.assertTrue(allOptions.contains(option), option + " is not available in " + allOptions);
+		}
+
+		softAssert.assertAll();
+		return this;
+	}
+
+	@Step("Verify options of output identifiers")
 	public SegmentDetailsPageSteps verifyOutputIdentifiersOptions() throws Exception {
 		List<String> allOptions = getDropdownControl("Choose Output Identifiers").allDropdownOptions();
 		String[] optionsToCheck = getTestData().get("OptionsOfOutputIdentifiers").split(";");
@@ -92,11 +121,13 @@ public class SegmentDetailsPageSteps extends SegmentDetailsPage {
 	}
 
 
+	@Step("Choose desired output identifiers")
 	public SegmentDetailsPageSteps chooseOutputIdentifiers() throws Exception {
 		getDropdownControl("Choose Output Identifiers").enterValue(getTestData().get("OutputIdentifiers"));
 		return this;
 	}
 
+	@Step("Click proceed")
 	public SegmentDistributionPageSteps proceed() throws Exception {
 		getButtonControl("PROCEED").click();
 		assertPageLoad();

@@ -2,6 +2,7 @@ package testcore.pages.Connect.Steps;
 
 import agent.IAgent;
 import central.Configuration;
+import io.qameta.allure.Step;
 import testcore.pages.Connect.SegmentDistributionPage;
 
 import java.util.Map;
@@ -19,7 +20,7 @@ public class SegmentDistributionPageSteps extends SegmentDistributionPage {
 		return SegmentDistributionPage.class.getSimpleName();
 	}
 
-
+	@Step("Choose destinations")
 	public SegmentDistributionPageSteps chooseDestinations() throws Exception {
 		String[] destinationsToSelect = getTestData().get("Destinations").split(";");
 		for (String destination: destinationsToSelect) {
@@ -28,6 +29,7 @@ public class SegmentDistributionPageSteps extends SegmentDistributionPage {
 		return this;
 	}
 
+	@Step("Click create and distribute")
 	public SegmentsPageSteps createAndDistribute() throws Exception {
 		getButtonControl("CREATE AND DISTRIBUTE").click();
 		assertPageLoad();

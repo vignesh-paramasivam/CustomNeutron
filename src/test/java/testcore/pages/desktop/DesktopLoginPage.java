@@ -18,21 +18,9 @@ public class DesktopLoginPage extends LoginPage {
         assertPageLoad();
     }
 
-    @Step("Enter the username and password to login")
+    @Step("Login")
     @Override
     public HomePage login() throws Exception {
-
-        //Temp test data: To be added in excel file under resources
-        getTestData().put("Organization", "ZEOTAP");
-        getTestData().put("Country", "Spain");
-        getTestData().put("SegmentName", "MT-Automation" + RandomData.dateTime_yyyyMMddHHmmss());
-        getTestData().put("DataCollections", "test-ms-01;e2e-QA-Test-01");
-        getTestData().put("InputIdentifiers", "Email;Mobile");
-        getTestData().put("OptionsOfOutputIdentifiers", "Google Cookie;MAID;mPlatform");
-        getTestData().put("OutputIdentifiers", "Google Cookie;MAID");
-        getTestData().put("ExtendFirstPartyAudience", "Activate Zeotap Graph");
-        getTestData().put("Destinations", "Test_Liveramp;testdest");
-
         assertPageLoad();
         this.getAgent().getWaiter().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[name='email']")));
         getTextboxControl("email").enterText(getTestData().get("Email"));

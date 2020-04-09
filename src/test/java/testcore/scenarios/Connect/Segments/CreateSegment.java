@@ -15,7 +15,8 @@ public class CreateSegment extends SupportTest {
                 .selectOrgAndCountry()
                 .gotoCreateSegmentPage()
                 .enterBasicDetails()
-                .enterBuildSegmentDetails()
+                .chooseDataCollections()
+                .chooseInputIdentifiers()
                 .addFiltersToDataCollections()
                 .extendFirstPartyAudience()
                 .verifyOutputIdentifiersOptions()
@@ -28,6 +29,20 @@ public class CreateSegment extends SupportTest {
                 .fetchJobIIDWithType()
                 .verifyDataLayerJobStatus(10) //Parameter - wait time in minutes for data layer status validation
                 .verifyDataLayerWorkflowStatus();
+    }
+
+    //We are deliberately making this test to fail by passing invalid expected values
+    @Test(enabled = true, description = "Validate the options of input identifiers")
+    public void ValidateInputIdentifier() throws Exception {
+        unity.createInstance()
+                .login()
+                .navigateTo("CONNECT")
+                .onSegmentsPage()
+                .selectOrgAndCountry()
+                .gotoCreateSegmentPage()
+                .enterBasicDetails()
+                .chooseDataCollections()
+                .verifyInputIdentifiersOptions();
     }
 
 }

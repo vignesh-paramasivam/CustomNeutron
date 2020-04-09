@@ -60,6 +60,7 @@ public class FilterForQueryBuilder extends BasePage {
         getDropdownControl("Select Operator", ruleSetElement).enterValue(operator);
         switch (valueType.toLowerCase()) {
             case "dropdown":
+                Thread.sleep(2000); //To make the test slow for demo
                 getDropdownControl("Select Values", ruleSetElement).enterValue(value);
                 break;
             case "textbox" :
